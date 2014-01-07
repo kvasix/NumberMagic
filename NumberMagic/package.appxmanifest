@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
+
+  <Identity
+    Name="83f340e1-0a83-47b6-a543-e84af8dbe47e"
+    Version="1.0.0.0"
+    Publisher="CN=aakas_000" />
+
+  <Properties>
+    <DisplayName>NumberMagic</DisplayName>
+    <PublisherDisplayName>aakas_000</PublisherDisplayName>
+    <Logo>images\storelogo.png</Logo>
+  </Properties>
+
+  <Prerequisites>
+    <OSMinVersion>6.2.1</OSMinVersion>
+    <OSMaxVersionTested>6.2.1</OSMaxVersionTested>
+  </Prerequisites>
+
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+
+  <Applications>
+    <Application 
+      Id="App"
+      StartPage="default.html">
+
+      <VisualElements
+        DisplayName="NumberMagic"
+        Logo="images\logo.png"
+        SmallLogo="images\smalllogo.png"
+        Description="NumberMagic"
+        ForegroundText="light"
+        BackgroundColor="#464646">
+
+        <DefaultTile ShowName="allLogos" />
+        <SplashScreen Image="images\splashscreen.png" />
+
+      </VisualElements>
+    </Application>
+  </Applications>
+
+  <Capabilities>
+    <Capability Name="internetClient" />
+  </Capabilities>
+
+</Package>
