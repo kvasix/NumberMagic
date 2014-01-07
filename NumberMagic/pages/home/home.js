@@ -10,7 +10,7 @@
 
             for (var row = 0; row < 5; row++) {
                 var numrow = document.createElement("tr");
-                for (var col = 0; col < 5; col++) {
+                for (var col = 0; col < 10; col++) {
                     var numContainer = document.createElement("td");
                     numContainer.setAttribute("class", "numContainer");
 

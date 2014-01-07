@@ -14,8 +14,10 @@
     }
 }
 
-.numContainerClass {
+.numContainer {
     height:10em;
     width:10em;
     background-color:black;
+    text-align:center;
 }
+
