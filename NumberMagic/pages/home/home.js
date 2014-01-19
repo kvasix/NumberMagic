@@ -47,21 +47,21 @@
         }
     });
 
-    // Remove the 'empty' and 'filled' part of the id's and compare the rest of the strings. 
+    
+    var mistakeCount = 0;
     function checkShapeDrop(e) {
-        document.getElementById("mistakeCount").innerHTML = "Checked";
-
-        //  Remove the 'empty' and 'filled' part of the id's and compare the rest of the strings.  
+        // Remove the 'numBox' and 'pawnHeap' part of the id's and compare the rest of the strings. 
         var target = this.id.replace("numBox", "");
         var elt = e.dataTransfer.getData('text').replace("pawnHeap", "");
-        if (target == elt) {  // if we have a match, replace empty shape with filled shape image
-            //this.setAttribute('class', "filled");
-            document.getElementById("mistakeCount").innerHTML = "<span style='color: blue;'>Pieces match!</span>";
-            //  Remove the original filled image to give illusion that the filled image is now inside the empty one
+        if (target == elt) {  // if we have a match, fill the numBox with white and show the status.
+            this.setAttribute('class', "numIn");            
+            //  Remove the original image to give illusion that the image is now inside the numBox
             document.getElementById(e.dataTransfer.getData('text')).style.display = "none";
         }
         else {
-            document.getElementById("mistakeCount").innerHTML = "<span style='color: red;'>"+target+": Pieces don't match!</span>";
+            // Display the number of mistakes so far
+            mistakeCount++;
+            document.getElementById("mistakeCount").innerHTML = "<span style='color: red;'>" + mistakeCount + ": Pieces don't match!</span>";
         }
     }
 
