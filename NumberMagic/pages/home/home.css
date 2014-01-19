@@ -27,13 +27,13 @@
 }
 
  .freepawn {     
-    width:100%;
-    height:15%;    
+    width:111px;
+    height:111px;    
 }
 
 .setpawn {     
-    width:100%;
-    height:100%;    
+    width:75%;
+    height:99%;    
 }
 
 #numGrid {
@@ -49,9 +49,10 @@
 #pawnHeap {
     position:absolute;
     left:78%;
-    width:7.5%;
+    width:18%;
     height:60%;
     top:24%;
-    background-color:white;
-    overflow:hidden;   
+    background-color:black;
+    overflow:scroll;
+    text-align:center;   
 }

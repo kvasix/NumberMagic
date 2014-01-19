@@ -18,7 +18,7 @@
                     numContainer.setAttribute("id", "numBox" + idNumber);
                     numContainer.innerHTML = idNumber;
 
-                    /*var circle = document.createElement("canvas")
+                    var circle = document.createElement("canvas")
                     circle.setAttribute("width", 100);
                     circle.setAttribute("height", 100);
                     var context = circle.getContext('2d');
@@ -36,13 +36,16 @@
                     context.fillStyle = "blue";
                     context.font = "bold 16px Arial";
                     context.textAlign = "center";
-                    context.fillText(idNumber, 10, 10);*/
+                    context.fillText(idNumber, 10, 10);
 
+                    /*
                     var circle = document.createElement("img");
-                    circle.src = "/images/circle.png";
+                    circle.src = "/images/circle.png";                    
+                    circle.setAttribute("alt", "pawn" + idNumber);
+                    */
+
                     circle.setAttribute("class", "freepawn");
                     circle.setAttribute("id", "pawn" + idNumber);
-                    circle.setAttribute("alt", "pawn" + idNumber);
                     circle.draggable = true;
                     circle.addEventListener('dragstart', startShapeDrag, false);
                     id('pawnHeap').appendChild(circle);
