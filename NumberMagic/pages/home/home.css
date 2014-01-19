@@ -16,50 +16,32 @@
 
 .pagetitle {
     height: 3%;
-    width: 10%;
+    width: 9%;
 }
 .numContainer {
-    height:10em;
-    width:10em;
+    width:7.5%;
+    height:15%;    
     background-color:black;
     border:solid white;
     text-align:center;
 }
 
-.numIn {
-    position:relative;
-    height: 10em;
-    width: 10em;
-    color:black;
-    background-color:white;
-    text-align: center;
-}
-
 #numGrid {
     position: absolute;
-    left: 5%;
+    left: 3%;
     width: 75%;
     height: 60%;
-    top: 20%;
+    top: 24%;
     background-color: black;
     overflow: scroll;
 }
 
 #pawnHeap {
     position:absolute;
-    left:80%;
+    left:78%;
     width:15%;
     height:60%;
-    top:20%;
+    top:24%;
     background-color:white;
     overflow:scroll;   
-}
-
-#pawnHeap10 {
-    position:absolute;
-    left:80%;
-    height:8em;
-    width:8em;
-    top:20%;
-    background-color:white;   
 }

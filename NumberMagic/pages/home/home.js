@@ -51,6 +51,7 @@
             }
 
             id('reset').addEventListener("click", resetPawns, false);
+            setInterval(timer, 500);
         }
     });
 
@@ -110,6 +111,17 @@
         mistakeCount = 0;
         numpawnsleft = 50;
         id("mistakeCount").innerHTML = 0;
+        hours = 0, mins = 0, secs = 0;
+    }
+
+    var hours = 0, mins = 0, secs = 0;
+    var blink = true;
+    var separator = ":";
+    function timer() {        
+        blink ? (++secs, separator = " ", blink = false) : (separator = ":", blink = true);
+        (secs == 60) ? (++mins, secs = 0) : true;
+        (mins == 60) ? (++hours, mins = 0) : true;               
+        id('timeCounter').innerHTML = (hours < 10 ? "0" : "") + hours + separator + (mins < 10 ? "0" : "") + mins + separator + (secs < 10 ? "0" : "") + secs;
     }
 
 })();
