@@ -27,14 +27,11 @@
                     var radius = min(centerX, centerY);
 
                     //document.getElementById("mistakeCount").innerHTML = circle.width;
+                    context.fillStyle = 'green';
                     context.beginPath();
                     context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-                    context.fillStyle = 'green';
                     context.fill();
-                    context.lineWidth = "1em";
-                    context.strokeStyle = '#003300';
-                    context.stroke();
-
+                 
                     circle.setAttribute("class", "pawn");
                     circle.setAttribute("id", "pawn" + idNumber);
                     context.fillStyle = "blue";
@@ -52,6 +49,8 @@
                 }
                 numGrid.appendChild(numrow);
             }
+
+            id('reset').addEventListener("click", resetPawns, false);
         }
     });
 
@@ -65,30 +64,11 @@
         if (target == elt) {  // if we have a match, fill the numBox with white and show the status.
             //this.setAttribute('class', "numIn");
             this.innerHTML = "";
-            var circle = document.createElement("canvas")
-            circle.setAttribute("width", 100);
-            circle.setAttribute("height", 100);
-            var context = circle.getContext('2d');
-            var centerX = circle.width / 2;
-            var centerY = circle.height / 2;
-            var radius = min(centerX, centerY);
 
-            //document.getElementById("mistakeCount").innerHTML = circle.width;
-            context.beginPath();
-            context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-            context.fillStyle = 'green';
-            context.fill();
-            context.lineWidth = "1em";
-            context.strokeStyle = '#003300';
-            context.stroke();
-            /*context.fillStyle = "blue";
-            context.font = "bold 16px Arial";
-            context.textAlign = "center";
-            context.fillText(target, 10, 10);*/            
-            this.appendChild(circle);
+            //  Remove the original image to give illusion that the image is now inside the numBox            
+            this.appendChild(document.getElementById(e.dataTransfer.getData('text')));
+            //id('pawnHeap').removeChild(document.getElementById(e.dataTransfer.getData('text')));
 
-            //  Remove the original image to give illusion that the image is now inside the numBox
-            id('pawnHeap').removeChild(document.getElementById(e.dataTransfer.getData('text')));
             //document.getElementById(e.dataTransfer.getData('text')).style.display = "none";
             if (!(--numpawnsleft)) {
                 document.getElementById("mistakeCount").innerHTML = "<span style='color: white;'>" + mistakeCount + ": Finished</span>";
@@ -97,7 +77,7 @@
         else {
             // Display the number of mistakes so far
             mistakeCount++;
-            document.getElementById("mistakeCount").innerHTML = "<span style='color: red;'>" + mistakeCount + ": Pieces don't match!</span>";
+            id("mistakeCount").innerHTML = "<span style='color: red;'>" + mistakeCount + ": Pieces don't match!</span>";
         }
     }
 
@@ -117,5 +97,19 @@
             return y;
     }
 
+    function resetPawns() {
+        for (var row = 0; row < 5; row++) {
+            for (var col = 0; col < 10; col++) {
+                var idNumber = row * 10 + col
+                var numContainer = document.getElementById("numBox" + idNumber);
+                //id('pawnHeap').appendChild(numContainer.childNodes[0]);
+                id('pawnHeap').appendChild(id("pawn" + idNumber));
+                numContainer.innerHTML = idNumber;
+            }
+        }
+        mistakeCount = 0;
+        numpawnsleft = 50;
+        id("mistakeCount").innerHTML = 0;
+    }
 
 })();
