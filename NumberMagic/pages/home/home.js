@@ -13,7 +13,7 @@
                 for (var col = 0; col < 10; col++) {
                     var numContainer = document.createElement("td");
                     numContainer.setAttribute("class", "numContainer");
-                    numContainer.setAttribute("id", "numBox" + row * 10 + col);
+                    numContainer.setAttribute("id", "numBox" + (row * 10 + col));
                     numContainer.innerHTML = row * 10 + col;
 
           /*          var circle = document.createElement("canvas")
