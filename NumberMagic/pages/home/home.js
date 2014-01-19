@@ -18,7 +18,7 @@
                     numContainer.setAttribute("id", "numBox" + idNumber);
                     numContainer.innerHTML = idNumber;
 
-                    var circle = document.createElement("canvas")
+                    /*var circle = document.createElement("canvas")
                     circle.setAttribute("width", 100);
                     circle.setAttribute("height", 100);
                     var context = circle.getContext('2d');
@@ -32,12 +32,17 @@
                     context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
                     context.fill();
                  
-                    circle.setAttribute("class", "pawn");
-                    circle.setAttribute("id", "pawn" + idNumber);
+                    
                     context.fillStyle = "blue";
                     context.font = "bold 16px Arial";
                     context.textAlign = "center";
-                    context.fillText(idNumber, 10, 10);                    
+                    context.fillText(idNumber, 10, 10);*/
+
+                    var circle = document.createElement("img");
+                    circle.src = "/images/circle.png";
+                    circle.setAttribute("class", "freepawn");
+                    circle.setAttribute("id", "pawn" + idNumber);
+                    circle.setAttribute("alt", "pawn" + idNumber);
                     circle.draggable = true;
                     circle.addEventListener('dragstart', startShapeDrag, false);
                     id('pawnHeap').appendChild(circle);
@@ -66,11 +71,13 @@
             //this.setAttribute('class', "numIn");
             this.innerHTML = "";
 
-            //  Remove the original image to give illusion that the image is now inside the numBox            
-            this.appendChild(document.getElementById(e.dataTransfer.getData('text')));
-            //id('pawnHeap').removeChild(document.getElementById(e.dataTransfer.getData('text')));
+            //  Remove the original image to give illusion that the image is now inside the numBox
+            var pawn = document.getElementById(e.dataTransfer.getData('text'))
+            this.appendChild(pawn);
+            pawn.setAttribute("class", "setpawn");
+            //id('pawnHeap').removeChild(pawn);
+            //pawn.style.display = "none";
 
-            //document.getElementById(e.dataTransfer.getData('text')).style.display = "none";
             if (!(--numpawnsleft)) {
                 document.getElementById("mistakeCount").innerHTML = "<span style='color: white;'>" + mistakeCount + ": Finished</span>";
             }
@@ -105,6 +112,7 @@
                 var numContainer = document.getElementById("numBox" + idNumber);
                 //id('pawnHeap').appendChild(numContainer.childNodes[0]);
                 id('pawnHeap').appendChild(id("pawn" + idNumber));
+                id("pawn" + idNumber).setAttribute("class", "freepawn");
                 numContainer.innerHTML = idNumber;
             }
         }

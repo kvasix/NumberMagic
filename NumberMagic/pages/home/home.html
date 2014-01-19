@@ -26,11 +26,14 @@
         <section aria-label="Main content" role="main">
             <span id="mistakesBox">Number of Mistakes: <span id="mistakeCount">0</span></span>
             <span id="timeBox" style="position:absolute; right:9%">Time Elapsed: <span id="timeCounter">10</span></span>
-            <input type="button" id="reset" value="Reset" style="position:absolute; top:14%; right:11%" />
+            <!-- <input type="button" id="reset" value="Reset" style="position:absolute; top:14%; right:11%" /> -->
             <table id="numGrid"></table>
             <div id="pawnHeap"></div>
 
         </section>
+    </div>
+    <div id="appbar" data-win-control="WinJS.UI.AppBar">
+        <button id="reset" data-win-control="WinJS.UI.AppBarCommand" data-win-options="{id:'reset', label:'Reset', icon:'placeholder'}" type="button"></button>
     </div>
 </body>
 </html>
