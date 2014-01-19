@@ -13,8 +13,10 @@
                 for (var col = 0; col < 10; col++) {
                     var numContainer = document.createElement("td");
                     numContainer.setAttribute("class", "numContainer");
+                    numContainer.setAttribute("id", "numBox" + row * 10 + col);
+                    numContainer.innerHTML = row * 10 + col;
 
-                    var circle = document.createElement("canvas")
+          /*          var circle = document.createElement("canvas")
                     circle.setAttribute("width", 100);
                     circle.setAttribute("height", 100);
                     var context = circle.getContext('2d');
@@ -31,13 +33,46 @@
                     context.strokeStyle = '#003300';
                     context.stroke();
 
-                    numContainer.appendChild(circle);
+                    circle.setAttribute("class", "pawn");
+                    numContainer.appendChild(circle);*/
+                    numContainer.setAttribute("ondragover", "return false;");
+                    numContainer.addEventListener('drop', checkShapeDrop, false);
+
                     numrow.appendChild(numContainer);
                 }
                 numGrid.appendChild(numrow);
             }
-        }           
+
+            document.getElementById("pawnHeap10").addEventListener('dragstart', startShapeDrag, false);
+        }
     });
+
+    // Remove the 'empty' and 'filled' part of the id's and compare the rest of the strings. 
+    function checkShapeDrop(e) {
+        document.getElementById("mistakeCount").innerHTML = "Checked";
+
+        //  Remove the 'empty' and 'filled' part of the id's and compare the rest of the strings.  
+        var target = this.id.replace("numBox", "");
+        var elt = e.dataTransfer.getData('text').replace("pawnHeap", "");
+        if (target == elt) {  // if we have a match, replace empty shape with filled shape image
+            //this.setAttribute('class', "filled");
+            document.getElementById("mistakeCount").innerHTML = "<span style='color: blue;'>Pieces match!</span>";
+            //  Remove the original filled image to give illusion that the filled image is now inside the empty one
+            document.getElementById(e.dataTransfer.getData('text')).style.display = "none";
+        }
+        else {
+            document.getElementById("mistakeCount").innerHTML = "<span style='color: red;'>"+target+": Pieces don't match!</span>";
+        }
+    }
+
+    // When dragging starts, set dataTransfer's data to the element's id.
+    function startShapeDrag(e) {
+        e.dataTransfer.setData('text', this.id);
+    }
+
+    function id(elementId) {
+        return document.getElementById(elementId);
+    }
 
     function min(x, y) {        
         if (x < y)
@@ -45,4 +80,6 @@
         else
             return y;
     }
+
+
 })();
