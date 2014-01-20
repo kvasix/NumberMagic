@@ -69,6 +69,11 @@
             gotWrongAudio.load();
             applaudAudio = new Audio("/sounds/applause.wma");
             applaudAudio.load();
+        },
+
+        unload: function () {
+            // TODO: Respond to navigations away from this page.
+            clearInterval(timeCtrl);
         }
     });
 
@@ -99,7 +104,7 @@
                 //applaudAudio.volume = 1;
                 applaudAudio.play();
                 var msgBox = new Windows.UI.Popups.MessageDialog("Good Job!!! You've completed the game in " + 
-                    (hours < 10 ? "0" : "") + hours + separator + (mins < 10 ? "0" : "") + mins + separator + (secs < 10 ? "0" : "") + secs +
+                    (hours < 10 ? "0" : "") + hours + ":" + (mins < 10 ? "0" : "") + mins + ":" + (secs < 10 ? "0" : "") + secs +
                      ". Why don't you try it again?");
                 msgBox.showAsync();                
             }

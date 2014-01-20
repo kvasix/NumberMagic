@@ -35,10 +35,10 @@
     </div>
 
     <div id="contenthost" data-win-control="Application.PageControlNavigator" data-win-options="{home: '/pages/home/home.html'}"></div>
-    <div id="appbar" data-win-control="WinJS.UI.AppBar">
+    <div id="appbar" data-win-control="WinJS.UI.AppBar" data-win-options="{placement: 'bottom',layout: 'commands'}">
         <button id="scramble" 
             data-win-control="WinJS.UI.AppBarCommand" 
-            data-win-options="{id:'scramble', label:'Scramble', icon:'Two Page', tooltip:'Scramble the board'}" 
+            data-win-options="{id:'scramble', label:'Scramble', icon:WinJS.UI.AppBarIcon.page, tooltip:'Scramble the board'}" 
             type="button">
         </button> 
         <button id="home" 
@@ -48,9 +48,14 @@
         </button> 
         <button id="graph" 
             data-win-control="WinJS.UI.AppBarCommand" 
-            data-win-options="{id:'graph', label:'Graph', icon:'graph', tooltip:'Draw Graph'}" 
+            data-win-options="{id:'graph', label:'Graph', icon:'Threebars', tooltip:'Draw Graph'}" 
             type="button">
         </button> 
+        <button id="highscores" 
+            data-win-control="WinJS.UI.AppBarCommand" 
+            data-win-options="{id:'highscores', label:'High Scores', icon:'Bullets', tooltip:'HighScore List'}" 
+            type="button">
+        </button>
     </div>
 </body>
 </html>
