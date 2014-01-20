@@ -98,17 +98,17 @@
             pawn.setAttribute("class", "setpawn");
             pawn.draggable = false;
 
-            //gotRightAudio.volume = 1;
+            gotRightAudio.volume = localSettings.values["volume"];
             gotRightAudio.play();
 
             if (!(--numpawnsleft)) {
                 document.getElementById("mistakeCount").innerHTML = "<span style='color: white;'>" + mistakeCount + ": Finished</span>";
                 clearInterval(timeCtrl);
-                //applaudAudio.volume = 1;
+                applaudAudio.volume = localSettings.values["volume"];
                 applaudAudio.play();
-                var msgBox = new Windows.UI.Popups.MessageDialog("Good Job!!! You've completed the game in " + 
-                    (hours < 10 ? "0" : "") + hours + separator + (mins < 10 ? "0" : "") + mins + separator + (secs < 10 ? "0" : "") + secs +
-                     ". Why don't you try it again?");
+                var msgBox = new Windows.UI.Popups.MessageDialog("Good Job, " + localSettings.values["usrName"] + "!!! You've completed the game in " +
+                    (hours < 10 ? "0" : "") + hours + ":" + (mins < 10 ? "0" : "") + mins + ":" + (secs < 10 ? "0" : "") + secs +
+                     " with " + mistakeCount + " mistakes. Why don't you try it again?");
                 msgBox.showAsync();                
             }
             id("mistakeCount").innerHTML = "<span style='color: red;'>" + mistakeCount + "</span>";
@@ -117,7 +117,7 @@
             // Display the number of mistakes so far
             mistakeCount++;
             id("mistakeCount").innerHTML = "<span style='color: red;'>" + mistakeCount + ": Pieces don't match!</span>";
-            //gotWrongAudio.volume = 1;
+            gotWrongAudio.volume = localSettings.values["volume"];
             gotWrongAudio.play();
         }
     }

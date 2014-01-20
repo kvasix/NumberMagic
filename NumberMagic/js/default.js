@@ -34,7 +34,11 @@
             id('home').addEventListener("click", homeBoard, false);
             id('scramble').addEventListener("click", scrambleBoard, false);
             id('graph').addEventListener("click", renderGraph, false);
+            id('volume').addEventListener("change", changeVolume, false);
+            id('usrName').addEventListener("change", changeusrName, false);
 
+            // Store the user's name for multiple sessions.
+            localSettings.values["volume"] = 1.0;
         }
     });
 
@@ -48,6 +52,8 @@
 
     app.start();
 
+    var appData = Windows.Storage.ApplicationData.current;
+    var localSettings = appData.localSettings;
     function id(elementId) {
         return document.getElementById(elementId);
     }
@@ -65,5 +71,13 @@
     function renderGraph(eventInfo) {
         eventInfo.preventDefault();
         WinJS.Navigation.navigate("/pages/graph/graph.html");
+    }
+
+    function changeVolume(eventInfo) {
+        localSettings.values["volume"] = id('volume').value / 100;//eventInfo.srcElement.nodeValue;
+    }
+
+    function changeusrName(eventInfo) {
+        localSettings.values["usrName"] = id('usrName').value;//eventInfo.srcElement.nodeValue;
     }
 })();

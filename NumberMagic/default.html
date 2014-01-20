@@ -15,37 +15,18 @@
     <script src="/js/navigator.js"></script>
 </head>
 <body>
-    <div id="NavBar" data-win-control="WinJS.UI.NavBar">
-        <div id="GlobalNav" data-win-control="WinJS.UI.NavBarContainer">
-                <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{
-                    label: 'Home',
-                    icon: WinJS.UI.AppBarIcon.home,
-                    location: '/html/home.html',
-                    splitButton: false
-                    }">
-                </div>
-                <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{
-                    label: 'Your apps',
-                    icon: WinJS.UI.AppBarIcon.favorite,
-                    location: '/html/home.html',
-                    splitButton: false
-                    }">
-                </div>
-        </div>
-    </div>
-
     <div id="contenthost" data-win-control="Application.PageControlNavigator" data-win-options="{home: '/pages/home/home.html'}"></div>
     <div id="appbar" data-win-control="WinJS.UI.AppBar" data-win-options="{placement: 'bottom',layout: 'commands'}">
-        <button id="scramble" 
-            data-win-control="WinJS.UI.AppBarCommand" 
-            data-win-options="{id:'scramble', label:'Scramble', icon:WinJS.UI.AppBarIcon.page, tooltip:'Scramble the board'}" 
-            type="button">
-        </button> 
         <button id="home" 
             data-win-control="WinJS.UI.AppBarCommand" 
             data-win-options="{id:'home', label:'Home', icon:'home', tooltip:'Home'}" 
             type="button">
         </button> 
+        <button id="scramble" 
+            data-win-control="WinJS.UI.AppBarCommand" 
+            data-win-options="{id:'scramble', label:'Scramble', icon:WinJS.UI.AppBarIcon.page, tooltip:'Scramble the board'}" 
+            type="button">
+        </button>        
         <button id="graph" 
             data-win-control="WinJS.UI.AppBarCommand" 
             data-win-options="{id:'graph', label:'Graph', icon:'Threebars', tooltip:'Draw Graph'}" 
@@ -56,6 +37,30 @@
             data-win-options="{id:'highscores', label:'High Scores', icon:'Bullets', tooltip:'HighScore List'}" 
             type="button">
         </button>
+        <button data-win-control="WinJS.UI.AppBarCommand"
+            data-win-options="{
+                id: 'volumeflyout', 
+                icon: 'volume', 
+                label: 'Volume', 
+                type: 'flyout',
+                flyout: select('#volumeFlyout')}">
+        </button>
+        <button data-win-control="WinJS.UI.AppBarCommand"
+            data-win-options="{
+                id: 'loginflyout', 
+                icon: 'contact', 
+                label: 'Login', 
+                type: 'flyout',
+                flyout: select('#loginFlyout')}">
+        </button>
+    </div>
+    <div id="volumeFlyout"
+            data-win-control="WinJS.UI.Flyout">
+        <h3>Volume</h3> <input id="volume" type="range" />
+    </div>
+    <div id="loginFlyout"
+        data-win-control="WinJS.UI.Flyout">
+        <h3>Login</h3> Username: <input id="usrName" type="text" />
     </div>
 </body>
 </html>
