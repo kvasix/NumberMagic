@@ -65,6 +65,9 @@
     <Content Include="pages\home\home.html" />
     <Content Include="pages\home\home.js" />
     <Content Include="default.html" />
+    <Content Include="pages\scrambled\scrambled.css" />
+    <Content Include="pages\scrambled\scrambled.html" />
+    <Content Include="pages\scrambled\scrambled.js" />
     <Content Include="sounds\applause.wma" />
     <Content Include="sounds\right.wma" />
     <Content Include="sounds\wrong.wma" />

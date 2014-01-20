@@ -15,7 +15,7 @@
     <script src="/js/navigator.js"></script>
 </head>
 <body>
-    <!--div id="NavBar" data-win-control="WinJS.UI.NavBar">
+    <div id="NavBar" data-win-control="WinJS.UI.NavBar">
         <div id="GlobalNav" data-win-control="WinJS.UI.NavBarContainer">
                 <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{
                     label: 'Home',
@@ -32,11 +32,20 @@
                     }">
                 </div>
         </div>
-    </div>-->
+    </div>
 
     <div id="contenthost" data-win-control="Application.PageControlNavigator" data-win-options="{home: '/pages/home/home.html'}"></div>
-    <!-- <div id="appbar" data-win-control="WinJS.UI.AppBar">
-        <button data-win-control="WinJS.UI.AppBarCommand" data-win-options="{id:'cmd', label:'Command', icon:'placeholder'}" type="button"></button>
-    </div> -->
+    <div id="appbar" data-win-control="WinJS.UI.AppBar">
+        <button id="scramble" 
+            data-win-control="WinJS.UI.AppBarCommand" 
+            data-win-options="{id:'scramble', label:'Scramble', icon:'Two Page', tooltip:'Scramble the board'}" 
+            type="button">
+        </button> 
+        <button id="home" 
+            data-win-control="WinJS.UI.AppBarCommand" 
+            data-win-options="{id:'home', label:'Home', icon:'home', tooltip:'Home'}" 
+            type="button">
+        </button> 
+    </div>
 </body>
 </html>

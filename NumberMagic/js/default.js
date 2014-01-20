@@ -30,6 +30,10 @@
                     return nav.navigate(Application.navigator.home);
                 }
             }));
+
+            id('home').addEventListener("click", homeBoard, false);
+            id('scramble').addEventListener("click", scrambleBoard, false);
+
         }
     });
 
@@ -39,7 +43,22 @@
         // complete an asynchronous operation before your application is 
         // suspended, call args.setPromise().
         app.sessionState.history = nav.history;
-    };
+    };     
 
     app.start();
+
+    function id(elementId) {
+        return document.getElementById(elementId);
+    }
+
+    function homeBoard(eventInfo) {
+        eventInfo.preventDefault();
+        WinJS.Navigation.navigate("/pages/home/home.html");
+    }
+
+    function scrambleBoard(eventInfo) {
+        eventInfo.preventDefault();
+        WinJS.Navigation.navigate("/pages/scrambled/scrambled.html");
+    }
+
 })();

@@ -1,12 +1,15 @@
 ﻿(function () {
     "use strict";
 
-    WinJS.UI.Pages.define("/pages/home/home.html", {        
+    var NUM_PAWNS = 50;
+
+    WinJS.UI.Pages.define("/pages/scrambled/scrambled.html", {
         // This function is called whenever a user navigates to this page. It
         // populates the page elements with the app's data.
         ready: function (element, options) {
             // TODO: Initialize the page here.
             
+            populateArray();
 
             var numGrid = document.getElementById("numGrid");
 
@@ -38,7 +41,7 @@
                     context.fillStyle = "blue";
                     context.font = "bold 16px Arial";
                     context.textAlign = "center";
-                    context.fillText(idNumber, 10, 10);
+                    context.fillText(numArray[idNumber], 10, 10);
 
                     /*
                     var circle = document.createElement("img");
@@ -47,7 +50,7 @@
                     */
 
                     circle.setAttribute("class", "freepawn");
-                    circle.setAttribute("id", "pawn" + idNumber);
+                    circle.setAttribute("id", "pawn" + numArray[idNumber]);
                     circle.draggable = true;
                     circle.addEventListener('dragstart', startShapeDrag, false);
                     id('pawnHeap').appendChild(circle);
@@ -74,7 +77,7 @@
 
     var timeCtrl = null;
     var mistakeCount = 0;
-    var numpawnsleft = 50;
+    var numpawnsleft = NUM_PAWNS;
     var gotRightAudio, gotWrongAudio, applaudAudio;
     function checkShapeDrop(e) {
         // Remove the 'numBox' and 'pawn' part of the id's and compare the rest of the strings. 
@@ -131,19 +134,20 @@
     }
 
     function resetPawns() {
+        populateArray();
         for (var row = 0; row < 5; row++) {
             for (var col = 0; col < 10; col++) {
                 var idNumber = row * 10 + col
                 var numContainer = document.getElementById("numBox" + idNumber);
                 //id('pawnHeap').appendChild(numContainer.childNodes[0]);
-                id('pawnHeap').appendChild(id("pawn" + idNumber));
+                id('pawnHeap').appendChild(id("pawn" + numArray[idNumber]));
                 id("pawn" + idNumber).setAttribute("class", "freepawn");
                 id("pawn" + idNumber).draggable = true;
                 numContainer.innerHTML = idNumber;
             }
         }
         mistakeCount = 0;
-        numpawnsleft = 50;
+        numpawnsleft = NUM_PAWNS;
         id("mistakeCount").innerHTML = 0;
         hours = 0, mins = 0, secs = 0;
     }
@@ -157,5 +161,27 @@
         (mins == 60) ? (++hours, mins = 0) : true;               
         id('timeCounter').innerHTML = (hours < 10 ? "0" : "") + hours + separator + (mins < 10 ? "0" : "") + mins + separator + (secs < 10 ? "0" : "") + secs;
     }
-    
+
+    var numArray = new Array();
+    function populateArray() {
+        var populated_count = 0;
+        while (populated_count < NUM_PAWNS) {
+            numArray[populated_count] = populated_count++;
+        }
+
+        for (var i = numArray.length - 1; i > 0; i--) {
+            var j = randint(0, i);
+
+            // Swap the elements at positions i and j.
+            var temp = numArray[i];
+            numArray[i] = numArray[j];
+            numArray[j] = temp;
+        }
+    }
+
+    function randint(l, u)
+    // Returns an integer uniformly distributed over l..u.
+    {
+        return l + Math.floor(Math.random() * (u + 1 - l));
+    }
 })();
