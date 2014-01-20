@@ -40,6 +40,7 @@
             }
             else {
                 id('volume').value = 100;
+                localSettings.values["volume"] = 1.0;
             }
 
             id('home').addEventListener("click", homeBoard, false);
