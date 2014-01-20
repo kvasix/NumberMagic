@@ -49,7 +49,7 @@
             id('highscores').addEventListener("click", showScores, false);
             id('volume').addEventListener("change", changeVolume, false);
             id('usrName').addEventListener("change", changeusrName, false);
-
+            id('selectpage').addEventListener("click", changepage, false);
             //localSettings.values.remove("highscores");
         }
     });
@@ -96,5 +96,13 @@
 
     function changeusrName(eventInfo) {
         localSettings.values["usrName"] = id('usrName').value;//eventInfo.srcElement.nodeValue;
+    }
+
+    var previousSelected = 5;
+    function changepage(eventInfo) {
+        if (previousSelected != id('selectpage').options.selectedIndex) {
+            WinJS.Navigation.navigate("/pages/home/" + id('selectpage').options.selectedIndex + ".html");
+            previousSelected = id('selectpage').options.selectedIndex
+        }
     }
 })();

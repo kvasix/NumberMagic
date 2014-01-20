@@ -26,7 +26,15 @@
             data-win-control="WinJS.UI.AppBarCommand" 
             data-win-options="{id:'scramble', label:'Scramble', icon:WinJS.UI.AppBarIcon.switch, tooltip:'Scramble the board'}" 
             type="button">
-        </button>        
+        </button> 
+        <button data-win-control="WinJS.UI.AppBarCommand"
+            data-win-options="{
+                id: 'pageflyout', 
+                icon: 'twopage', 
+                label: 'Grid Select', 
+                type: 'flyout',
+                flyout: select('#pageFlyout')}">
+        </button>       
         <button id="graph" 
             data-win-control="WinJS.UI.AppBarCommand" 
             data-win-options="{id:'graph', label:'Graph', icon:'threebars', tooltip:'Draw Graph'}" 
@@ -53,6 +61,17 @@
                 type: 'flyout',
                 flyout: select('#loginFlyout')}">
         </button>
+    </div>
+    <div id="pageFlyout"
+            data-win-control="WinJS.UI.Flyout">
+        <select id="selectpage">
+            <option>1 x 5 Grid</option>
+            <option>1 x 10 Grid</option>
+            <option>2 x 10 Grid</option>
+            <option>3 x 10 Grid</option>
+            <option>4 x 10 Grid</option>
+            <option>5 x 10 Grid</option>
+        </select>
     </div>
     <div id="volumeFlyout"
             data-win-control="WinJS.UI.Flyout">
