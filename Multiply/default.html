@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>NumberMagic</title>
+
+    <!-- WinJS references -->
+    <link href="//Microsoft.WinJS.1.0/css/ui-dark.css" rel="stylesheet" />
+    <script src="//Microsoft.WinJS.1.0/js/base.js"></script>
+    <script src="//Microsoft.WinJS.1.0/js/ui.js"></script>
+
+    <!-- NumberMagic references -->
+    <link href="/css/default.css" rel="stylesheet" />
+    <script src="/js/default.js"></script>
+    <script src="/js/navigator.js"></script>
+</head>
+<body>
+    <div id="contenthost" data-win-control="Application.PageControlNavigator" data-win-options="{home: '/pages/home/home.html'}"></div>
+    <div id="appbar" data-win-control="WinJS.UI.AppBar" data-win-options="{placement: 'bottom',layout: 'commands'}">
+        <button id="home" 
+            data-win-control="WinJS.UI.AppBarCommand" 
+            data-win-options="{id:'home', label:'Home', icon:'home', tooltip:'Home'}" 
+            type="button">
+        </button>         
+        <button data-win-control="WinJS.UI.AppBarCommand"
+            data-win-options="{
+                id: 'pageflyout', 
+                icon: 'twopage', 
+                label: 'Select kids Tables', 
+                type: 'flyout',
+                flyout: select('#kidsFlyout')}">
+        </button>   
+        <button data-win-control="WinJS.UI.AppBarCommand"
+            data-win-options="{
+                id: 'pageflyout', 
+                icon: 'twopage', 
+                label: 'Select Multiplication Tables', 
+                type: 'flyout',
+                flyout: select('#pageFlyout')}">
+        </button>
+        <button data-win-control="WinJS.UI.AppBarCommand"
+            data-win-options="{
+                id: 'pageflyout', 
+                icon: 'twopage', 
+                label: 'Select Advanced Tables', 
+                type: 'flyout',
+                flyout: select('#advancedFlyout')}">
+        </button>
+        <button id="surprise" 
+            data-win-control="WinJS.UI.AppBarCommand" 
+            data-win-options="{id:'surprise', label:'Surprise Me!', icon:WinJS.UI.AppBarIcon.switch, tooltip:'Random table popups'}" 
+            type="button">
+        </button>           
+        <button id="graph" 
+            data-win-control="WinJS.UI.AppBarCommand" 
+            data-win-options="{id:'graph', label:'Graph', icon:'threebars', tooltip:'Draw Graph'}" 
+            type="button">
+        </button> 
+        <button id="highscores" 
+            data-win-control="WinJS.UI.AppBarCommand" 
+            data-win-options="{id:'highscores', label:'High Scores', icon:'bullets', tooltip:'HighScore List'}" 
+            type="button">
+        </button>
+        <button data-win-control="WinJS.UI.AppBarCommand"
+            data-win-options="{
+                id: 'volumeflyout', 
+                icon: 'volume', 
+                label: 'Volume', 
+                type: 'flyout',
+                flyout: select('#volumeFlyout')}">
+        </button>
+        <button data-win-control="WinJS.UI.AppBarCommand"
+            data-win-options="{
+                id: 'loginflyout', 
+                icon: 'contact', 
+                label: 'Login', 
+                type: 'flyout',
+                flyout: select('#loginFlyout')}">
+        </button>
+    </div>
+    <div id="kidsFlyout"
+            data-win-control="WinJS.UI.Flyout">
+        <select id="selectkids">
+        </select>
+    </div>
+    <div id="pageFlyout"
+            data-win-control="WinJS.UI.Flyout">
+        <select id="selectpage">
+        </select>
+    </div>
+    <div id="advancedFlyout"
+            data-win-control="WinJS.UI.Flyout">
+        <select id="selectadvanced">
+        </select>
+    </div>
+    <div id="volumeFlyout"
+            data-win-control="WinJS.UI.Flyout">
+        <h3>Volume</h3> <input id="volume" type="range" />
+    </div>
+    <div id="loginFlyout"
+        data-win-control="WinJS.UI.Flyout">
+        <h3>Login</h3> Username: <input id="usrName" type="text" />
+    </div>
+</body>
+</html>
