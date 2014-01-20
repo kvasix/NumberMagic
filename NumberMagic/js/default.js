@@ -31,14 +31,25 @@
                 }
             }));
 
+            if (localSettings.values["usrName"]) {
+                id('usrName').value = localSettings.values["usrName"];
+            }
+
+            if (localSettings.values["volume"]) {
+                id('volume').value = localSettings.values["volume"] * 100;
+            }
+            else {
+                id('volume').value = 100;
+            }
+
             id('home').addEventListener("click", homeBoard, false);
             id('scramble').addEventListener("click", scrambleBoard, false);
             id('graph').addEventListener("click", renderGraph, false);
+            id('highscores').addEventListener("click", showScores, false);
             id('volume').addEventListener("change", changeVolume, false);
             id('usrName').addEventListener("change", changeusrName, false);
 
-            // Store the user's name for multiple sessions.
-            localSettings.values["volume"] = 1.0;
+            //localSettings.values.remove("highscores");
         }
     });
 
@@ -71,6 +82,11 @@
     function renderGraph(eventInfo) {
         eventInfo.preventDefault();
         WinJS.Navigation.navigate("/pages/graph/graph.html");
+    }
+
+    function showScores(eventInfo) {
+        eventInfo.preventDefault();
+        WinJS.Navigation.navigate("/pages/highscores/highscore.html");
     }
 
     function changeVolume(eventInfo) {

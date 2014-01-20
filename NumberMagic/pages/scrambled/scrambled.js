@@ -101,22 +101,25 @@
             gotRightAudio.volume = localSettings.values["volume"];
             gotRightAudio.play();
 
-            if (!(--numpawnsleft)) {
-                document.getElementById("mistakeCount").innerHTML = "<span style='color: white;'>" + mistakeCount + ": Finished</span>";
+            if (!(--numpawnsleft)) {                
                 clearInterval(timeCtrl);
                 applaudAudio.volume = localSettings.values["volume"];
                 applaudAudio.play();
                 var msgBox = new Windows.UI.Popups.MessageDialog("Good Job, " + localSettings.values["usrName"] + "!!! You've completed the game in " +
                     (hours < 10 ? "0" : "") + hours + ":" + (mins < 10 ? "0" : "") + mins + ":" + (secs < 10 ? "0" : "") + secs +
                      " with " + mistakeCount + " mistakes. Why don't you try it again?");
-                msgBox.showAsync();                
+                msgBox.showAsync();
+
+                if(localSettings.values["highscores"])
+                    localSettings.values["highscores"] = localSettings.values["highscores"] + localSettings.values["usrName"] + "," + "Scrambled" + "," + mistakeCount + "," + hours + ":" + mins + ":" + secs + ".";
+                else localSettings.values["highscores"] = localSettings.values["usrName"] + "," + "Scrambled" + "," + mistakeCount + "," + hours + ":" + mins + ":" + secs + ".";
             }
-            id("mistakeCount").innerHTML = "<span style='color: red;'>" + mistakeCount + "</span>";
+            id("mistakeCount").innerHTML = mistakeCount;
         }
         else {
             // Display the number of mistakes so far
             mistakeCount++;
-            id("mistakeCount").innerHTML = "<span style='color: red;'>" + mistakeCount + ": Pieces don't match!</span>";
+            id("mistakeCount").innerHTML = mistakeCount + ": Pieces don't match!";
             gotWrongAudio.volume = localSettings.values["volume"];
             gotWrongAudio.play();
         }

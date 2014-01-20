@@ -65,6 +65,9 @@
     <Content Include="pages\graph\graph.css" />
     <Content Include="pages\graph\graph.html" />
     <Content Include="pages\graph\graph.js" />
+    <Content Include="pages\highscores\highscore.css" />
+    <Content Include="pages\highscores\highscore.html" />
+    <Content Include="pages\highscores\highscore.js" />
     <Content Include="pages\home\home.css" />
     <Content Include="pages\home\home.html" />
     <Content Include="pages\home\home.js" />
