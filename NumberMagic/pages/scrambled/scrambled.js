@@ -64,7 +64,7 @@
             }
 
             id('reset').addEventListener("click", resetPawns, false);
-            timeCtrl = setInterval(timer, 500);
+            //timeCtrl = setInterval(timer, 500);
 
             gotRightAudio = new Audio("/sounds/right.wma");
             gotRightAudio.load();

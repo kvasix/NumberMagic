@@ -61,6 +61,10 @@
     <Content Include="images\storelogo.png" />
     <Content Include="js\default.js" />
     <Content Include="js\navigator.js" />
+    <Content Include="pages\graph\chart.js" />
+    <Content Include="pages\graph\graph.css" />
+    <Content Include="pages\graph\graph.html" />
+    <Content Include="pages\graph\graph.js" />
     <Content Include="pages\home\home.css" />
     <Content Include="pages\home\home.html" />
     <Content Include="pages\home\home.js" />

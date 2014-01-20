@@ -33,6 +33,7 @@
 
             id('home').addEventListener("click", homeBoard, false);
             id('scramble').addEventListener("click", scrambleBoard, false);
+            id('graph').addEventListener("click", renderGraph, false);
 
         }
     });
@@ -61,4 +62,8 @@
         WinJS.Navigation.navigate("/pages/scrambled/scrambled.html");
     }
 
+    function renderGraph(eventInfo) {
+        eventInfo.preventDefault();
+        WinJS.Navigation.navigate("/pages/graph/graph.html");
+    }
 })();
