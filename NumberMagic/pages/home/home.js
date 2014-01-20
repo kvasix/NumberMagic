@@ -1,11 +1,13 @@
 ﻿(function () {
     "use strict";
 
-    WinJS.UI.Pages.define("/pages/home/home.html", {
+    WinJS.UI.Pages.define("/pages/home/home.html", {        
         // This function is called whenever a user navigates to this page. It
         // populates the page elements with the app's data.
         ready: function (element, options) {
             // TODO: Initialize the page here.
+            
+
             var numGrid = document.getElementById("numGrid");
 
             for (var row = 0; row < 5; row++) {
@@ -59,13 +61,21 @@
             }
 
             id('reset').addEventListener("click", resetPawns, false);
-            setInterval(timer, 500);
+            timeCtrl = setInterval(timer, 500);
+
+            gotRightAudio = new Audio("/sounds/right.wma");
+            gotRightAudio.load();
+            gotWrongAudio = new Audio("/sounds/wrong.wma");
+            gotWrongAudio.load();
+            applaudAudio = new Audio("/sounds/applause.wma");
+            applaudAudio.load();
         }
     });
 
-    
+    var timeCtrl = null;
     var mistakeCount = 0;
     var numpawnsleft = 50;
+    var gotRightAudio, gotWrongAudio, applaudAudio;
     function checkShapeDrop(e) {
         // Remove the 'numBox' and 'pawn' part of the id's and compare the rest of the strings. 
         var target = this.id.replace("numBox", "");
@@ -80,15 +90,29 @@
             pawn.setAttribute("class", "setpawn");
             //id('pawnHeap').removeChild(pawn);
             //pawn.style.display = "none";
+            pawn.draggable = false;
+
+            //gotRightAudio.volume = 1;
+            gotRightAudio.play();
 
             if (!(--numpawnsleft)) {
                 document.getElementById("mistakeCount").innerHTML = "<span style='color: white;'>" + mistakeCount + ": Finished</span>";
+                clearInterval(timeCtrl);
+                //applaudAudio.volume = 1;
+                applaudAudio.play();
+                var msgBox = new Windows.UI.Popups.MessageDialog("Good Job!!! You've completed the game in " + 
+                    (hours < 10 ? "0" : "") + hours + separator + (mins < 10 ? "0" : "") + mins + separator + (secs < 10 ? "0" : "") + secs +
+                     ". Why don't you try it again?");
+                msgBox.showAsync();                
             }
+            id("mistakeCount").innerHTML = "<span style='color: red;'>" + mistakeCount + "</span>";
         }
         else {
             // Display the number of mistakes so far
             mistakeCount++;
             id("mistakeCount").innerHTML = "<span style='color: red;'>" + mistakeCount + ": Pieces don't match!</span>";
+            //gotWrongAudio.volume = 1;
+            gotWrongAudio.play();
         }
     }
 
@@ -116,6 +140,7 @@
                 //id('pawnHeap').appendChild(numContainer.childNodes[0]);
                 id('pawnHeap').appendChild(id("pawn" + idNumber));
                 id("pawn" + idNumber).setAttribute("class", "freepawn");
+                id("pawn" + idNumber).draggable = true;
                 numContainer.innerHTML = idNumber;
             }
         }

@@ -60,12 +60,14 @@
     <Content Include="images\splashscreen.png" />
     <Content Include="images\storelogo.png" />
     <Content Include="js\default.js" />
-    <Content Include="js\jquery-1.10.2.min.js" />
     <Content Include="js\navigator.js" />
     <Content Include="pages\home\home.css" />
     <Content Include="pages\home\home.html" />
     <Content Include="pages\home\home.js" />
     <Content Include="default.html" />
+    <Content Include="sounds\applause.wma" />
+    <Content Include="sounds\right.wma" />
+    <Content Include="sounds\wrong.wma" />
     <None Include="NumberMagic_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>

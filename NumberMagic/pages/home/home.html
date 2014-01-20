@@ -11,7 +11,6 @@
 
     <link href="/css/default.css" rel="stylesheet" />
     <link href="/pages/home/home.css" rel="stylesheet" />
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="/pages/home/home.js"></script>
 </head>
 <body>
@@ -29,11 +28,11 @@
             <!-- <input type="button" id="reset" value="Reset" style="position:absolute; top:14%; right:11%" /> -->
             <table id="numGrid"></table>
             <div id="pawnHeap"></div>
-
+            <audio id="alarma" src="/sounds/Alarm01.wav" style="visibility:hidden"></audio>
         </section>
     </div>
     <div id="appbar" data-win-control="WinJS.UI.AppBar">
-        <button id="reset" data-win-control="WinJS.UI.AppBarCommand" data-win-options="{id:'reset', label:'Reset', icon:'placeholder'}" type="button"></button>
+        <button id="reset" data-win-control="WinJS.UI.AppBarCommand" data-win-options="{id:'reset', label:'Reset', icon:'placeholder'}" type="button"></button>        
     </div>
 </body>
 </html>
