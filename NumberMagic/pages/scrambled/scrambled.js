@@ -80,6 +80,10 @@
         }
     });
 
+    // Restore the user's volume
+    var appData = Windows.Storage.ApplicationData.current;
+    var localSettings = appData.localSettings;
+
     var timeCtrl = null;
     var mistakeCount = 0;
     var numpawnsleft = NUM_PAWNS;
