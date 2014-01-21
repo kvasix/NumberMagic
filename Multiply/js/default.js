@@ -29,7 +29,7 @@
                 } else {
                     return nav.navigate(Application.navigator.home);
                 }
-            }));
+            }));                     
 
             for (var num = 5; num <= 10; num+=5) {
                 var option = document.createElement("option");
@@ -53,7 +53,8 @@
                 option.id = "L" + num;
                 id('selectadvanced').appendChild(option);
             }
-            id('selectadvanced').disabled = true;
+            id('advflybtn').disabled = true;
+            updatelevel();//Small bug, when the app is started the updation happens to the last value
 
             if (localSettings.values["usrName"]) {
                 id('usrName').value = localSettings.values["usrName"];
@@ -162,6 +163,9 @@
         for (var num = 1; num < level; num++) {
             var option = id('L' + num);
             option.removeAttribute("disabled");
+        }
+        if (level >= 13) {
+            id('advflybtn').removeAttribute('disabled');
         }
         if (level <= 22) {
             id('L' + num).removeAttribute("disabled");

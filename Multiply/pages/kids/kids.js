@@ -83,6 +83,7 @@
         unload: function () {
             // TODO: Respond to navigations away from this page.
             clearInterval(timeCtrl);
+            hours = 0, mins = 0, secs = 0;
         }
     });
 
@@ -134,6 +135,7 @@
     function resetTable() {
         for (var var_num = 0; var_num <= 10; var_num++) {
             id(var_num * fixed_num).value = "";
+            id(var_num * fixed_num).setAttribute("style", "background-color:white");
         }
         hours = 0, mins = 0, secs = 0;
     }
