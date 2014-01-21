@@ -29,6 +29,7 @@
     top: 24%;
     left: 60%;
     text-align:right;
+    visibility:hidden;
 }
 
 td {

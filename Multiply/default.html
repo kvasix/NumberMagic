@@ -24,13 +24,14 @@
         </button>         
         <button data-win-control="WinJS.UI.AppBarCommand"
             data-win-options="{
-                id: 'pageflyout', 
+                id: 'kidsflyout', 
                 icon: 'twopage', 
                 label: 'Select kids Tables', 
                 type: 'flyout',
                 flyout: select('#kidsFlyout')}">
         </button>   
-        <button data-win-control="WinJS.UI.AppBarCommand"
+        <button id="pageflybtn"
+            data-win-control="WinJS.UI.AppBarCommand"
             data-win-options="{
                 id: 'pageflyout', 
                 icon: 'twopage', 
@@ -38,9 +39,10 @@
                 type: 'flyout',
                 flyout: select('#pageFlyout')}">
         </button>
-        <button data-win-control="WinJS.UI.AppBarCommand"
+        <button id="advflybtn"
+            data-win-control="WinJS.UI.AppBarCommand"
             data-win-options="{
-                id: 'pageflyout', 
+                id: 'advancedflyout', 
                 icon: 'twopage', 
                 label: 'Select Advanced Tables', 
                 type: 'flyout',
@@ -99,7 +101,7 @@
     </div>
     <div id="loginFlyout"
         data-win-control="WinJS.UI.Flyout">
-        <h3>Login</h3> Username: <input id="usrName" type="text" />
+        <h3>Login</h3> Username: <input id="usrName" type="text" value="Anonymous" />
     </div>
 </body>
 </html>

@@ -39,18 +39,26 @@
 
             for (var num = 1; num <= 12; num++) {
                 var option = document.createElement("option");
-                option.innerText = num + "'s Table"
+                option.innerText = num + "'s Table"                
+                option.disabled = true;
+                option.id = "L" + num;
                 id('selectpage').appendChild(option);
             }
+            id('L1').removeAttribute("disabled");
 
             for (var num = 13; num <= 22; num++) {
                 var option = document.createElement("option");
                 option.innerText = num + "'s Table"
+                option.disabled = true;
+                option.id = "L" + num;
                 id('selectadvanced').appendChild(option);
             }
+            id('selectadvanced').disabled = true;
 
             if (localSettings.values["usrName"]) {
                 id('usrName').value = localSettings.values["usrName"];
+            } else {
+                localSettings.values["usrName"] = id('usrName').value;
             }
 
             if (localSettings.values["volume"]) {
@@ -61,8 +69,12 @@
                 localSettings.values["volume"] = 1.0;
             }
 
+            if (!localSettings.values["level"]) {
+                localSettings.values["level"] = 1;
+            }
+
             id('home').addEventListener("click", homeBoard, false);
-            id('surprise').addEventListener("click", scrambleBoard, false);
+            id('surprise').addEventListener("click", surpriseme, false);
             id('graph').addEventListener("click", renderGraph, false);
             id('highscores').addEventListener("click", showScores, false);
             id('volume').addEventListener("change", changeVolume, false);
@@ -71,6 +83,9 @@
             id('selectpage').addEventListener("click", changetable, false);
             id('selectadvanced').addEventListener("click", changetable_adv, false);
             id('selectkids').addEventListener("click", changetable_kids, false);
+
+            id('pageflybtn').addEventListener("click", updatelevel, false);
+            id('advflybtn').addEventListener("click", updatelevel, false);
             //localSettings.values.remove("highscores");
         }
     });
@@ -94,11 +109,11 @@
     function homeBoard(eventInfo) {
         eventInfo.preventDefault();
         WinJS.Navigation.navigate("/pages/home/home.html");
-    }
+    }   
 
-    function scrambleBoard(eventInfo) {
+    function surpriseme(eventInfo) {
         eventInfo.preventDefault();
-        WinJS.Navigation.navigate("/pages/scrambled/scrambled.html");
+        WinJS.Navigation.navigate("/pages/surprise/surprise.html");
     }
 
     function renderGraph(eventInfo) {
@@ -127,11 +142,10 @@
         }
     }
 
-    var previousSelected_adv = -1;
     function changetable_adv(eventInfo) {
-        if (previousSelected_adv != id('selectadvanced').options.selectedIndex) {
+        if (previousSelected != id('selectadvanced').options.selectedIndex) {
             WinJS.Navigation.navigate("/pages/advanced/advanced.html", id('selectadvanced').options.selectedIndex + 13);
-            previousSelected_adv = id('selectadvanced').options.selectedIndex
+            previousSelected = id('selectadvanced').options.selectedIndex
         }
     }
 
@@ -139,7 +153,18 @@
     function changetable_kids(eventInfo) {
         if (previousSelected_kids != id('selectkids').options.selectedIndex) {
             WinJS.Navigation.navigate("/pages/kids/kids.html", (id('selectkids').options.selectedIndex + 1) * 5);
-            previousSelected_kids = id('selectkids').options.selectedIndex
+            previousSelected_kids = id('selectkids').options.selectedIndex;
+        }
+    }
+
+    function updatelevel(eventInfo) {
+        var level = parseInt(localSettings.values["level"]);
+        for (var num = 1; num < level; num++) {
+            var option = id('L' + num);
+            option.removeAttribute("disabled");
+        }
+        if (level <= 22) {
+            id('L' + num).removeAttribute("disabled");
         }
     }
 })();
