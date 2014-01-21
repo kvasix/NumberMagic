@@ -33,6 +33,8 @@
 
             if (localSettings.values["usrName"]) {
                 id('usrName').value = localSettings.values["usrName"];
+            } else {
+                localSettings.values["usrName"] = id('usrName').value;
             }
 
             if (localSettings.values["volume"]) {
@@ -50,6 +52,7 @@
             id('volume').addEventListener("change", changeVolume, false);
             id('usrName').addEventListener("change", changeusrName, false);
             id('selectpage').addEventListener("click", changepage, false);
+            id('loginflybtn').addEventListener("click", clearloginstatus, false);
             //localSettings.values.remove("highscores");
         }
     });
@@ -96,6 +99,7 @@
 
     function changeusrName(eventInfo) {
         localSettings.values["usrName"] = id('usrName').value;//eventInfo.srcElement.nodeValue;
+        id('login_success').style.visibility = "visible";
     }
 
     var previousSelected = 5;
@@ -104,5 +108,10 @@
             WinJS.Navigation.navigate("/pages/home/" + id('selectpage').options.selectedIndex + ".html");
             previousSelected = id('selectpage').options.selectedIndex
         }
+    }
+
+    function clearloginstatus(eventInfo) {
+        id('login_success').style.visibility = "hidden";
+        id('login_failed').style.visibility = "hidden";
     }
 })();
