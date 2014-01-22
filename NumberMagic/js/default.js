@@ -110,10 +110,10 @@
         if (previousSelected != index) {
             if (index <= 5) {
                 WinJS.Navigation.navigate("/pages/kids/110.html",index);
-            } else if(index <= 10) {
-                WinJS.Navigation.navigate("/pages/kids/110.html", index - 5);
+            } else if(index <= 10 && index != 8 ) {
+                WinJS.Navigation.navigate("/pages/kids/1120.html", index - 6);
             } else if (index <= 15) {
-                WinJS.Navigation.navigate("/pages/kids/110.html", index - 10);
+                WinJS.Navigation.navigate("/pages/kids/2130.html", index - 11);
             }
             previousSelected = id('selectpage').options.selectedIndex;
         }
