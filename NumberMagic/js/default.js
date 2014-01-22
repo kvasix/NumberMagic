@@ -108,8 +108,10 @@
     function changepage(eventInfo) {
         var index = id('selectpage').options.selectedIndex;
         if (previousSelected != index) {
-            if (index <= 5) {
-                WinJS.Navigation.navigate("/pages/kids/110.html",index);
+            if (index == 0) {
+                WinJS.Navigation.navigate("/pages/kids/blank.html", index);
+            } else if (index <= 5) {
+                WinJS.Navigation.navigate("/pages/kids/110.html",index - 1);
             } else if (index == 8) {
 
             }

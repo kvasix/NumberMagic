@@ -10,10 +10,10 @@
             
             indexSelected = parseInt(options.toString());
 
-            if (indexSelected == 1) {
+            if (indexSelected == 0) {
                 NUM_PAWNS = 3;
             }
-            else if (indexSelected == 0 || indexSelected == 2 || indexSelected == 3) {
+            else if (indexSelected <= 2) {
                 NUM_PAWNS = 5;
             }
             else {
@@ -30,8 +30,7 @@
 
                     var idNumber = row * NUM_COLS + col + 1;
                     numContainer.setAttribute("id", "numBox" + idNumber);
-                    if (indexSelected)
-                        numContainer.innerHTML = idNumber;
+                    numContainer.innerHTML = idNumber;
 
                     numContainer.setAttribute("ondragover", "return false;");
                     numContainer.addEventListener('drop', checkShapeDrop, false);
@@ -222,12 +221,12 @@
             for (var col = 0; col < NUM_COLS; col++) {
                 var idNumber = row * NUM_COLS + col + 1;
                 var numContainer = document.getElementById("numBox" + idNumber);
-                if (indexSelected)
-                    numContainer.innerHTML = idNumber;
+                numContainer.innerHTML = idNumber;
             }
         }
 
         toggleHeap(disableRightHeap);
+
 
         mistakeCount = 0;
         numpawnsleft = NUM_PAWNS;

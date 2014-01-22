@@ -73,6 +73,9 @@
     <Content Include="pages\home\home.css" />
     <Content Include="pages\home\home.html" />
     <Content Include="pages\home\home.js" />
+    <Content Include="pages\kids\blank.css" />
+    <Content Include="pages\kids\blank.html" />
+    <Content Include="pages\kids\blank.js" />
     <Content Include="pages\kids\2130.css" />
     <Content Include="pages\kids\2130.html" />
     <Content Include="pages\kids\2130.js" />
