@@ -8,7 +8,7 @@
         ready: function (element, options) {
             // TODO: Initialize the page here.
             
-            var indexSelected = parseInt(options.toString());
+            indexSelected = parseInt(options.toString());
 
             if (indexSelected == 2) {
                 NUM_PAWNS = 15;
@@ -115,21 +115,21 @@
         if (disableRight && (id('pawnHeap1').childElementCount != 0))
         {
             for (var i = 0; i < id('pawnHeap1').childElementCount; i++) {
-                id('pawnHeap1').childNodes[i].setAttribute("draggable", true);
+                id('pawnHeap1').childNodes[i].draggable = true;
                 id('pawnHeap1').childNodes[i].setAttribute("class", "freepawn");
             }
             for (var i = 0; i < id('pawnHeap2').childElementCount; i++) {
-                id('pawnHeap2').childNodes[i].setAttribute("draggable", false);
+                id('pawnHeap2').childNodes[i].draggable = false;
                 id('pawnHeap2').childNodes[i].setAttribute("class", "disabled");
             }
             disableRightHeap = false;
         } else if (!disableRight && (id('pawnHeap2').childElementCount != 0)) {
             for (var i = 0; i < id('pawnHeap1').childElementCount; i++) {
-                id('pawnHeap1').childNodes[i].setAttribute("draggable", false);
+                id('pawnHeap1').childNodes[i].draggable = false;
                 id('pawnHeap1').childNodes[i].setAttribute("class", "disabled");
             }
             for (var i = 0; i < id('pawnHeap2').childElementCount; i++) {
-                id('pawnHeap2').childNodes[i].setAttribute("draggable", true);
+                id('pawnHeap2').childNodes[i].draggable = true;
                 id('pawnHeap2').childNodes[i].setAttribute("class", "freepawn");
 
             }
@@ -223,7 +223,7 @@
             for (var col = 0; col < NUM_COLS; col++) {
                 var idNumber = row * NUM_COLS + col + 11;
                 var numContainer = document.getElementById("numBox" + idNumber);
-                    numContainer.innerHTML = idNumber;
+                numContainer.innerHTML = idNumber;
             }
         }
 
