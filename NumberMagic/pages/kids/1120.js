@@ -81,8 +81,11 @@
                 id('pawnHeap' + ((idnum % 2)+1)).appendChild(circle);
             }
             numpawnsleft = NUM_PAWNS;
-            disableRightHeap = true;
-            toggleHeap(disableRightHeap);            
+            enableRightHeap = true;
+            toggleHeap(enableRightHeap);
+
+            id('pawnHeap1').addEventListener("mousedown", updateHandStatus, false);
+            id('pawnHeap2').addEventListener("mousedown", updateHandStatus, false);
 
             id('reset').addEventListener("click", resetPawns, false);
             timeCtrl = setInterval(timer, 500);
@@ -102,6 +105,21 @@
         }
     });
 
+    function updateHandStatus(eventInfo) {
+        var heapid = parseInt(this.id.replace("pawnHeap", "")) - 1;
+        if (heapid ^ enableRightHeap) {
+            if (enableRightHeap) {
+                id('guide').innerHTML = "Use your right hand --->";
+                id('guide').style.textAlign = "right";
+            } else {
+                id('guide').innerHTML = "<--- Use your left hand";
+                id('guide').style.textAlign = "left";
+            }
+        } else {
+            id('guide').innerHTML = "";
+        }
+    }
+
     // Restore the user's volume
     var appData = Windows.Storage.ApplicationData.current;
     var localSettings = appData.localSettings;
@@ -110,9 +128,9 @@
     var mistakeCount = 0;
     var numpawnsleft;
     var gotRightAudio, gotWrongAudio, applaudAudio;
-    var disableRightHeap;
-    function toggleHeap(disableRight){
-        if (disableRight && (id('pawnHeap1').childElementCount != 0))
+    var enableRightHeap;
+    function toggleHeap(enableRight){
+        if (enableRight && (id('pawnHeap1').childElementCount != 0))
         {
             for (var i = 0; i < id('pawnHeap1').childElementCount; i++) {
                 id('pawnHeap1').childNodes[i].draggable = true;
@@ -122,8 +140,8 @@
                 id('pawnHeap2').childNodes[i].draggable = false;
                 id('pawnHeap2').childNodes[i].setAttribute("class", "disabled");
             }
-            disableRightHeap = false;
-        } else if (!disableRight && (id('pawnHeap2').childElementCount != 0)) {
+            enableRightHeap = false;
+        } else if (!enableRight && (id('pawnHeap2').childElementCount != 0)) {
             for (var i = 0; i < id('pawnHeap1').childElementCount; i++) {
                 id('pawnHeap1').childNodes[i].draggable = false;
                 id('pawnHeap1').childNodes[i].setAttribute("class", "disabled");
@@ -133,7 +151,7 @@
                 id('pawnHeap2').childNodes[i].setAttribute("class", "freepawn");
 
             }
-            disableRightHeap = true;
+            enableRightHeap = true;
         }
     }
 
@@ -162,7 +180,7 @@
             gotRightAudio.volume = localSettings.values["volume"];
             gotRightAudio.play();
 
-            toggleHeap(disableRightHeap);
+            toggleHeap(enableRightHeap);
 
             if (!(--numpawnsleft)) {                
                 clearInterval(timeCtrl);
@@ -227,7 +245,9 @@
             }
         }
 
-        toggleHeap(disableRightHeap);
+        toggleHeap(enableRightHeap);
+        id('guide').innerHTML = "Board Reset!";
+        id('guide').style.textAlign = "center";
 
         mistakeCount = 0;
         numpawnsleft = NUM_PAWNS;

@@ -219,6 +219,8 @@
         }
 
         toggleHeap(enableRightHeap);
+        id('guide').innerHTML = "Board Reset!";
+        id('guide').style.textAlign = "center";
 
         numpawnsleft = NUM_PAWNS;
         hours = 0, mins = 0, secs = 0;

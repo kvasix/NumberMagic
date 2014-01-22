@@ -37,6 +37,15 @@
     height:5em;    
 }
 
+#guide {
+    position: absolute;
+    height:1em;
+    width:39em;
+    left: 27em;
+    top: 21em;
+    overflow: visible;
+}
+
 #numGrid {
     position: absolute;
     height:12em;
