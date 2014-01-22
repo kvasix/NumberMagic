@@ -29,12 +29,26 @@
         </button> 
         <button data-win-control="WinJS.UI.AppBarCommand"
             data-win-options="{
-                id: 'pageflyout', 
+                id: 'kidflyout', 
                 icon: 'twopage', 
-                label: 'Grid Select', 
+                label: 'Beginner', 
                 type: 'flyout',
-                flyout: select('#pageFlyout')}">
-        </button>       
+                flyout: select('#kidFlyout')}">
+        </button>
+        <button data-win-control="WinJS.UI.AppBarCommand"
+                data-win-options="{
+                id: 'blankflyout',
+                icon: 'twopage',
+                label: 'Pacer',
+                type: 'flyout',
+                flyout: select('#blankFlyout')}"></button>
+        <button data-win-control="WinJS.UI.AppBarCommand"
+                data-win-options="{
+                id: 'advancedflyout',
+                icon: 'twopage',
+                label: 'Advanced',
+                type: 'flyout',
+                flyout: select('#advancedFlyout')}"></button>      
         <button id="graph" 
             data-win-control="WinJS.UI.AppBarCommand" 
             data-win-options="{id:'graph', label:'Graph', icon:'threebars', tooltip:'Draw Graph'}" 
@@ -63,15 +77,41 @@
                 flyout: select('#loginFlyout')}">
         </button>
     </div>
-    <div id="pageFlyout"
+    <div id="kidFlyout"
             data-win-control="WinJS.UI.Flyout">
         <select id="selectpage">
-            <option>1 x 5 Grid</option>
-            <option>1 x 10 Grid</option>
-            <option>2 x 10 Grid</option>
-            <option>3 x 10 Grid</option>
-            <option>4 x 10 Grid</option>
-            <option>5 x 10 Grid</option>
+            <option>blank board</option>
+            <option>Numbers 1 - 3</option>
+            <option>Numbers 1 - 5</option>
+            <option>Numbers 1 - 5+</option>
+            <option>Numbers 1 - 10</option>
+            <option>Numbers 1 - 10+</option>
+            <option>Numbers 11 - 15</option>
+            <option>Numbers 11 - 15+</option>
+            <option>Numbers 1 - 15+</option>
+            <option>Numbers 16 - 20</option>
+            <option>Numbers 16 - 20+</option>
+            <option>Numbers 21 - 25</option>
+            <option>Numbers 21 - 25+</option>
+            <option>Numbers 1 - 25+</option>
+            <option>Numbers 26 - 30</option>
+            <option>Numbers 26 - 30+</option>
+        </select>
+    </div>
+    <div id="blankFlyout"
+         data-win-control="WinJS.UI.Flyout">
+        <select id="selectblankpage">
+            <option>Numbers 1 - 10</option>
+            <option>Numbers 11 - 20</option>
+            <option>Numbers 21 - 30</option>
+        </select>
+    </div>
+    <div id="advancedFlyout"
+         data-win-control="WinJS.UI.Flyout">
+        <select id="selectadvpage">
+            <option>Reverse 30 - 1</option>
+            <option>Numbers 1 - 50</option>
+            <option>Numbers 1 - 100</option>
         </select>
     </div>
     <div id="volumeFlyout"

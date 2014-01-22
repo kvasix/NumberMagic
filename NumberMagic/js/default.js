@@ -47,11 +47,13 @@
 
             id('home').addEventListener("click", homeBoard, false);
             id('scramble').addEventListener("click", scrambleBoard, false);
+            id('selectpage').addEventListener("click", changepage, false);
+            id('selectblankpage').addEventListener("click", changeblankpage, false);
+            id('selectadvpage').addEventListener("click", changeadvpage, false);
             id('graph').addEventListener("click", renderGraph, false);
             id('highscores').addEventListener("click", showScores, false);
             id('volume').addEventListener("change", changeVolume, false);
-            id('usrName').addEventListener("change", changeusrName, false);
-            id('selectpage').addEventListener("click", changepage, false);
+            id('usrName').addEventListener("change", changeusrName, false);            
             id('loginflybtn').addEventListener("click", clearloginstatus, false);
             //localSettings.values.remove("highscores");
         }
@@ -102,11 +104,34 @@
         id('login_success').style.visibility = "visible";
     }
 
-    var previousSelected = 5;
+    var previousSelected = -1;
     function changepage(eventInfo) {
-        if (previousSelected != id('selectpage').options.selectedIndex) {
+        var index = id('selectpage').options.selectedIndex;
+        if (previousSelected != index) {
+            if (index <= 5) {
+                WinJS.Navigation.navigate("/pages/kids/110.html",index);
+            } else if(index <= 10) {
+                WinJS.Navigation.navigate("/pages/kids/110.html", index - 5);
+            } else if (index <= 15) {
+                WinJS.Navigation.navigate("/pages/kids/110.html", index - 10);
+            }
+            previousSelected = id('selectpage').options.selectedIndex;
+        }
+    }
+
+    function changeblankpage(eventInfo) {
+        var index = id('selectblankpage').options.selectedIndex;
+        if (previousSelected != index) {
             WinJS.Navigation.navigate("/pages/normal/" + id('selectpage').options.selectedIndex + ".html");
-            previousSelected = id('selectpage').options.selectedIndex
+            previousSelected = id('selectpage').options.selectedIndex + 15;
+        }
+    }
+
+    function changeadvpage(eventInfo) {
+        var index = id('selectadvpage').options.selectedIndex;
+        if (previousSelected != index) {
+            WinJS.Navigation.navigate("/pages/normal/" + id('selectpage').options.selectedIndex + ".html");
+            previousSelected = id('selectpage').options.selectedIndex + 18;
         }
     }
 
