@@ -67,7 +67,7 @@
                 /*
                 var circle = document.createElement("img");
                 circle.src = "/images/circle.png";                    
-                circle.setAttribute("alt", "pawn" + idNumber);
+                circle.setAttribute("alt", "pawn" + numArray[idnum-NUM_START]);
                 */
 
                 if (indexSelected == 3 || indexSelected == 5)
@@ -232,9 +232,11 @@
 
     function resetPawns() {
         populateArray();
-        for (var idnum = NUM_START; idnum < NUM_START+NUM_PAWNS; idnum++) {
-            id('pawnHeap' + randint(1, 2)).appendChild(id("pawn" + numArray[idnum - NUM_START]));
-            id("pawn" + idnum).setAttribute("class", "freepawn");
+        for (var idnum = NUM_START; idnum < NUM_START + NUM_PAWNS; idnum++) {
+            var pawn = id("pawn" + numArray[idnum - NUM_START]);
+            id('pawnHeap' + randint(1, 2)).appendChild(pawn);
+            pawn.setAttribute("class", "freepawn");
+            pawn.draggable = true;
         }
 
         for (var row = 0; row < NUM_ROWS; row++) {
