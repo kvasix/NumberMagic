@@ -1,7 +1,7 @@
 ﻿(function () {
     "use strict";
     var NUM_PAWNS = 5, NUM_ROWS = 1, NUM_COLS = 5;
-    WinJS.UI.Pages.define("/pages/home/0.html", {        
+    WinJS.UI.Pages.define("/pages/normal/0.html", {
         // This function is called whenever a user navigates to this page. It
         // populates the page elements with the app's data.
         ready: function (element, options) {

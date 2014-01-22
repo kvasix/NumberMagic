@@ -5,9 +5,9 @@
     <title>homePage</title>
 
     <!-- WinJS references -->
-    <link href="//Microsoft.WinJS.1.0/css/ui-dark.css" rel="stylesheet" />
-    <script src="//Microsoft.WinJS.1.0/js/base.js"></script>
-    <script src="//Microsoft.WinJS.1.0/js/ui.js"></script>
+    <link href="//Microsoft.WinJS.2.0/css/ui-dark.css" rel="stylesheet" />
+    <script src="//Microsoft.WinJS.2.0/js/base.js"></script>
+    <script src="//Microsoft.WinJS.2.0/js/ui.js"></script>
 
     <link href="/css/default.css" rel="stylesheet" />
     <link href="/pages/home/home.css" rel="stylesheet" />
@@ -19,15 +19,11 @@
         <header aria-label="Header content" role="banner">
             <!--<button class="win-backbutton" aria-label="Back" disabled type="button"></button>-->
             <h1 class="titlearea win-type-ellipsis">
-                <span class="pagetitle">Number Magic</span>
+                <span class="pagetitle">Welcome to Number Magic!</span>
             </h1>
         </header>
         <section aria-label="Main content" role="main">
-            <span id="mistakesBox">Number of Mistakes: <span id="mistakeCount" style='color: red;'>0</span></span>
-            <span id="timeBox" style="position:absolute; right:9%">Time Elapsed: <span id="timeCounter"></span></span>
-            <input type="button" id="reset" value="Reset" style="position:absolute; top:14%; right:11%" />
-            <table id="numGrid"></table>
-            <div id="pawnHeap"></div>
+            <p>You are in Level: <span id="level"></span></p>
         </section>
     </div>
     

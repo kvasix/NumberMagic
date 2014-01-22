@@ -105,7 +105,7 @@
     var previousSelected = 5;
     function changepage(eventInfo) {
         if (previousSelected != id('selectpage').options.selectedIndex) {
-            WinJS.Navigation.navigate("/pages/home/" + id('selectpage').options.selectedIndex + ".html");
+            WinJS.Navigation.navigate("/pages/normal/" + id('selectpage').options.selectedIndex + ".html");
             previousSelected = id('selectpage').options.selectedIndex
         }
     }

@@ -19,29 +19,30 @@
     width: 9%;
 }
 .numContainer {    
-    width:7.5%;
-    height:12%;    
+    position:relative;
+    width:6em;
+    height:6em;    
     background-color:black;
     border:solid white;
     text-align:center;
 }
 
  .freepawn {     
-    width:111px;
-    height:111px;    
+    width:6em;
+    height:6em;    
 }
 
 .setpawn {     
-    width:75%;
-    height:99%;    
+    width:5em;
+    height:5em;    
 }
 
 #numGrid {
     position: absolute;
+    height:30em;
+    width:36em;
     left: 3%;
-    width: 45%;
-    height: 60%;
-    top: 24%;
+    top: 27%;
     background-color: black;
     overflow: scroll;
 }
@@ -49,9 +50,9 @@
 #pawnHeap {
     position:absolute;
     left:78%;
-    width:18%;
-    height:60%;
-    top:24%;
+    width:15%;
+    height:33em;
+    top:27%;
     background-color:black;
     overflow:scroll;
     text-align:center;   
