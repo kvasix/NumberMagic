@@ -1,24 +1,16 @@
 ﻿(function () {
     "use strict";
 
-    var NUM_PAWNS, NUM_ROWS = 2, NUM_COLS = 5, indexSelected;
-    WinJS.UI.Pages.define("/pages/kids/110.html", {
+    var NUM_PAWNS, NUM_START, NUM_ROWS = 2, NUM_COLS = 5;
+    WinJS.UI.Pages.define("/pages/pacer/pacer.html", {
         // This function is called whenever a user navigates to this page. It
         // populates the page elements with the app's data.
         ready: function (element, options) {
             // TODO: Initialize the page here.
+           
+            NUM_START = parseInt(options.toString())*10 + 1;
+            NUM_PAWNS = 10;
             
-            indexSelected = parseInt(options.toString());
-
-            if (indexSelected == 0) {
-                NUM_PAWNS = 3;
-            }
-            else if (indexSelected <= 2) {
-                NUM_PAWNS = 5;
-            }
-            else {
-                NUM_PAWNS = 10;
-            }
 
             var numGrid = document.getElementById("numGrid");
 
@@ -28,7 +20,7 @@
                     var numContainer = document.createElement("td");
                     numContainer.setAttribute("class", "numContainer");
 
-                    var idNumber = row * NUM_COLS + col + 1;
+                    var idNumber = row * NUM_COLS + col + NUM_START;
                     numContainer.setAttribute("id", "numBox" + idNumber);
                     numContainer.innerHTML = idNumber;
 
@@ -41,7 +33,7 @@
             }
 
             populateArray();
-            for (var idnum = 1; idnum <= NUM_PAWNS; idnum++) {
+            for (var idnum = NUM_START; idnum < NUM_START + NUM_PAWNS; idnum++) {
                 var circle = document.createElement("canvas")
                 circle.setAttribute("width", 100);
                 circle.setAttribute("height", 100);
@@ -60,19 +52,15 @@
                 context.fillStyle = "blue";
                 context.font = "bold 16px Arial";
                 context.textAlign = "center";
-                context.fillText(numArray[idnum-1], 10, 10);
+                context.fillText(numArray[idnum-NUM_START], 10, 10);
 
                 /*
                 var circle = document.createElement("img");
                 circle.src = "/images/circle.png";                    
-                circle.setAttribute("alt", "pawn" + numArray[idnum-1]);
-                */
+                circle.setAttribute("alt", "pawn" + numArray[idnum-NUM_START]);
+                */                
 
-                if (indexSelected == 3 || indexSelected == 5)
-                    circle.setAttribute("class", "freepawnSingle");
-                else
-                    circle.setAttribute("class", "freepawn");
-                circle.setAttribute("id", "pawn" + numArray[idnum-1]);
+                circle.setAttribute("id", "pawn" + numArray[idnum-NUM_START]);
                 circle.addEventListener('dragstart', startShapeDrag, false);
                 //circle.addEventListener('drag', moveObject, false);
                 //id('pawnHeap' + randint(1, 2)).appendChild(circle);
@@ -128,8 +116,7 @@
     var gotRightAudio, gotWrongAudio, applaudAudio;
     var enableRightHeap;
     function toggleHeap(enableRight) {
-        if (enableRight && (id('pawnHeap1').childElementCount != 0))
-        {
+        if (enableRight && (id('pawnHeap1').childElementCount != 0)) {
             for (var i = 0; i < id('pawnHeap1').childElementCount; i++) {
                 id('pawnHeap1').childNodes[i].draggable = true;
                 id('pawnHeap1').childNodes[i].setAttribute("class", "freepawn");
@@ -230,16 +217,16 @@
 
     function resetPawns() {
         populateArray();
-        for (var idnum = 1; idnum <= NUM_PAWNS; idnum++) {
-            var pawn = id("pawn" + numArray[idnum - 1]);
-            id('pawnHeap'+randint(1,2)).appendChild(pawn);
+        for (var idnum = NUM_START; idnum < NUM_START + NUM_PAWNS; idnum++) {
+            var pawn = id("pawn" + numArray[idnum - NUM_START]);
+            id('pawnHeap' + randint(1, 2)).appendChild(pawn);
             pawn.setAttribute("class", "freepawn");
             pawn.draggable = true;
         }
 
         for (var row = 0; row < NUM_ROWS; row++) {
             for (var col = 0; col < NUM_COLS; col++) {
-                var idNumber = row * NUM_COLS + col + 1;
+                var idNumber = row * NUM_COLS + col + NUM_START;
                 var numContainer = document.getElementById("numBox" + idNumber);
                 numContainer.innerHTML = idNumber;
             }
@@ -272,7 +259,8 @@
         numArray = new Array();
         var populated_count = 0;
         while (populated_count < NUM_PAWNS) {
-            numArray[populated_count] = ++populated_count;
+            numArray[populated_count] = NUM_START + populated_count;
+            populated_count++;
         }
 
         for (var i = numArray.length - 1; i > 0; i--) {

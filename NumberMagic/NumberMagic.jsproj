@@ -73,12 +73,12 @@
     <Content Include="pages\home\home.css" />
     <Content Include="pages\home\home.html" />
     <Content Include="pages\home\home.js" />
-    <Content Include="pages\kids\blank.css" />
-    <Content Include="pages\kids\blank.html" />
-    <Content Include="pages\kids\blank.js" />
     <Content Include="pages\kids\2130.css" />
     <Content Include="pages\kids\2130.html" />
     <Content Include="pages\kids\2130.js" />
+    <Content Include="pages\kids\blank.css" />
+    <Content Include="pages\kids\blank.html" />
+    <Content Include="pages\kids\blank.js" />
     <Content Include="pages\kids\1120.css" />
     <Content Include="pages\kids\1120.html" />
     <Content Include="pages\kids\1120.js" />
@@ -103,6 +103,9 @@
     <Content Include="pages\normal\5.css" />
     <Content Include="pages\normal\5.html" />
     <Content Include="pages\normal\5.js" />
+    <Content Include="pages\pacer\pacer.css" />
+    <Content Include="pages\pacer\pacer.html" />
+    <Content Include="pages\pacer\pacer.js" />
     <Content Include="pages\scrambled\scrambled.css" />
     <Content Include="pages\scrambled\scrambled.html" />
     <Content Include="pages\scrambled\scrambled.js" />

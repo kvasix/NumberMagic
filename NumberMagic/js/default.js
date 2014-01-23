@@ -130,8 +130,8 @@
     function changeblankpage(eventInfo) {
         var index = id('selectblankpage').options.selectedIndex;
         if (previousSelected != index) {
-            WinJS.Navigation.navigate("/pages/normal/" + id('selectpage').options.selectedIndex + ".html");
-            previousSelected = id('selectpage').options.selectedIndex + 15;
+            WinJS.Navigation.navigate("/pages/pacer/pacer.html",index);
+            previousSelected = id('selectblankpage').options.selectedIndex + 15;
         }
     }
 
@@ -139,7 +139,7 @@
         var index = id('selectadvpage').options.selectedIndex;
         if (previousSelected != index) {
             WinJS.Navigation.navigate("/pages/normal/" + id('selectpage').options.selectedIndex + ".html");
-            previousSelected = id('selectpage').options.selectedIndex + 18;
+            previousSelected = id('selectadvpage').options.selectedIndex + 18;
         }
     }
 
