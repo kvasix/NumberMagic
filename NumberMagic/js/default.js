@@ -138,8 +138,10 @@
     function changeadvpage(eventInfo) {
         var index = id('selectadvpage').options.selectedIndex;
         if (previousSelected != index) {
-            WinJS.Navigation.navigate("/pages/normal/" + id('selectpage').options.selectedIndex + ".html");
-            previousSelected = id('selectadvpage').options.selectedIndex + 18;
+            if (index == 0) {
+                WinJS.Navigation.navigate("/pages/advanced/301.html");
+                previousSelected = id('selectadvpage').options.selectedIndex + 18;
+            }
         }
     }
 
