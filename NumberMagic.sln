@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows 8
-Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "NumberMagic", "NumberMagic\NumberMagic.jsproj", "{83F340E1-0A83-47B6-A543-E84AF8DBE47E}"
+Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "NumberMagic", "NumberMagic\NumberMagic.jsproj", "{6951F62E-90DA-4378-80E4-68D4F1821196}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,30 +15,30 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{83F340E1-0A83-47B6-A543-E84AF8DBE47E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{83F340E1-0A83-47B6-A543-E84AF8DBE47E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{83F340E1-0A83-47B6-A543-E84AF8DBE47E}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{83F340E1-0A83-47B6-A543-E84AF8DBE47E}.Debug|ARM.ActiveCfg = Debug|ARM
-		{83F340E1-0A83-47B6-A543-E84AF8DBE47E}.Debug|ARM.Build.0 = Debug|ARM
-		{83F340E1-0A83-47B6-A543-E84AF8DBE47E}.Debug|ARM.Deploy.0 = Debug|ARM
-		{83F340E1-0A83-47B6-A543-E84AF8DBE47E}.Debug|x64.ActiveCfg = Debug|x64
-		{83F340E1-0A83-47B6-A543-E84AF8DBE47E}.Debug|x64.Build.0 = Debug|x64
-		{83F340E1-0A83-47B6-A543-E84AF8DBE47E}.Debug|x64.Deploy.0 = Debug|x64
-		{83F340E1-0A83-47B6-A543-E84AF8DBE47E}.Debug|x86.ActiveCfg = Debug|x86
-		{83F340E1-0A83-47B6-A543-E84AF8DBE47E}.Debug|x86.Build.0 = Debug|x86
-		{83F340E1-0A83-47B6-A543-E84AF8DBE47E}.Debug|x86.Deploy.0 = Debug|x86
-		{83F340E1-0A83-47B6-A543-E84AF8DBE47E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{83F340E1-0A83-47B6-A543-E84AF8DBE47E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{83F340E1-0A83-47B6-A543-E84AF8DBE47E}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{83F340E1-0A83-47B6-A543-E84AF8DBE47E}.Release|ARM.ActiveCfg = Release|ARM
-		{83F340E1-0A83-47B6-A543-E84AF8DBE47E}.Release|ARM.Build.0 = Release|ARM
-		{83F340E1-0A83-47B6-A543-E84AF8DBE47E}.Release|ARM.Deploy.0 = Release|ARM
-		{83F340E1-0A83-47B6-A543-E84AF8DBE47E}.Release|x64.ActiveCfg = Release|x64
-		{83F340E1-0A83-47B6-A543-E84AF8DBE47E}.Release|x64.Build.0 = Release|x64
-		{83F340E1-0A83-47B6-A543-E84AF8DBE47E}.Release|x64.Deploy.0 = Release|x64
-		{83F340E1-0A83-47B6-A543-E84AF8DBE47E}.Release|x86.ActiveCfg = Release|x86
-		{83F340E1-0A83-47B6-A543-E84AF8DBE47E}.Release|x86.Build.0 = Release|x86
-		{83F340E1-0A83-47B6-A543-E84AF8DBE47E}.Release|x86.Deploy.0 = Release|x86
+		{6951F62E-90DA-4378-80E4-68D4F1821196}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6951F62E-90DA-4378-80E4-68D4F1821196}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6951F62E-90DA-4378-80E4-68D4F1821196}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{6951F62E-90DA-4378-80E4-68D4F1821196}.Debug|ARM.ActiveCfg = Debug|ARM
+		{6951F62E-90DA-4378-80E4-68D4F1821196}.Debug|ARM.Build.0 = Debug|ARM
+		{6951F62E-90DA-4378-80E4-68D4F1821196}.Debug|ARM.Deploy.0 = Debug|ARM
+		{6951F62E-90DA-4378-80E4-68D4F1821196}.Debug|x64.ActiveCfg = Debug|x64
+		{6951F62E-90DA-4378-80E4-68D4F1821196}.Debug|x64.Build.0 = Debug|x64
+		{6951F62E-90DA-4378-80E4-68D4F1821196}.Debug|x64.Deploy.0 = Debug|x64
+		{6951F62E-90DA-4378-80E4-68D4F1821196}.Debug|x86.ActiveCfg = Debug|x86
+		{6951F62E-90DA-4378-80E4-68D4F1821196}.Debug|x86.Build.0 = Debug|x86
+		{6951F62E-90DA-4378-80E4-68D4F1821196}.Debug|x86.Deploy.0 = Debug|x86
+		{6951F62E-90DA-4378-80E4-68D4F1821196}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6951F62E-90DA-4378-80E4-68D4F1821196}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6951F62E-90DA-4378-80E4-68D4F1821196}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{6951F62E-90DA-4378-80E4-68D4F1821196}.Release|ARM.ActiveCfg = Release|ARM
+		{6951F62E-90DA-4378-80E4-68D4F1821196}.Release|ARM.Build.0 = Release|ARM
+		{6951F62E-90DA-4378-80E4-68D4F1821196}.Release|ARM.Deploy.0 = Release|ARM
+		{6951F62E-90DA-4378-80E4-68D4F1821196}.Release|x64.ActiveCfg = Release|x64
+		{6951F62E-90DA-4378-80E4-68D4F1821196}.Release|x64.Build.0 = Release|x64
+		{6951F62E-90DA-4378-80E4-68D4F1821196}.Release|x64.Deploy.0 = Release|x64
+		{6951F62E-90DA-4378-80E4-68D4F1821196}.Release|x86.ActiveCfg = Release|x86
+		{6951F62E-90DA-4378-80E4-68D4F1821196}.Release|x86.Build.0 = Release|x86
+		{6951F62E-90DA-4378-80E4-68D4F1821196}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

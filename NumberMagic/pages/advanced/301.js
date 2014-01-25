@@ -60,7 +60,7 @@
                 circle.setAttribute("alt", "pawn" + numArray[idnum-NUM_START]);
                 */                
 
-                circle.setAttribute("id", "pawn" + numArray[idnum-NUM_START]);
+                circle.setAttribute("id", "pawn" + numArray[idnum - NUM_START]);
                 circle.addEventListener('dragstart', startShapeDrag, false);
                 //circle.addEventListener('drag', moveObject, false);
                 //id('pawnHeap' + randint(1, 2)).appendChild(circle);
@@ -197,6 +197,7 @@
     //var pawnHeapNode;
     // When dragging starts, set dataTransfer's data to the element's id.
     function startShapeDrag(e) {
+        e.preventDefault();
         e.dataTransfer.setData('text', this.id);
         //pawnHeapNode = this.parent;
         //document.body.appendChild(this);

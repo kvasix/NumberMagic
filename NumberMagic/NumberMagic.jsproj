@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|AnyCPU">
       <Configuration>Debug</Configuration>
@@ -35,20 +35,20 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>83f340e1-0a83-47b6-a543-e84af8dbe47e</ProjectGuid>
+    <ProjectGuid>6951f62e-90da-4378-80e4-68d4f1821196</ProjectGuid>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0'">
-    <VisualStudioVersion>12.0</VisualStudioVersion>
+  <PropertyGroup Condition="'$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0'">
+    <VisualStudioVersion>11.0</VisualStudioVersion>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).Default.props" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).props" />
   <PropertyGroup>
     <TargetPlatformIdentifier>Windows</TargetPlatformIdentifier>
-    <TargetPlatformVersion>8.1</TargetPlatformVersion>
+    <TargetPlatformVersion>8.0</TargetPlatformVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
     <PackageCertificateKeyFile>NumberMagic_TemporaryKey.pfx</PackageCertificateKeyFile>
-    <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
   </PropertyGroup>
   <ItemGroup>
     <AppxManifest Include="package.appxmanifest">
@@ -72,22 +72,22 @@
     <Content Include="pages\highscores\highscore.css" />
     <Content Include="pages\highscores\highscore.html" />
     <Content Include="pages\highscores\highscore.js" />
-    <Content Include="default.html" />
     <Content Include="pages\home\home.css" />
     <Content Include="pages\home\home.html" />
     <Content Include="pages\home\home.js" />
+    <Content Include="default.html" />
+    <Content Include="pages\kids\110.css" />
+    <Content Include="pages\kids\110.html" />
+    <Content Include="pages\kids\110.js" />
+    <Content Include="pages\kids\1120.css" />
+    <Content Include="pages\kids\1120.html" />
+    <Content Include="pages\kids\1120.js" />
     <Content Include="pages\kids\2130.css" />
     <Content Include="pages\kids\2130.html" />
     <Content Include="pages\kids\2130.js" />
     <Content Include="pages\kids\blank.css" />
     <Content Include="pages\kids\blank.html" />
     <Content Include="pages\kids\blank.js" />
-    <Content Include="pages\kids\1120.css" />
-    <Content Include="pages\kids\1120.html" />
-    <Content Include="pages\kids\1120.js" />
-    <Content Include="pages\kids\110.css" />
-    <Content Include="pages\kids\110.html" />
-    <Content Include="pages\kids\110.js" />
     <Content Include="pages\normal\0.css" />
     <Content Include="pages\normal\0.html" />
     <Content Include="pages\normal\0.js" />
@@ -118,7 +118,7 @@
     <None Include="NumberMagic_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <SDKReference Include="Microsoft.WinJS.2.0, Version=1.0" />
+    <SDKReference Include="Microsoft.WinJS.1.0, Version=1.0" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
   <!-- To modify your build process, add your task inside one of the targets below then uncomment
