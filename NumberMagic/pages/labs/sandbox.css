@@ -1,0 +1,62 @@
+﻿.homepage section[role=main] {
+    margin-left: 120px;
+}
+
+@media screen and (-ms-view-state: snapped) {
+    .homepage section[role=main] {
+        margin-left: 20px;
+    }
+}
+
+@media screen and (-ms-view-state: portrait) {
+    .homepage section[role=main] {
+        margin-left: 100px;
+    }
+}
+
+.pagetitle {
+    height: 3%;
+    width: 9%;
+}
+.numContainer {    
+    background-size:100%;
+    border:none;
+    
+    width:6em;
+    height:6em;
+
+    text-align:center;
+}
+
+img {
+    width:5em;
+    height:5em;
+    border-radius: 5em;
+}
+
+#guide {
+    position: absolute;
+    height:1em;
+    width:39em;
+    left: 27em;
+    top: 21em;
+    overflow: visible;
+}
+
+#numGrid {
+    position: absolute;
+    height:12em;
+    width:30em;
+    left: 30em;
+    top: 24em;
+}
+
+#timeBox {
+    top:9em;
+}
+
+.pawnHeap1 {
+    position:absolute;
+    left:300px;
+    top: 600px;
+}

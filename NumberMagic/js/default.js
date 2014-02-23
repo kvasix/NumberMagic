@@ -29,13 +29,7 @@
                 } else {
                     return nav.navigate(Application.navigator.home);
                 }
-            }));
-
-            if (localSettings.values["usrName"]) {
-                id('usrName').value = localSettings.values["usrName"];
-            } else {
-                localSettings.values["usrName"] = id('usrName').value;
-            }
+            }));            
 
             if (localSettings.values["volume"]) {
                 id('volume').value = localSettings.values["volume"] * 100;
@@ -46,16 +40,17 @@
             }
 
             id('home').addEventListener("click", homeBoard, false);
-            id('scramble').addEventListener("click", scrambleBoard, false);
-            id('selectpage').addEventListener("click", changepage, false);
-            id('selectblankpage').addEventListener("click", changeblankpage, false);
+            id('selectkidspage').addEventListener("click", changekidspage, false);
+            id('selectpacerpage').addEventListener("click", changepacerpage, false);
             id('selectadvpage').addEventListener("click", changeadvpage, false);
             id('graph').addEventListener("click", renderGraph, false);
             id('highscores').addEventListener("click", showScores, false);
+            id('labbtn').addEventListener("click", showlabs, false);
             id('volume').addEventListener("change", changeVolume, false);
-            id('usrName').addEventListener("change", changeusrName, false);            
-            id('loginflybtn').addEventListener("click", clearloginstatus, false);
+
             //localSettings.values.remove("highscores");
+            id('appbar').addEventListener("beforeshow", updatelevel, false);
+
         }
     });
 
@@ -78,75 +73,115 @@
     function homeBoard(eventInfo) {
         eventInfo.preventDefault();
         WinJS.Navigation.navigate("/pages/home/home.html");
-    }
-
-    function scrambleBoard(eventInfo) {
-        eventInfo.preventDefault();
-        WinJS.Navigation.navigate("/pages/scrambled/scrambled.html");
+        document.getElementById('appbar').winControl.hide();
     }
 
     function renderGraph(eventInfo) {
         eventInfo.preventDefault();
         WinJS.Navigation.navigate("/pages/graph/graph.html");
+        document.getElementById('appbar').winControl.hide();
     }
 
     function showScores(eventInfo) {
         eventInfo.preventDefault();
         WinJS.Navigation.navigate("/pages/highscores/highscore.html");
+        document.getElementById('appbar').winControl.hide();
     }
 
     function changeVolume(eventInfo) {
         localSettings.values["volume"] = id('volume').value / 100;//eventInfo.srcElement.nodeValue;
-    }
+    }    
 
-    function changeusrName(eventInfo) {
-        localSettings.values["usrName"] = id('usrName').value;//eventInfo.srcElement.nodeValue;
-        id('login_success').style.visibility = "visible";
-    }
+    function changekidspage(eventInfo) {
+        var selected_level = id('selectkidspage').options.selectedIndex;
 
-    var previousSelected = -1;
-    function changepage(eventInfo) {
-        var index = id('selectpage').options.selectedIndex;
-        if (previousSelected != index) {
-            if (index == 0) {
-                WinJS.Navigation.navigate("/pages/kids/blank.html", index);
-            } else if (index <= 5) {
-                WinJS.Navigation.navigate("/pages/kids/110.html",index - 1);
-            } else if (index == 8) {
-
-            }
-            else if (index <= 10 && index != 8) {
-                WinJS.Navigation.navigate("/pages/kids/1120.html", index - 6);
-            } else if (index == 13) {
-
-            }
-            else if (index <= 15 && index != 13) {
-                WinJS.Navigation.navigate("/pages/kids/2130.html", index - 11);
-            }
-            previousSelected = id('selectpage').options.selectedIndex;
+        if (selected_level == 0) {
+            WinJS.Navigation.navigate("/pages/blank/blank.html", selected_level);
+        } else if (selected_level <= 8) {
+            WinJS.Navigation.navigate("/pages/110/110.html", selected_level);
         }
+
+        document.getElementById('appbar').winControl.hide();
     }
 
-    function changeblankpage(eventInfo) {
-        var index = id('selectblankpage').options.selectedIndex;
-        if (previousSelected != index) {
-            WinJS.Navigation.navigate("/pages/pacer/pacer.html",index);
-            previousSelected = id('selectblankpage').options.selectedIndex + 15;
+    function changepacerpage(eventInfo) {
+        var selected_level = id('selectpacerpage').options.selectedIndex + 8;
+
+        if (selected_level == 10 || selected_level == 14) {
+            WinJS.Navigation.navigate("/pages/more/more.html", selected_level);
+        } else if (selected_level <= 13) {
+            WinJS.Navigation.navigate("/pages/1120/1120.html", selected_level);
         }
+
+        document.getElementById('appbar').winControl.hide();
     }
 
     function changeadvpage(eventInfo) {
-        var index = id('selectadvpage').options.selectedIndex;
-        if (previousSelected != index) {
-            if (index == 0) {
-                WinJS.Navigation.navigate("/pages/advanced/301.html");
-                previousSelected = id('selectadvpage').options.selectedIndex + 18;
-            }
+        var selected_level = id('selectadvpage').options.selectedIndex + 15;
+
+        if (selected_level == 17) {
+            WinJS.Navigation.navigate("/pages/more/more.html", selected_level);
+        } else if (selected_level <= 20) {
+            WinJS.Navigation.navigate("/pages/2130/2130.html", selected_level);
+        } else if (selected_level == 21) {
+            WinJS.Navigation.navigate("/pages/301/301.html", selected_level);
+        } else if (selected_level == 22) {
+            WinJS.Navigation.navigate("/pages/150/150.html", selected_level);
+        } else if (selected_level == 23) {
+            WinJS.Navigation.navigate("/pages/1100/1100.html", selected_level);
         }
+
+        document.getElementById('appbar').winControl.hide();
     }
 
-    function clearloginstatus(eventInfo) {
-        id('login_success').style.visibility = "hidden";
-        id('login_failed').style.visibility = "hidden";
+    function updatelevel(eventInfo) {
+        var MAX_LEVEL = 23;
+        var level = parseInt(localSettings.values["level"]);
+
+        if (level > MAX_LEVEL) {
+            level = MAX_LEVEL;
+        }
+
+        if (level >= 0) {
+            id('kidflybtn').removeAttribute('disabled')
+            id('graph').removeAttribute("disabled");
+            id('highscores').removeAttribute("disabled");
+            id('labbtn').removeAttribute("disabled");
+
+            for (var num = 0; num <= level; num++) {
+                var option = id('L' + num);
+                option.removeAttribute("disabled");
+            }
+            for (var num = level + 1; num <= MAX_LEVEL; num++) {
+                var option = id('L' + num);
+                option.setAttribute("disabled");
+            }
+
+            if (level >= 8) {
+                id('pacerflybtn').removeAttribute('disabled');
+
+                if (level >= 15) {
+                    id('advflybtn').removeAttribute('disabled');
+                } else {
+                    id('advflybtn').setAttribute('disabled');
+                }
+            } else {
+                id('pacerflybtn').setAttribute('disabled');
+            }
+
+        } else {
+            id('kidflybtn').setAttribute('disabled');
+            id('pacerflybtn').setAttribute('disabled');
+            id('advflybtn').setAttribute('disabled');
+            id('graph').setAttribute("disabled");
+            id('highscores').setAttribute("disabled");
+            id('labbtn').setAttribute("disabled");
+        }
+    }
+    
+    function showlabs(eventInfo) {
+        eventInfo.preventDefault();
+        WinJS.Navigation.navigate("/pages/labs/sandbox.html");
+        document.getElementById('appbar').winControl.hide();
     }
 })();

@@ -72,3 +72,7 @@
         -ms-grid-columns: 29px 71px 1fr;
     }
 }
+
+#usrSpan, #passSpan, #login_status {
+    float:left;
+}

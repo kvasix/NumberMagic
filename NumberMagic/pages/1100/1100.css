@@ -1,0 +1,70 @@
+﻿.homepage section[role=main] {
+    margin-left: 120px;
+}
+
+@media screen and (-ms-view-state: snapped) {
+    .homepage section[role=main] {
+        margin-left: 20px;
+    }
+}
+
+@media screen and (-ms-view-state: portrait) {
+    .homepage section[role=main] {
+        margin-left: 100px;
+    }
+}
+
+.pagetitle {
+    height: 3%;
+    width: 9%;
+}
+
+.numContainer {    
+    background-size:100%;
+    background-repeat:no-repeat;
+    border:none;
+}
+
+#guide {
+    position: absolute;
+    height:1em;
+    width:39em;
+    left: 27em;
+    top: 0em;
+    visibility: hidden;
+}
+
+.pawnHeap1001,.pawnHeap1002 {
+    width:48px;
+    height:48px;
+    border-radius: 48px;
+}
+
+#numGrid100 {
+    position: absolute;
+    height:600px;
+    width:600px;
+    left: 25em;
+    top: 9em;
+    background-color: black;
+    overflow: scroll;
+} 
+
+#mistakesBox {
+    visibility: hidden;
+}
+#mistakesBox, #timeBox {
+    top:9em;
+}
+
+.disabled {
+    opacity:0.4;
+    width:5em;
+    height:5em; 
+}
+
+* {
+	-ms-touch-action: none;
+	-ms-content-zooming: none;
+	overflow: hidden;
+}

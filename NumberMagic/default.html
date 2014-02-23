@@ -21,43 +21,45 @@
             data-win-control="WinJS.UI.AppBarCommand" 
             data-win-options="{id:'home', label:'Home', icon:'home', tooltip:'Home'}" 
             type="button">
-        </button> 
-        <button id="scramble" 
-            data-win-control="WinJS.UI.AppBarCommand" 
-            data-win-options="{id:'scramble', label:'Scramble', icon:WinJS.UI.AppBarIcon.switch, tooltip:'Scramble the board'}" 
-            type="button">
-        </button> 
-        <button data-win-control="WinJS.UI.AppBarCommand"
+        </button>
+        <button id="kidflybtn" data-win-control="WinJS.UI.AppBarCommand"
             data-win-options="{
                 id: 'kidflyout', 
                 icon: 'twopage', 
                 label: 'Beginner', 
                 type: 'flyout',
-                flyout: select('#kidFlyout')}">
+                flyout: select('#kidFlyout')}" disabled>
         </button>
-        <button data-win-control="WinJS.UI.AppBarCommand"
+        <button id="pacerflybtn" data-win-control="WinJS.UI.AppBarCommand"
                 data-win-options="{
-                id: 'blankflyout',
+                id: 'pacerflyout',
                 icon: 'twopage',
                 label: 'Pacer',
                 type: 'flyout',
-                flyout: select('#blankFlyout')}"></button>
-        <button data-win-control="WinJS.UI.AppBarCommand"
+                flyout: select('#pacerFlyout')}"
+            disabled></button>
+        <button id="advflybtn" data-win-control="WinJS.UI.AppBarCommand"
                 data-win-options="{
                 id: 'advancedflyout',
                 icon: 'twopage',
                 label: 'Advanced',
                 type: 'flyout',
-                flyout: select('#advancedFlyout')}"></button>      
+                flyout: select('#advancedFlyout')}"
+            disabled></button>      
         <button id="graph" 
             data-win-control="WinJS.UI.AppBarCommand" 
             data-win-options="{id:'graph', label:'Graph', icon:'threebars', tooltip:'Draw Graph'}" 
-            type="button">
+            type="button" disabled>
         </button> 
         <button id="highscores" 
             data-win-control="WinJS.UI.AppBarCommand" 
             data-win-options="{id:'highscores', label:'High Scores', icon:'bullets', tooltip:'HighScore List'}" 
-            type="button">
+            type="button" disabled>
+        </button>
+        <button id="labbtn" 
+            data-win-control="WinJS.UI.AppBarCommand" 
+            data-win-options="{id:'labs', label:'Labs', icon:'bullets', tooltip:'Testpage for new features'}" 
+            type="button" disabled>
         </button>
         <button data-win-control="WinJS.UI.AppBarCommand"
             data-win-options="{
@@ -67,63 +69,50 @@
                 type: 'flyout',
                 flyout: select('#volumeFlyout')}">
         </button>
-        <button id="loginflybtn"
-            data-win-control="WinJS.UI.AppBarCommand"
-            data-win-options="{
-                id: 'loginflyout', 
-                icon: 'contact', 
-                label: 'Login', 
-                type: 'flyout',
-                flyout: select('#loginFlyout')}">
-        </button>
     </div>
     <div id="kidFlyout"
-            data-win-control="WinJS.UI.Flyout">
-        <select id="selectpage">
-            <option>blank board</option> <!--0-->
-            <option>Numbers 1 - 3</option><!--1-->
-            <option>Numbers 1 - 5</option><!--2-->
-            <option>Numbers 1 - 5+</option><!--3-->
-            <option>Numbers 1 - 10</option><!--4-->
-            <option>Numbers 1 - 10+</option><!--5-->
-            <option>Numbers 11 - 15</option><!--6-->
-            <option>Numbers 11 - 15+</option><!--7-->
-            <option>Numbers 1 - 15+</option><!--8-->
-            <option>Numbers 16 - 20</option><!--9-->
-            <option>Numbers 16 - 20+</option><!--10-->
-            <option>Numbers 21 - 25</option><!--11-->
-            <option>Numbers 21 - 25+</option><!--12-->
-            <option>Numbers 1 - 25+</option><!--13-->
-            <option>Numbers 26 - 30</option><!--14-->
-            <option>Numbers 26 - 30+</option><!--15-->
+            data-win-control="WinJS.UI.Flyout"  style="overflow:scroll;">
+        <select id="selectkidspage" size="8">
+            <option id="L0" disabled>blank board</option> <!--0-->
+            <option id="L1" disabled>Numbers 1 - 3</option><!--1-->
+            <option id="L2" disabled>Numbers 1 - 5</option><!--2-->
+            <option id="L3" disabled>Numbers 1 - 5+</option><!--3-->            
+            <option id="L4" disabled>Numbers 6 - 10</option><!--4-->
+            <option id="L5" disabled>Numbers 6 - 10+</option><!--5-->         
+            <option id="L6" disabled>Numbers 1 - 10</option><!--6-->
+            <option id="L7" disabled>Numbers 1 - 10+</option><!--7-->           
         </select>
     </div>
-    <div id="blankFlyout"
-         data-win-control="WinJS.UI.Flyout">
-        <select id="selectblankpage">
-            <option>Numbers 1 - 10</option>
-            <option>Numbers 11 - 20</option>
-            <option>Numbers 21 - 30</option>
+    <div id="pacerFlyout"
+         data-win-control="WinJS.UI.Flyout"  style="overflow:scroll;">
+        <select id="selectpacerpage" size="7">            
+            <option id="L8" disabled>Numbers 11 - 15</option><!--0-->
+            <option id="L9" disabled>Numbers 11 - 15+</option><!--1-->
+            <option id="L10" disabled>Numbers 1 - 15+</option><!--2-->   
+            <option id="L11" disabled>Numbers 16 - 20</option><!--3-->
+            <option id="L12" disabled>Numbers 16 - 20+</option><!--4-->            
+            <option id="L13" disabled>Numbers 11 - 20+</option><!--5-->
+            <option id="L14" disabled>Numbers 1 - 20+</option><!--6-->
         </select>
     </div>
     <div id="advancedFlyout"
-         data-win-control="WinJS.UI.Flyout">
-        <select id="selectadvpage">
-            <option>Reverse 30 - 1</option>
-            <option>Numbers 1 - 50</option>
-            <option>Numbers 1 - 100</option>
+         data-win-control="WinJS.UI.Flyout"  style="overflow:scroll;">
+        <select id="selectadvpage" size="9">
+            <!--option>Reverse 30 - 1</option-->            
+            <option id="L15" disabled>Numbers 21 - 25</option><!--0-->
+            <option id="L16" disabled>Numbers 21 - 25+</option><!--1-->
+            <option id="L17" disabled>Numbers 1 - 25+</option><!--2-->
+            <option id="L18" disabled>Numbers 26 - 30</option><!--3-->
+            <option id="L19" disabled>Numbers 26 - 30+</option><!--4-->
+            <option id="L20" disabled>Numbers 21 - 30+</option><!--5-->
+            <option id="L21" disabled>Numbers 1 - 30</option><!--6-->
+            <option id="L22" disabled>Numbers 1 - 50</option><!--7-->
+            <option id="L23" disabled>Numbers 1 - 100</option><!--8-->
         </select>
     </div>
     <div id="volumeFlyout"
             data-win-control="WinJS.UI.Flyout">
         <h3>Volume</h3> <input id="volume" type="range" />
-    </div>
-    <div id="loginFlyout"
-        data-win-control="WinJS.UI.Flyout">
-        <h3>Login</h3> Username: <input id="usrName" type="text" value="Anonymous" />
-        <br />
-        <span id="login_success" style="visibility:hidden">Login successful :)</span>
-        <span id="login_failed" style="visibility:hidden">Login failed :(</span>
     </div>
 </body>
 </html>

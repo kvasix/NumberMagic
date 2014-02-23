@@ -1,0 +1,69 @@
+﻿.homepage section[role=main] {
+    margin-left: 120px;
+}
+
+@media screen and (-ms-view-state: snapped) {
+    .homepage section[role=main] {
+        margin-left: 20px;
+    }
+}
+
+@media screen and (-ms-view-state: portrait) {
+    .homepage section[role=main] {
+        margin-left: 100px;
+    }
+}
+
+.pagetitle {
+    height: 3%;
+    width: 9%;
+}
+.numContainer {    
+    background-size:100%;
+    background-repeat:no-repeat;
+    border:none;
+}
+
+#guide {
+    position: absolute;
+    height:1em;
+    width:39em;
+    left: 27em;
+    top: 21em;
+    overflow: visible;
+    z-index:+1;
+    visibility:hidden;
+}
+
+img {
+    width:69px;
+    height:69px;
+    border-radius: 69px;
+}
+
+#numGrid {
+    position: absolute;
+    height:180px;
+    width:450px;
+    left: 30em;
+    top: 24em;
+}
+
+#mistakesBox {
+    visibility: hidden;
+}
+#mistakesBox, #timeBox {
+    top:9em;
+}
+
+.disabled {
+    opacity:0.4;
+    width:5em;
+    height:5em; 
+}
+
+* {
+	-ms-touch-action: none;
+	-ms-content-zooming: none;
+	overflow: hidden;
+}
