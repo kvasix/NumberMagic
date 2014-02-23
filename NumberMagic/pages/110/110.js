@@ -4,7 +4,7 @@
     var PAWN_START, NUM_PAWNS, NUM_START, NUM_ROWS = 2, NUM_COLS = 5, this_level, MISTAKE_THRESHOLD = 5;
     var numGrid = null;
 
-    WinJS.UI.Pages.define("/pages/1120/1120.html", {
+    WinJS.UI.Pages.define("/pages/110/110.html", {
         // This function is called whenever a user navigates to this page. It
         // populates the page elements with the app's data.
         ready: function (element, options) {
@@ -41,7 +41,7 @@
                     var numContainer = document.createElement("td");
                     numContainer.setAttribute("class", "numContainer");
 
-                    var idNumber = row * NUM_COLS + col + 11;
+                    var idNumber = row * NUM_COLS + col + 1;
                     numContainer.setAttribute("id", "numBox" + idNumber);
                     //numContainer.innerHTML = idNumber;
                     numContainer.background = "images/tables/" + idNumber + ".jpg";
@@ -255,7 +255,7 @@
 
         for (var row = 0; row < NUM_ROWS; row++) {
             for (var col = 0; col < NUM_COLS; col++) {
-                var idNumber = row * NUM_COLS + col + 11;
+                var idNumber = row * NUM_COLS + col + 1;
                 var numContainer = document.getElementById("numBox" + idNumber);
                 //numContainer.innerHTML = idNumber;
             }
