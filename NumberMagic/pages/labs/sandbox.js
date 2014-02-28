@@ -46,7 +46,7 @@
             populateArray();
             for (var idnum = 1; idnum <= NUM_PAWNS; idnum++) {
                 var circle = document.createElement("img");
-                circle.src = "/images/pawns/s (" + numArray[idnum - 1] + ").jpg";
+                circle.src = "/images/pawns/small/" + numArray[idnum - 1] + ".jpg";
                 circle.setAttribute("alt", "pawn" + numArray[idnum - 1]);
 
                 circle.setAttribute("id", "pawn" + numArray[idnum - 1]);

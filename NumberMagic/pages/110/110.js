@@ -26,7 +26,7 @@
 
             window.addEventListener("dragstart", function (e) { e.preventDefault(); }, false);
 
-            numGrid = document.getElementById("numGrid");
+            numGrid = id("numGrid");
             numGrid._gesture = new MSGesture();
             numGrid._gesture.target = numGrid;
             numGrid.addEventListener("MSPointerDown", setupGesture, false);
@@ -56,7 +56,7 @@
             populateArray();
             for (var idnum = NUM_START; idnum < NUM_START + NUM_PAWNS; idnum++) {
                 var circle = document.createElement("img");
-                circle.src = "/images/pawns/s (" + numArray[idnum - NUM_START] + ").jpg";
+                circle.src = "/images/pawns/small/" + numArray[idnum - NUM_START] + ".jpg";
                 circle.setAttribute("alt", "pawn" + numArray[idnum - NUM_START]);
 
                 circle.setAttribute("id", "pawn" + numArray[idnum - NUM_START]);
