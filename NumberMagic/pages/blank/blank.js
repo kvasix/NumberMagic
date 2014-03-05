@@ -75,7 +75,7 @@
             //id('pawnHeap2').addEventListener("mousedown", updateHandStatus, false);
 
             id('reset').addEventListener("click", resetPawns, false);
-            timeCtrl = setInterval(timer, 500);
+            timeCtrl = setInterval(timer, 1000);
 
             gotRightAudio = new Audio("/sounds/right.wma");
             gotRightAudio.load();
@@ -138,8 +138,8 @@
     }
 
     function checkShape(e1, e2) {
-        console.log(e1.id);
-        console.log(e2.id);
+        //console.log(e1.id);
+        //console.log(e2.id);
         // Remove the 'numBox' and 'pawn' part of the id's and compare the rest of the strings. 
         var target = e1.id.replace("numBox", "");
         var elt = e2.id.replace("pawn", "");
@@ -164,60 +164,15 @@
                     message += "Why don't you try it again?";
                 }
                 else {
-                    message += upgradeLevel();
+                    message += upgradeLevel(0);
                 }
 
                 var msgBox = new Windows.UI.Popups.MessageDialog(message);
                 msgBox.showAsync();
                 
-                var score_post_string = "sid=" + localSettings.values["sid"] + "&date=" + 12 + "&level=" + 0;
+                var score_post_string = "sid=" + localSettings.values["sid"] + "&level=" + 0;
                 score_post_string += "&mistakes=" + mistakeCount + "&timetaken=" + ((hours * 60 + mins) * 60 + secs);
-                WinJS.xhr({
-                    type: "post",
-                    url: "http://www.kumonivanhoe.com.au/NumberMagic/scoreupdate.php",
-                    responseType: 'json',
-                    headers: { "Content-type": "application/x-www-form-urlencoded" },
-                    data: score_post_string
-                }).done(   //
-                  function complete(result) {
-                      if (result.status === 200) {
-                          console.log(result.responseText);
-                          var jsonContent = JSON.parse(result.responseText);//eval('(' + result.responseText + ')');//result.responseJSON; //
-                          console.log(jsonContent);
-                          /*
-                          if (jsonContent['upgradesuccess']) {
-                              localSettings.values["usrName"] = jsonContent['usrName'];//"Gautam";//get from server
-                              localSettings.values["level"] = jsonContent['level'];//23;//get from server
-                              id("greetings").innerHTML = "Hi " + localSettings.values["usrName"] + "! Welcome to Number Magic.";
-                              id("userStatus").innerHTML = "You are in Level: " + localSettings.values["level"];
-                              id("logindiv").style.display = "none";
-                              id("signout").style.display = "block";
-                          } else {
-                              id("greetings").innerHTML = "Login Failed!";
-                              id("userStatus").innerHTML = "Please enter the right username and password";
-                          }
-                          */
-                      }
-                  },
-                  function error(result) {
-                      /*
-                      id("greetings").innerHTML = "Connection Error!";
-                      id("userStatus").innerHTML = "Error connecting to Database! Please check your network.";
-                      */
-                  },
-                  function progress(progress) {
-                  }
-                );
-                
-                if (localSettings.values["highscores"]) {
-                    localSettings.values["highscores"] += ',{ "user": "' + localSettings.values["usrName"] + '", "levelType": "Advanced", "level": ' + 0;
-                    localSettings.values["highscores"] += ', "mistakes": ' + mistakeCount + ', "hours": ' + hours + ', "mins": ' + mins + ', "secs": ' + secs + ' }';
-                }
-                else {
-                    localSettings.values["highscores"] = '{ "user":"' + localSettings.values["usrName"] + '", "levelType": "Advanced", "level": ' + 0;
-                    localSettings.values["highscores"] += ', "mistakes": ' + mistakeCount + ', "hours": ' + hours + ', "mins": ' + mins + ', "secs": ' + secs + ' }';
-
-                }
+                score_post(score_post_string);
             }
         }
     }
@@ -292,13 +247,11 @@
     }
 
     var hours = 0, mins = 0, secs = 0;
-    var blink = true;
-    var separator = ":";
-    function timer() {        
-        blink ? (++secs, separator = " ", blink = false) : (separator = ":", blink = true);
+    function timer() {
+        ++secs;
         (secs == 60) ? (++mins, secs = 0) : true;
-        (mins == 60) ? (++hours, mins = 0) : true;               
-        id('timeCounter').innerHTML = (hours < 10 ? "0" : "") + hours + separator + (mins < 10 ? "0" : "") + mins + separator + (secs < 10 ? "0" : "") + secs;
+        (mins == 60) ? (++hours, mins = 0) : true;
+        id('timeCounter').innerHTML = (hours < 10 ? "0" : "") + hours + ":" + (mins < 10 ? "0" : "") + mins + ":" + (secs < 10 ? "0" : "") + secs;
     }
 
     var numArray;
@@ -323,44 +276,5 @@
     // Returns an integer uniformly distributed over l..u.
     {
         return l + Math.floor(Math.random() * (u + 1 - l));
-    }
-
-    function upgradeLevel() {
-        var new_level = 1;
-        var return_str;
-        if (new_level > localSettings.values["level"]) {
-            var upgradelevel_post_string = "sid=" + localSettings.values["sid"] + "&level=" + new_level;
-            WinJS.xhr({
-                type: "post",
-                url: "http://www.kumonivanhoe.com.au/NumberMagic/upgradelevel.php",
-                responseType: 'json',
-                headers: { "Content-type": "application/x-www-form-urlencoded" },
-                data: upgradelevel_post_string
-            }).done(   //
-              function complete(result) {
-                  if (result.status === 200) {
-                      //console.log(result.responseText);
-                      var jsonContent = JSON.parse(result.responseText);//eval('(' + result.responseText + ')');//result.responseJSON; //
-                      //console.log(jsonContent);
-
-                      if (jsonContent['upgradesuccess']) {
-                          localSettings.values["level"] = jsonContent['level'];//23;//get from server
-                          return_str = "You've been upgraded to the next level!!!";
-                      } else {
-                          return_str = "Upgrade Failed! Database Error.";
-                      }
-                  }
-              },
-              function error(result) {
-                  return_str = "Upgrade Failed! Network Error.";
-              },
-              function progress(progress) {
-              }
-            );
-        } else {
-            return_str = "Aren't you playing this level again?";
-        }
-
-        return return_str;
     }
 })();

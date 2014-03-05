@@ -296,6 +296,7 @@
     <Content Include="images\tables\blank.jpg" />
     <Content Include="js\default.js" />
     <Content Include="js\gestures.js" />
+    <Content Include="js\levels.js" />
     <Content Include="js\navigator.js" />
     <Content Include="pages\1100\1100.css" />
     <Content Include="pages\1100\1100.html" />

@@ -76,7 +76,7 @@
             //id('pawnHeap502').addEventListener("mousedown", updateHandStatus, false);
 
             id('reset').addEventListener("click", resetPawns, false);
-            timeCtrl = setInterval(timer, 500);
+            timeCtrl = setInterval(timer, 1000);
 
             gotRightAudio = new Audio("/sounds/right.wma");
             gotRightAudio.load();
@@ -164,21 +164,14 @@
                     message += "Why don't you try it again?";
                 }
                 else {
-                    message += "You've been upgraded to the next level!!!";
-                    upgradeLevel();
+                    message += upgradeLevel(this_level);
                 }
                 var msgBox = new Windows.UI.Popups.MessageDialog(message);
                 msgBox.showAsync();
 
-                if (localSettings.values["highscores"]) {
-                    localSettings.values["highscores"] += ',{ "user": "' + localSettings.values["usrName"] + '", "levelType": "Advanced", "level": ' + this_level;
-                    localSettings.values["highscores"] += ', "mistakes": ' + mistakeCount + ', "hours": ' + hours + ', "mins": ' + mins + ', "secs": ' + secs + ' }';
-                }
-                else {
-                    localSettings.values["highscores"] = '{ "user":"' + localSettings.values["usrName"] + '", "levelType": "Advanced", "level": ' + this_level;
-                    localSettings.values["highscores"] += ', "mistakes": ' + mistakeCount + ', "hours": ' + hours + ', "mins": ' + mins + ', "secs": ' + secs + ' }';
-
-                }
+                var score_post_string = "sid=" + localSettings.values["sid"] + "&level=" + this_level;
+                score_post_string += "&mistakes=" + mistakeCount + "&timetaken=" + ((hours * 60 + mins) * 60 + secs);
+                score_post(score_post_string);
             }
             id("mistakeCount").innerHTML = mistakeCount;
         }
@@ -269,13 +262,11 @@
     }
 
     var hours = 0, mins = 0, secs = 0;
-    var blink = true;
-    var separator = ":";
     function timer() {
-        blink ? (++secs, separator = " ", blink = false) : (separator = ":", blink = true);
+        ++secs;
         (secs == 60) ? (++mins, secs = 0) : true;
         (mins == 60) ? (++hours, mins = 0) : true;
-        id('timeCounter').innerHTML = (hours < 10 ? "0" : "") + hours + separator + (mins < 10 ? "0" : "") + mins + separator + (secs < 10 ? "0" : "") + secs;
+        id('timeCounter').innerHTML = (hours < 10 ? "0" : "") + hours + ":" + (mins < 10 ? "0" : "") + mins + ":" + (secs < 10 ? "0" : "") + secs;
     }
 
     var numArray;
@@ -301,11 +292,5 @@
         // Returns an integer uniformly distributed over l..u.
     {
         return l + Math.floor(Math.random() * (u + 1 - l));
-    }
-
-    function upgradeLevel() {
-        var new_level = this_level + 1;
-        if (new_level > localSettings.values["level"])
-            localSettings.values["level"] = new_level;
     }
 })();
