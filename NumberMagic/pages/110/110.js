@@ -11,8 +11,11 @@
             // TODO: Initialize the page here.
             
             this_level = parseInt(options.toString());
-
-            if (this_level <= 3) {
+            if (this_level == 1) {
+                NUM_START = 1;
+                NUM_PAWNS = 3;
+            }
+            else if (this_level <= 3) {
                 NUM_START = 1;
                 NUM_PAWNS = 5;
             }
@@ -153,7 +156,10 @@
         var target = e1.id.replace("numBox", "");
         var elt = e2.id.replace("pawn", "");
         if (target == elt) {  // if we have a match, fill the numBox with white and show the status.
-            var pawn = e2;
+            /*var pawn = e2;
+            pawn.style.position = "absolute";
+            pawn.style.left = e1.style.left;
+            pawn.style.top = e1.style.top;*/
             pawn._pinned = true;
             id('numGrid')._pinned = true;
 
@@ -238,32 +244,36 @@
         timeCtrl = setInterval(timer, 500);
     }
 
+    
     function placePawns() {
-        var position;
-        if (this_level == 2 || this_level == 4 || this_level == 6)
-            position = "absolute";
-        else
-            position = "auto";
         var elesleft = document.getElementsByClassName("pawnHeap1");
         if (elesleft) {
+            var leftpos = 120;
             for (var i = 0; i < elesleft.length; i++) {
-                elesleft[i].style.position = position;/*
-                elesleft[i].style.zindex = 0;
-                elesleft[i].style.left = randint(6,297);//Math.floor(Math.random()* 291) + 6;//(randint(6, 300 - 3));
-                console.log(parseInt(elesleft[i].style.left));
-                elesleft[i].style.bottom = 600;//randint(6, parseInt(window.innerHeight) - 6);
-                console.log(elesleft[i].style.top);
-                //elesleft[i].style.display = "none";*/
+                elesleft[i].style.position = "absolute";
+                if (this_level == 2 || this_level == 4 || this_level == 6) {
+                    elesleft[i].style.left = 9 + "%";
+                    elesleft[i].style.top = 18 + "%"; 
+                } else {
+                    elesleft[i].style.left = leftpos + 'px';//elesleft[i].style.left = randint(0, 24) + "%";
+                    leftpos += 72;                    
+                    elesleft[i].style.top = 18 + "%"; //randint(24, 90) + "%";
+                }
             }
         }
-        
+
         var elesright = document.getElementsByClassName("pawnHeap2");
         if (elesright) {
             for (var i = 0; i < elesright.length; i++) {
-                elesright[i].style.position = position;
-                /*elesright[i].style.zindex = 0;
-                elesright[i].style.left = (randint(id('numGrid').style.right) + 3, window.innerWidth - 3);
-                elesright[i].style.top = randint(6, window.innerHeight - 6);*/
+                elesright[i].style.position = "absolute";
+                if (this_level == 2 || this_level == 4 || this_level == 6) {
+                    elesright[i].style.left = 9 + "%";
+                    elesright[i].style.top = 18 + "%";
+                } else {
+                    elesright[i].style.left = leftpos + 'px';//elesright[i].style.left = randint(66, 90) + "%";
+                    leftpos += 72;
+                    elesright[i].style.top = 18 + "%"; //elesright[i].style.top = randint(30, 90) + "%";
+                }
             }
         }
     }

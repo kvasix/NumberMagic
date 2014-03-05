@@ -24,7 +24,7 @@
 
             window.addEventListener("dragstart", function (e) { e.preventDefault(); }, false);
 
-            numGrid = document.getElementById("numGrid30");
+            numGrid = document.getElementById("numGridm");
             numGrid._gesture = new MSGesture();
             numGrid._gesture.target = numGrid;
             numGrid.addEventListener("MSPointerDown", setupGesture, false);
@@ -153,7 +153,7 @@
         if (target == elt) {  // if we have a match, fill the numBox with white and show the status.
             var pawn = e2;
             pawn._pinned = true;
-            id('numGrid30')._pinned = true;
+            id('numGridm')._pinned = true;
 
             gotRightAudio.volume = localSettings.values["volume"];
             gotRightAudio.play();
@@ -204,8 +204,8 @@
     }
 
     function resetPawns() {
-        id('numGrid30').style.msTransform = "none";
-        id('numGrid30')._pinned = false
+        id('numGridm').style.msTransform = "none";
+        id('numGridm')._pinned = false
         populateArray();
 
         //console.log(NUM_START);

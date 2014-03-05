@@ -40,11 +40,11 @@ img {
     border-radius: 69px;
 }
 
-#numGrid30 {
+#numGridm {
     position: absolute;
     height:540px;/*12em;*/
     width:450px;/*30em;*/
-    left: 30em;
+    left: 33em;
     top: 12em;
 }
 

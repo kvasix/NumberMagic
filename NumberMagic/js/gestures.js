@@ -21,10 +21,12 @@ function setupPGesture(eventInfo) {
     numberAudio.play();
 }
 
+var zIndex = 0;
 function startGesture(eventInfo) {
     eventInfo.target._directionX = 1;
     eventInfo.target._directionY = 1;
     eventInfo.target._bounceDampeningFactor = 1;
+    eventInfo.target.style.zindex = ++zIndex;
     //console.log("start Gesture");
 }
 
