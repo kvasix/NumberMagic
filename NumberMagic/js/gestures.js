@@ -4,11 +4,13 @@
     //console.log("setup gesture");
 }
 
+var zindex = 0;
 function setupPGesture(eventInfo) {
     var item = eventInfo.currentTarget;
     item._gesture.addPointer(eventInfo.pointerId);
     //console.log("setup gesture");
-    
+    item.style.zIndex = zindex++;
+
     var elt = item.id.replace("pawn", "");
 
     var numberAudio = new Audio("/sounds/numbers/" + elt + ".wma");
@@ -21,12 +23,10 @@ function setupPGesture(eventInfo) {
     numberAudio.play();
 }
 
-var zIndex = 0;
 function startGesture(eventInfo) {
     eventInfo.target._directionX = 1;
     eventInfo.target._directionY = 1;
     eventInfo.target._bounceDampeningFactor = 1;
-    eventInfo.target.style.zindex = ++zIndex;
     //console.log("start Gesture");
 }
 
@@ -47,24 +47,23 @@ function holdGesture(eventInfo) {
 function isInBounds(rect, scale) {
     var ret = 0;
     var offset = 0;
-    var tollerance = 20 * (scale * 16);
 
-    var centerPointX = rect.left + rect.width / 2;
-    var centerPointY = rect.top + rect.height / 2;
-
-    if (centerPointX + tollerance > window.innerWidth) {
+    if (rect.left + rect.width > window.innerWidth) {
         ret = 1; // Right Edge Bounce
-        offset = window.innerWidth - (centerPointX + tollerance);
-    } else if (centerPointX - tollerance < 0) {
+        offset = window.innerWidth - (rect.left + rect.width);
+    } else if (rect.left < 0) {
         ret = 2; // Left Edge Bounce
-        offset = centerPointX - tollerance;
-    } else if (centerPointY + tollerance > window.innerHeight) {
+        offset = rect.left;
+    } else if (rect.top + rect.height > window.innerHeight) {
         ret = 3; // Bottom Edge Bounce
-        offset = window.innerHeight - (centerPointY + tollerance);
-    } else if (centerPointY - tollerance < 0) {
+        offset = window.innerHeight - (rect.top + rect.height);
+    } else if (rect.top < 0) {
         ret = 4; // Top Edge Bounce
-        offset = centerPointY - tollerance;
+        offset = rect.top;
     }
+
+    console.log("x:" + rect.left + " wx" + window.innerWidth);
+    console.log("y:" + rect.top + " wy" + window.innerHeight);
     return { "value": ret, "offset": offset };
 }
 
@@ -86,10 +85,6 @@ function manipulateElement(eventInfo) {
         return;
     }
 
-    // Prevent Over / Under Scaling
-    if (eScale < 1 && targetScale > MIN_SCALE) { scale = eScale; }
-    if (eScale > 1 && targetScale < MAX_SCALE) { scale = eScale; }
-
     // Get the reported translation values
     tx = eventInfo.translationX;
     ty = eventInfo.translationY;
@@ -110,16 +105,15 @@ function manipulateElement(eventInfo) {
         }
 
         if (target._stop) {
-            target._bounceDampeningFactor *= 0.4;
+            target._bounceDampeningFactor *= 0.9;
         }
-        tx *= target._bounceDampeningFactor;
-        ty *= target._bounceDampeningFactor;
+        tx *= target._directionX * target._bounceDampeningFactor;
+        ty *= target._directionY * target._bounceDampeningFactor;
     }
 
-    // rotation / scale and
+    // rotation and translation
     target.style.msTransform = cssMatrix.translate(tx, ty).
-                        rotate(eventInfo.rotation * 180 / Math.PI);//.
-    //scale(scale);
+                        rotate(eventInfo.rotation * 180 / Math.PI);
 }
 
 function rotateElement(eventInfo) {

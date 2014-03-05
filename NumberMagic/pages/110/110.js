@@ -156,8 +156,8 @@
         var target = e1.id.replace("numBox", "");
         var elt = e2.id.replace("pawn", "");
         if (target == elt) {  // if we have a match, fill the numBox with white and show the status.
-            /*var pawn = e2;
-            pawn.style.position = "absolute";
+            var pawn = e2;
+            /*pawn.style.position = "absolute";
             pawn.style.left = e1.style.left;
             pawn.style.top = e1.style.top;*/
             pawn._pinned = true;
