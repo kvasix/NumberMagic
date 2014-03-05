@@ -20,18 +20,8 @@
 }
 .numContainer {    
     background-size:100%;
+    background-repeat:no-repeat;
     border:none;
-    
-    width:6em;
-    height:6em;
-
-    text-align:center;
-}
-
-img {
-    width:5em;
-    height:5em;
-    border-radius: 5em;
 }
 
 #guide {
@@ -41,16 +31,39 @@ img {
     left: 27em;
     top: 21em;
     overflow: visible;
+    z-index:+1;
+    visibility:hidden;
+}
+
+img {
+    width:69px;
+    height:69px;
+    border-radius: 69px;
 }
 
 #numGrid {
     position: absolute;
-    height:12em;
-    width:30em;
+    height:180px;
+    width:450px;
     left: 30em;
     top: 24em;
 }
 
-#timeBox {
+#mistakesBox {
+    visibility: hidden;
+}
+#mistakesBox, #timeBox {
     top:9em;
+}
+
+.disabled {
+    opacity:0.4;
+    width:5em;
+    height:5em; 
+}
+
+* {
+	-ms-touch-action: none;
+	-ms-content-zooming: none;
+	overflow: hidden;
 }
