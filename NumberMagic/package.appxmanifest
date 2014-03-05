@@ -15,7 +15,7 @@
   </Resources>
   <Applications>
     <Application Id="App" StartPage="default.html">
-      <VisualElements DisplayName="NumberMagic" Logo="images\logo.png" SmallLogo="images\smalllogo.png" Description="NumberMagic" ForegroundText="light" BackgroundColor="#464646">
+      <VisualElements DisplayName="NumberMagic" Logo="images\logo.png" SmallLogo="images\smalllogo.png" Description="NumberMagic" ForegroundText="dark" BackgroundColor="#464646">
         <DefaultTile ShowName="allLogos" />
         <SplashScreen Image="images/splashscreen.png" BackgroundColor="#454545" />
         <InitialRotationPreference>
