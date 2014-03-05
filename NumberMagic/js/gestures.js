@@ -46,7 +46,7 @@ function holdGesture(eventInfo) {
 
 function isInBounds(rect, scale) {
     var ret = 0;
-    var offset = 0;
+    var offset = 0;    
 
     if (rect.left + rect.width > window.innerWidth) {
         ret = 1; // Right Edge Bounce
@@ -105,10 +105,17 @@ function manipulateElement(eventInfo) {
         }
 
         if (target._stop) {
-            target._bounceDampeningFactor *= 0.9;
+            target._bounceDampeningFactor *= 0.45;
         }
         tx *= target._directionX * target._bounceDampeningFactor;
-        ty *= target._directionY * target._bounceDampeningFactor;
+        ty *= target._directionY * target._bounceDampeningFactor;        
+    }
+
+    if (tx + rect.left + rect.width / 2 > window.innerWidth || tx + rect.left + rect.width / 2 < 0) {
+        tx = 0;
+    }
+    if (ty + rect.top + rect.height / 2 > window.innerHeight || ty + rect.top + rect.height / 2 < 0) {
+        ty = 0;
     }
 
     // rotation and translation
