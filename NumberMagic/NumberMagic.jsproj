@@ -319,7 +319,7 @@
     <Content Include="pages\blank\blank.css" />
     <Content Include="pages\blank\blank.html" />
     <Content Include="pages\blank\blank.js" />
-    <Content Include="pages\graph\chart.js" />
+    <Content Include="pages\graph\Chart.min.js" />
     <Content Include="pages\graph\graph.css" />
     <Content Include="pages\graph\graph.html" />
     <Content Include="pages\graph\graph.js" />
