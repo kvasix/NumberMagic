@@ -32,7 +32,6 @@
     top: 21em;
     overflow: visible;
     z-index:+1;
-    visibility:hidden;
 }
 
 img {
@@ -54,12 +53,6 @@ img {
 }
 #mistakesBox, #timeBox {
     top:9em;
-}
-
-.disabled {
-    opacity:0.4;
-    width:5em;
-    height:5em; 
 }
 
 * {

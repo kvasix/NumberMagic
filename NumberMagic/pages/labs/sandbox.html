@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>homePage</title>
+    <title>Labs.</title>
 
     <!-- WinJS references -->
     <link href="//Microsoft.WinJS.1.0/css/ui-dark.css" rel="stylesheet" />
@@ -10,8 +10,9 @@
     <script src="//Microsoft.WinJS.1.0/js/ui.js"></script>
 
     <link href="/css/default.css" rel="stylesheet" />
-    <link href="/pages/labs/sandbox.css" rel="stylesheet" />      
+    <link href="/pages/labs/sandbox.css" rel="stylesheet" />   
     <script src="/js/gestures.js"></script>
+    <script src="/js/levels.js"></script>
     <script src="/pages/labs/sandbox.js"></script>
 </head>
 <body>
@@ -20,9 +21,10 @@
         <header aria-label="Header content" role="banner">
             <!--<button class="win-backbutton" aria-label="Back" disabled type="button"></button>-->
             <h1 class="titlearea win-type-ellipsis">
-                <span class="pagetitle">Labs</span>
+                <span class="pagetitle">Labs.</span>
             </h1>
-            <span id="timeBox" style="position:absolute; right:9%">Time Elapsed: <span id="timeCounter"></span></span>
+            <span id="mistakesBox" style="position:absolute;left:3em;">Number of Mistakes: <span id="mistakeCount" style='color: red;'>0</span></span>
+            <span id="timeBox" style="position:absolute; right:9%">Time Elapsed: <span id="timeCounter">00:00:00</span></span>
             <input type="button" id="reset" value="Reset" style="position:absolute; top:21%; right:12%" />
         </header>
         <section id="sec" aria-label="Main content" role="main">
@@ -36,3 +38,4 @@
     
 </body>
 </html>
+

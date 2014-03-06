@@ -62,6 +62,8 @@
                 //id('pawnHeap' + randint(1, 2)).appendChild(circle);
                 //id('pawnHeap' + ((idnum % 2)+1)).appendChild(circle);
 
+                //circle.addEventListener("mousedown", updateHandStatus, false);
+
                 circle.className = "pawnHeap" + ((idnum % 2) + 1);
                 id('sec').appendChild(circle);
             }
@@ -70,12 +72,9 @@
             numpawnsleft = NUM_PAWNS;
             enableRightHeap = false;
             toggleHeap(enableRightHeap);            
-
-            //id('pawnHeap1').addEventListener("mousedown", updateHandStatus, false);
-            //id('pawnHeap2').addEventListener("mousedown", updateHandStatus, false);
-
+            
             id('reset').addEventListener("click", resetPawns, false);
-            timeCtrl = setInterval(timer, 500);
+            timeCtrl = setInterval(timer, 1000);
 
             gotRightAudio = new Audio("/sounds/right.wma");
             gotRightAudio.load();
@@ -94,7 +93,7 @@
 
     function updateHandStatus(eventInfo) {
         var heapid = parseInt(this.id.replace("pawnHeap", "")) - 1;
-        if (heapid ^ enableRightHeap) {
+        if (!(heapid ^ enableRightHeap)) {
             if (enableRightHeap) {
                 id('guide').innerHTML = "Use your right hand --->";
                 id('guide').style.textAlign = "right";
@@ -120,37 +119,40 @@
         var elesleft = document.getElementsByClassName("pawnHeap1");
         var elesright = document.getElementsByClassName("pawnHeap2");
 
-        if (enableRight || !elesleft[0]) {
-                for (var i = 0; i < elesleft.length; i++) {
-                    if (!elesleft[i]._set) {
-                        elesleft[i].style.opacity = 0.45;
-                        elesleft[i]._pinned = true;
-                        //elesleft[i].addEventListener("MSPointerDown", setupPGesture, false);
-                    }
+        if (!elesleft.length) enableRight = true;
+        if (!elesright.length) enableRight = false;
+
+        if (enableRight) {
+            for (var i = 0; i < elesleft.length; i++) {
+                if (!elesleft[i]._set) {
+                    elesleft[i]._pinned = true;
+                    elesleft[i].style.opacity = 0.45;
+                    //elesleft[i].addEventListener("MSPointerDown", setupPGesture, false);
                 }
-                for (var i = 0; i < elesright.length; i++) {
-                    if (!elesright[i]._set) {
-                        elesright[i].style.opacity = 1;
-                        elesright[i]._pinned = false;
-                        //elesright[i].removeEventListener("MSPointerDown", setupPGesture, false);
-                    }
+            }
+            for (var i = 0; i < elesright.length; i++) {
+                if (!elesright[i]._set) {
+                    elesright[i]._pinned = false;
+                    elesright[i].style.opacity = 1;
+                    //elesright[i].removeEventListener("MSPointerDown", setupPGesture, false);
                 }
+            }
             enableRightHeap = false;
-        } else if (!enableRight || !elesright[0]) {
-                for (var i = 0; i < elesleft.length; i++) {
-                    if (!elesleft[i]._set) {
-                        elesleft[i].style.opacity = 1;
-                        elesleft[i]._pinned = false;
-                        //elesleft[i].addEventListener("MSPointerDown", setupPGesture, false);
-                    }
+        } else {
+            for (var i = 0; i < elesleft.length; i++) {
+                if (!elesleft[i]._set) {
+                    elesleft[i]._pinned = false;
+                    elesleft[i].style.opacity = 1;
+                    //elesleft[i].addEventListener("MSPointerDown", setupPGesture, false);
                 }
-                for (var i = 0; i < elesright.length; i++) {
-                    if (!elesright[i]._set) {
-                        elesright[i].style.opacity = 0.45;
-                        elesright[i]._pinned = true;
-                        //elesright[i].removeEventListener("MSPointerDown", setupPGesture, false);
-                    }
+            }
+            for (var i = 0; i < elesright.length; i++) {
+                if (!elesright[i]._set) {
+                    elesright[i]._pinned = true;
+                    elesright[i].style.opacity = 0.45; 
+                    //elesright[i].removeEventListener("MSPointerDown", setupPGesture, false);
                 }
+            }
             enableRightHeap = true;
         }
         //console.log(id('numGrid').style.left);
@@ -176,16 +178,16 @@
     }
 
     function checkShape(e1, e2) {
-        console.log(e1.id);
-        console.log(e2.id);
         // Remove the 'numBox' and 'pawn' part of the id's and compare the rest of the strings. 
         var target = e1.id.replace("numBox", "");
         var elt = e2.id.replace("pawn", "");
         if (true) {  // This is a blank board, the child can place the pawn anywhere on the board.
             var pawn = e2;
             pawn._pinned = true;
-            id('numGrid')._pinned = true;
+            pawn.setAttribute("class", "set");
+            //pawn.removeEventListener("mousedown");
             pawn._set = true;
+            id('numGrid')._pinned = true;
 
             gotRightAudio.volume = localSettings.values["volume"];
             gotRightAudio.play();
@@ -204,26 +206,15 @@
                 }
                 else {
                     message += "You've been upgraded to the next level!!!";
-                    upgradeLevel();
+                    //upgradeLevel();
                 }
                 var msgBox = new Windows.UI.Popups.MessageDialog(message);
                 msgBox.showAsync();
-
-                if (localSettings.values["highscores"]) {
-                    localSettings.values["highscores"] += ',{ "user": "' + localSettings.values["usrName"] + '", "levelType": "Beginner", "level": ' + 0;
-                    localSettings.values["highscores"] += ', "mistakes": ' + mistakeCount + ', "hours": ' + hours + ', "mins": ' + mins + ', "secs": ' + secs + ' }';
-                }
-                else {
-                    localSettings.values["highscores"] = '{ "user":"' + localSettings.values["usrName"] + '", "levelType": "Beginner", "level": ' + 0;
-                    localSettings.values["highscores"] += ', "mistakes": ' + mistakeCount + ', "hours": ' + hours + ', "mins": ' + mins + ', "secs": ' + secs + ' }';
-
-                }
             }
         }
         else {
             // Display the number of mistakes so far
             mistakeCount++;
-            e2.setAttribute("class", "freepawn");
             gotWrongAudio.volume = localSettings.values["volume"];
             gotWrongAudio.play();
         }
@@ -302,13 +293,11 @@
     }
 
     var hours = 0, mins = 0, secs = 0;
-    var blink = true;
-    var separator = ":";
     function timer() {        
-        blink ? (++secs, separator = " ", blink = false) : (separator = ":", blink = true);
+        ++secs;
         (secs == 60) ? (++mins, secs = 0) : true;
         (mins == 60) ? (++hours, mins = 0) : true;               
-        id('timeCounter').innerHTML = (hours < 10 ? "0" : "") + hours + separator + (mins < 10 ? "0" : "") + mins + separator + (secs < 10 ? "0" : "") + secs;
+        id('timeCounter').innerHTML = (hours < 10 ? "0" : "") + hours + ":" + (mins < 10 ? "0" : "") + mins + ":" + (secs < 10 ? "0" : "") + secs;
     }
 
     var numArray;
