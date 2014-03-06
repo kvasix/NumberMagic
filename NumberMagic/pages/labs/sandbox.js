@@ -183,6 +183,10 @@
         var elt = e2.id.replace("pawn", "");
         if (true) {  // This is a blank board, the child can place the pawn anywhere on the board.
             var pawn = e2;
+            var pawn_rect = pawn.getClientRects()[0];
+            var container_rect = e1.getClientRects()[0];
+            var cssMatrix = new MSCSSMatrix(pawn.style.msTransform);
+            pawn.style.msTransform = cssMatrix.translate(container_rect.left + container_rect.width / 2 - pawn_rect.left - pawn_rect.width / 2, container_rect.top + container_rect.height / 2 - pawn_rect.top - pawn_rect.height / 2);
             pawn._pinned = true;
             pawn.setAttribute("class", "set");
             //pawn.removeEventListener("mousedown");

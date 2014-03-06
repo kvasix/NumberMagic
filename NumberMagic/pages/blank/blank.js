@@ -146,6 +146,10 @@
         if (true) {  // if we have a match, fill the numBox with white and show the status.
             var pawn = e2;
             pawn._pinned = true;
+            var pawn_rect = pawn.getClientRects()[0];
+            var container_rect = e1.getClientRects()[0];
+            var cssMatrix = new MSCSSMatrix(pawn.style.msTransform);
+            pawn.style.msTransform = cssMatrix.translate(container_rect.left + container_rect.width / 2 - pawn_rect.left - pawn_rect.width / 2, container_rect.top + container_rect.height / 2 - pawn_rect.top - pawn_rect.height / 2);
             id('numGrid')._pinned = true;
 
             gotRightAudio.volume = localSettings.values["volume"];
