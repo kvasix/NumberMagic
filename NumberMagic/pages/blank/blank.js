@@ -220,9 +220,7 @@
 
         mistakeCount = 0;
         numpawnsleft = NUM_PAWNS;
-        clearInterval(timeCtrl);
-        hours = 0, mins = 0, secs = 0;
-        timeCtrl = setInterval(timer, 1000);
+        hours = 0, mins = 0, secs = 0; // timer reset
     }
 
     function placePawns() {

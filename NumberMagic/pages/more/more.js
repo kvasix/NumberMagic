@@ -239,10 +239,8 @@
 
         mistakeCount = 0;
         numpawnsleft = NUM_PAWNS;
-        id("mistakeCount").innerHTML = 0;
-        clearInterval(timeCtrl);
-        hours = 0, mins = 0, secs = 0;
-        timeCtrl = setInterval(timer, 1000);
+        id("mistakeCount").innerHTML = 0;        
+        hours = 0, mins = 0, secs = 0; // timer reset
     }
 
     function placePawns() {
