@@ -242,7 +242,7 @@
         id("mistakeCount").innerHTML = 0;
         clearInterval(timeCtrl);
         hours = 0, mins = 0, secs = 0;
-        timeCtrl = setInterval(timer, 500);
+        timeCtrl = setInterval(timer, 1000);
     }
 
     
