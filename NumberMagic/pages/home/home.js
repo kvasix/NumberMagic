@@ -26,6 +26,21 @@
             }
             else {
                 id("greetings").innerHTML = "Hi! Welcome to Number Magic.";
+
+                var packageSpecificToken;
+                var nonce = null;
+                packageSpecificToken =  Windows.System.Profile.HardwareIdentification.getPackageSpecificToken(nonce);
+                // hardware id, signature, certificate IBuffer objects 
+                // that can be accessed through properties.
+                var hardwareId = packageSpecificToken.id;
+                var signature = packageSpecificToken.signature;
+                var certificate = packageSpecificToken.certificate;
+
+                var dataReader = Windows.Storage.Streams.DataReader.fromBuffer(hardwareId);
+                var identifier = new Array(hardwareId.length);
+                dataReader.readBytes(identifier);
+
+
                 id("userStatus").innerHTML = "Please Sign in to proceed playing...";
                 id('sid').value = "";
                 id('pass').value = "";
@@ -42,7 +57,7 @@
     function LogIn() {
         /*
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://www.kumonivanhoe.com.au/NumberMagic/index.php", true);
+        xhr.open("POST", "http://www.kvasix.com/NumberMagic/index.php", true);
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4) {
                 if (xhr.status === 200) {
@@ -56,16 +71,14 @@
         var user_login_post_string = "sid=" + id('sid').value + "&pass=" + id('pass').value;
         WinJS.xhr({
             type: "post",
-            url: "http://www.kumonivanhoe.com.au/NumberMagic/index.php",
+            url: "http://www.kvasix.com/NumberMagic/index.php",
             responseType: 'json',
             headers: { "Content-type": "application/x-www-form-urlencoded" },
             data: user_login_post_string
         }).done(   //
           function complete(result) {
               if (result.status === 200) {
-                  //console.log(result.responseText);
-                  var jsonContent = JSON.parse(result.responseText);//eval('(' + result.responseText + ')');//result.responseJSON; //
-                  //console.log(jsonContent);
+                  var jsonContent = JSON.parse(result.responseText);
 
                   if (jsonContent['loginsuccess']) {
                       localSettings.values["sid"] = jsonContent['sid'];
@@ -79,8 +92,8 @@
                       id("remoteUpdatesArea").innerHTML = localSettings.values["remoteUpdate"];
                       id("remoteUpdatesArea").style.visibility = "visible";
                   } else {
-                      id("greetings").innerHTML = "Login Failed!";
-                      id("userStatus").innerHTML = "Please enter the right username and password";
+                      id("greetings").innerHTML = "Login Failed!";                      
+                      id("userStatus").innerHTML = jsonContent["status"];//"Please enter the right username and password";
                   }
               }
           },
@@ -98,6 +111,7 @@
         localSettings.values["level"] = -1;
         localSettings.values["usrName"] = "Anonymous";
         localSettings.values["volume"] = 1.0;
+        localSettings.values["remoteUpdate"] = "";
         id("greetings").innerHTML = "Hi! Welcome to Number Magic.";
         id("userStatus").innerHTML = "Please Sign in to proceed playing...";
         id('sid').value = "";
@@ -112,7 +126,6 @@
     }
     
     function changeusrName(eventInfo) {
-        // localSettings.values["usrName"] = id('usrName').value;//eventInfo.srcElement.nodeValue;
         id('login_success').style.visibility = "visible";
     }
 })();

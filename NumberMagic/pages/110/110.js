@@ -36,7 +36,6 @@
             numGrid.addEventListener("MSGestureStart", startGesture, false);
             numGrid.addEventListener("MSGestureHold", holdGesture, false);
             numGrid.addEventListener("MSGestureChange", rotateElement, false);
-            //console.log("gesture event listeners setup");
 
             for (var row = 0; row < NUM_ROWS; row++) {
                 var numrow = document.createElement("tr");
@@ -46,7 +45,6 @@
 
                     var idNumber = row * NUM_COLS + col + 1;
                     numContainer.setAttribute("id", "numBox" + idNumber);
-                    //numContainer.innerHTML = idNumber;
                     numContainer.background = "images/tables/" + idNumber + ".jpg";
 
                     numContainer.setAttribute("ondragover", "return false;");
@@ -71,10 +69,7 @@
                 circle.addEventListener("MSGestureHold", holdGesture, false);
                 circle.addEventListener("MSGestureChange", manipulateElement, false);
                 circle.addEventListener("MSGestureEnd", checkpawnpos, false);
-
-                //id('pawnHeap' + randint(1, 2)).appendChild(circle);
-                //id('pawnHeap' + ((idnum % 2)+1)).appendChild(circle);
-
+                
                 circle.className = "pawnHeap" + ((idnum % 2) + 1);
                 id('sec').appendChild(circle);
             }
@@ -141,7 +136,6 @@
         var elements = document.msElementsFromPoint(e.clientX, e.clientY);
         if (elements) {
             for (var i = elements.length - 1; i >= 0; i--) {
-                //console.log(elements[i].tagName);
                 if (elements[i].tagName === "td" || elements[i].tagName === "TD") {
                     checkShape(elements[i], this);
                 }
@@ -150,8 +144,6 @@
     }
 
     function checkShape(e1, e2) {
-        //console.log(e1.id);
-        //console.log(e2.id);
         // Remove the 'numBox' and 'pawn' part of the id's and compare the rest of the strings. 
         var target = e1.id.replace("numBox", "");
         var elt = e2.id.replace("pawn", "");
@@ -229,7 +221,6 @@
             for (var col = 0; col < NUM_COLS; col++) {
                 var idNumber = row * NUM_COLS + col + 1;
                 var numContainer = document.getElementById("numBox" + idNumber);
-                //numContainer.innerHTML = idNumber;
             }
         }
 
@@ -254,9 +245,9 @@
                     elesleft[i].style.left = 9 + "%";
                     elesleft[i].style.top = 18 + "%"; 
                 } else {
-                    elesleft[i].style.left = leftpos + 'px';//elesleft[i].style.left = randint(0, 24) + "%";
+                    elesleft[i].style.left = leftpos + 'px';
                     leftpos += 72;                    
-                    elesleft[i].style.top = 18 + "%"; //randint(24, 90) + "%";
+                    elesleft[i].style.top = 18 + "%";
                 }
             }
         }
@@ -269,9 +260,9 @@
                     elesright[i].style.left = 9 + "%";
                     elesright[i].style.top = 18 + "%";
                 } else {
-                    elesright[i].style.left = leftpos + 'px';//elesright[i].style.left = randint(66, 90) + "%";
+                    elesright[i].style.left = leftpos + 'px';
                     leftpos += 72;
-                    elesright[i].style.top = 18 + "%"; //elesright[i].style.top = randint(30, 90) + "%";
+                    elesright[i].style.top = 18 + "%";
                 }
             }
         }

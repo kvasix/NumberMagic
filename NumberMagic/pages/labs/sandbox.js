@@ -23,7 +23,6 @@
             numGrid.addEventListener("MSGestureStart", startGesture, false);
             numGrid.addEventListener("MSGestureHold", holdGesture, false);
             numGrid.addEventListener("MSGestureChange", rotateElement, false);
-            //console.log("gesture event listeners setup");
 
             for (var row = 0; row < NUM_ROWS; row++) {
                 var numrow = document.createElement("tr");
@@ -155,8 +154,6 @@
             }
             enableRightHeap = true;
         }
-        //console.log(id('numGrid').style.left);
-        //console.log(window.innerWidth);
     }
 
     function checkpawnpos(e) {
@@ -168,7 +165,6 @@
         var elements = document.msElementsFromPoint(e.clientX, e.clientY);
         if (elements) {
             for (var i = elements.length - 1; i >= 0; i--) {
-                //console.log(elements[i].tagName);
                 if (elements[i].tagName === "td" || elements[i].tagName === "TD") {
                     checkShape(elements[i], this);
                     break;
@@ -273,11 +269,8 @@
             for (var i = 0; i < elesleft.length; i++) {
                 elesleft[i].style.position = "absolute";
                 elesleft[i].style.zindex = 0;
-                elesleft[i].style.left = randint(6,24)+"%";//Math.floor(Math.random()* 291) + 6;//(randint(6, 300 - 3));
-                //console.log(parseInt(elesleft[i].style.left));
+                elesleft[i].style.left = randint(6,24)+"%";
                 elesleft[i].style.top = randint(36, 90)+"%";
-                //console.log(elesleft[i].style.top);
-                //elesleft[i].style.display = "none";
             }
         }
 
@@ -290,8 +283,6 @@
                 elesright[i].style.top = randint(36, 90) + "%";
             }
         }
-        //console.log(id('numGrid').style.left);
-        //console.log(window.innerWidth);
     }
 
     var hours = 0, mins = 0, secs = 0;

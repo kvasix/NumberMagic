@@ -5,7 +5,7 @@ var localSettings = appData.localSettings;
 function score_post(score_post_string) {
     WinJS.xhr({
         type: "post",
-        url: "http://www.kumonivanhoe.com.au/NumberMagic/scoreupdate.php",
+        url: "http://www.kvasix.com/NumberMagic/scoreupdate.php",
         responseType: 'json',
         headers: { "Content-type": "application/x-www-form-urlencoded" },
         data: score_post_string
@@ -47,7 +47,7 @@ function upgradeLevel(this_level) {
         var upgradelevel_post_string = "sid=" + localSettings.values["sid"] + "&level=" + new_level;
         WinJS.xhr({
             type: "post",
-            url: "http://www.kumonivanhoe.com.au/NumberMagic/upgradelevel.php",
+            url: "http://www.kvasix.com/NumberMagic/upgradelevel.php",
             responseType: 'json',
             headers: { "Content-type": "application/x-www-form-urlencoded" },
             data: upgradelevel_post_string

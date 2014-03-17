@@ -24,7 +24,6 @@
             numGrid.addEventListener("MSGestureStart", startGesture, false);
             numGrid.addEventListener("MSGestureHold", holdGesture, false);
             numGrid.addEventListener("MSGestureChange", rotateElement, false);
-            //console.log("gesture event listeners setup");
 
             for (var row = 0; row < NUM_ROWS; row++) {
                 var numrow = document.createElement("tr");
@@ -34,8 +33,7 @@
 
                     var idNumber = row * NUM_COLS + col + NUM_START;
                     numContainer.setAttribute("id", "numBox" + idNumber);
-                    //numContainer.innerHTML = idNumber;
-                    numContainer.background = "images/tables/" + idNumber + ".jpg";//"images/tables/blank.jpg"; //
+                    numContainer.background = "images/tables/" + idNumber + ".jpg";
 
                     numContainer.setAttribute("ondragover", "return false;");
 
@@ -59,9 +57,6 @@
                 circle.addEventListener("MSGestureHold", holdGesture, false);
                 circle.addEventListener("MSGestureChange", manipulateElement, false);
                 circle.addEventListener("MSGestureEnd", checkpawnpos, false);
-
-                //id('pawnHeap50' + randint(1, 2)).appendChild(circle);
-                //id('pawnHeap50' + ((idnum % 2)+1)).appendChild(circle);
 
                 circle.className = "pawnHeap50" + ((idnum % 2) + 1);
                 id('sec').appendChild(circle);
@@ -138,8 +133,6 @@
     }
 
     function checkShape(e1, e2) {
-        //console.log(e1.id);
-        //console.log(e2.id);
         // Remove the 'numBox' and 'pawn' part of the id's and compare the rest of the strings. 
         var target = e1.id.replace("numBox", "");
         var elt = e2.id.replace("pawn", "");
@@ -207,9 +200,7 @@
 
         //console.log(NUM_START);
         for (var idnum = NUM_START; idnum < NUM_START + NUM_PAWNS; idnum++) {
-            //console.log(NUM_START);
             var pawn = id("pawn" + numArray[idnum - NUM_START]);
-            //console.log(pawn.id);
             pawn.style.msTransform = "none";
             pawn.className = 'pawnHeap50' + randint(1, 2);
             pawn._gesture = new MSGesture();// is this required?
@@ -217,15 +208,6 @@
             pawn._pinned = false;
         }
         placePawns();
-        /*
-                for (var row = 0; row < NUM_ROWS; row++) {
-                    for (var col = 0; col < NUM_COLS; col++) {
-                        var idNumber = row * NUM_COLS + col + NUM_START;
-                        var numContainer = document.getElementById("numBox" + idNumber);
-                        numContainer.innerHTML = idNumber;
-                    }
-                }
-        */
         toggleHeap(enableRightHeap);
         id('guide').innerHTML = "Board Reset!";
         id('guide').style.textAlign = "center";
@@ -242,11 +224,8 @@
             for (var i = 0; i < elesleft.length; i++) {
                 elesleft[i].style.position = "absolute";
                 elesleft[i].style.zindex = 0;
-                elesleft[i].style.left = randint(0, 9) + "%";//Math.floor(Math.random()* 291) + 6;//(randint(6, 300 - 3));
-                //console.log(parseInt(elesleft[i].style.left));
+                elesleft[i].style.left = randint(0, 9) + "%";
                 elesleft[i].style.top = randint(18, 90) + "%";
-                //console.log(elesleft[i].style.top);
-                //elesleft[i].style.display = "none";
             }
         }
 
@@ -259,8 +238,6 @@
                 elesright[i].style.top = randint(27, 90) + "%";
             }
         }
-        //console.log(id('numGrid').style.left);
-        //console.log(window.innerWidth);
     }
 
     var hours = 0, mins = 0, secs = 0;

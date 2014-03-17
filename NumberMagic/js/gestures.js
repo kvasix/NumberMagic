@@ -41,7 +41,7 @@ function holdGesture(eventInfo) {
         }
     }
 
-    console.log("hold gesture: " + target._pinned);
+    //console.log("hold gesture: " + target._pinned);
 }
 
 function isInBounds(rect, scale) {
@@ -62,8 +62,8 @@ function isInBounds(rect, scale) {
         offset = rect.top;
     }
 
-    console.log("x:" + rect.left + " wx" + window.innerWidth);
-    console.log("y:" + rect.top + " wy" + window.innerHeight);
+    //console.log("x:" + rect.left + " wx" + window.innerWidth);
+    //console.log("y:" + rect.top + " wy" + window.innerHeight);
     return { "value": ret, "offset": offset };
 }
 
@@ -124,7 +124,7 @@ function manipulateElement(eventInfo) {
 }
 
 function rotateElement(eventInfo) {
-    console.log("rotate Element");
+    //console.log("rotate Element");
 
     var target = eventInfo.target;
     var cssMatrix = new MSCSSMatrix(target.style.msTransform);
