@@ -30,3 +30,12 @@ td {
     border: 1px 1px 0px 0px solid white;
     text-align:center;
 }
+
+#highscores {
+    width:81%;
+
+    font-family:'Arial';
+    font-style:oblique;
+    font-weight:300;
+    font-size:xx-large;
+}
