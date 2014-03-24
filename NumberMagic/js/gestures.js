@@ -21,6 +21,17 @@ function setupPGesture(eventInfo) {
     numberAudio.volume = localSettings.values["volume"];
 
     numberAudio.play();
+
+    var elements = document.msElementsFromPoint(eventInfo.clientX, eventInfo.clientY);
+    if (elements) {
+        for (var i = elements.length - 1; i >= 0; i--) {
+            if (elements[i].tagName === "td" || elements[i].tagName === "TD") {
+                elements[i].background = "images/tables/" + elements[i].id.replace("numBox", "") + ".jpg";
+                //elements[i].class = "numContainer";
+                elements[i].setAttribute("class", "numContainer");
+            }
+        }
+    }
 }
 
 function startGesture(eventInfo) {

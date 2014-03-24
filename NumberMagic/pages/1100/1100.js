@@ -131,21 +131,26 @@
         }
     }
 
-    function checkShape(e1, e2) {
+    function checkShape(drop_target, pawn) {
         // Remove the 'numBox' and 'pawn' part of the id's and compare the rest of the strings. 
-        var target = e1.id.replace("numBox", "");
-        var elt = e2.id.replace("pawn", "");
-        if (target == elt) {  // if we have a match, fill the numBox with white and show the status.
-            var pawn = e2;
-            var pawn_rect = pawn.getClientRects()[0];
-            var container_rect = e1.getClientRects()[0];
-            var cssMatrix = new MSCSSMatrix(pawn.style.msTransform);
-            pawn.style.msTransform = cssMatrix.translate(container_rect.left + container_rect.width / 2 - pawn_rect.left - pawn_rect.width / 2, container_rect.top + container_rect.height / 2 - pawn_rect.top - pawn_rect.height / 2);
-            pawn._pinned = true;
-            id('numGrid100')._pinned = true;
+        var target_id = drop_target.id.replace("numBox", "");
+        var pawn_id = pawn.id.replace("pawn", "");
 
-            gotRightAudio.volume = localSettings.values["volume"];
-            gotRightAudio.play();
+        var pawn_rect = pawn.getClientRects()[0];
+        var container_rect = drop_target.getClientRects()[0];
+        var cssMatrix = new MSCSSMatrix(pawn.style.msTransform);
+        pawn.style.msTransform = cssMatrix.translate(container_rect.left + container_rect.width / 2 - pawn_rect.left - pawn_rect.width / 2, container_rect.top + container_rect.height / 2 - pawn_rect.top - pawn_rect.height / 2);
+
+
+        if (target_id == pawn_id) {  // if we have a match, fill the numBox with white and show the status.
+            pawn._pinned = true;
+            id('numGrid')._pinned = true;
+
+            //gotRightAudio.volume = localSettings.values["volume"];
+            //gotRightAudio.play();
+            drop_target.background = "images/tables/" + target_id + ".jpg";
+            //drop_target.class = "numContainer";
+            drop_target.setAttribute("class", "numContainer");
 
             toggleHeap(enableRightHeap);
 
@@ -175,8 +180,11 @@
             // Display the number of mistakes so far
             mistakeCount++;
             id("mistakeCount").innerHTML = mistakeCount + ": Pieces don't match!";
-            gotWrongAudio.volume = localSettings.values["volume"];
-            gotWrongAudio.play();
+            //gotWrongAudio.volume = localSettings.values["volume"];
+            //gotWrongAudio.play();
+            drop_target.background = "";
+            //drop_target.class = "numContainer wrongpawn";
+            drop_target.setAttribute("class", "numContainer wrongpawn");
         }
     }
 
@@ -195,8 +203,16 @@
     function resetPawns() {
         id('numGrid100').style.msTransform = "none";
         id('numGrid100')._pinned = true;
-        populateArray();
+        for (var row = 0; row < NUM_ROWS; row++) {
+            for (var col = 0; col < NUM_COLS; col++) {
+                var idNumber = row * NUM_COLS + col + NUM_START;
+                var numContainer = document.getElementById("numBox" + idNumber);
+                numContainer.background = "images/tables/" + idNumber + ".jpg";
+                numContainer.setAttribute("class", "numContainer");
+            }
+        }
 
+        populateArray();
         for (var idnum = NUM_START; idnum < NUM_START + NUM_PAWNS; idnum++) {
             var pawn = id("pawn" + numArray[idnum - NUM_START]);
             pawn.style.msTransform = "none";
@@ -239,11 +255,30 @@
     }
 
     var hours = 0, mins = 0, secs = 0;
+    var td_blink = true;
     function timer() {
         ++secs;
         (secs == 60) ? (++mins, secs = 0) : true;
         (mins == 60) ? (++hours, mins = 0) : true;
         id('timeCounter').innerHTML = (hours < 10 ? "0" : "") + hours + ":" + (mins < 10 ? "0" : "") + mins + ":" + (secs < 10 ? "0" : "") + secs;
+
+        var table_division_array = document.getElementsByClassName("numContainer wrongpawn");
+        if (table_division_array) {
+            if (td_blink) {
+                for (var i = table_division_array.length - 1; i >= 0; i--) {
+                    if (table_division_array[i].tagName === "td" || table_division_array[i].tagName === "TD") {
+                        table_division_array[i].background = "images/tables/" + table_division_array[i].id.replace("numBox", "") + ".jpg";
+                    }
+                }
+            } else {
+                for (var i = table_division_array.length - 1; i >= 0; i--) {
+                    if (table_division_array[i].tagName === "td" || table_division_array[i].tagName === "TD") {
+                        table_division_array[i].background = "";
+                    }
+                }
+            }
+        }
+        td_blink = !td_blink;
     }
 
     var numArray;

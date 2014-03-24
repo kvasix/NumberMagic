@@ -1,7 +1,7 @@
 ﻿(function () {
     "use strict";
 
-    var PAWN_START, NUM_PAWNS, NUM_START, NUM_ROWS = 2, NUM_COLS = 5, this_level, MISTAKE_THRESHOLD = 5;
+    var SINGLE_PAWNED, PAWN_START, NUM_PAWNS, NUM_START, NUM_ROWS = 2, NUM_COLS = 5, this_level, MISTAKE_THRESHOLD = 5;
     var numGrid = null;
 
     WinJS.UI.Pages.define("/pages/1120/1120.html", {
@@ -23,6 +23,11 @@
                 NUM_START = 11;
                 NUM_PAWNS = 10;
             }
+
+            if(this_level == 8 || this_level == 11)
+                SINGLE_PAWNED = true;
+            else
+                SINGLE_PAWNED = false;
 
             window.addEventListener("dragstart", function (e) { e.preventDefault(); }, false);
 
@@ -51,7 +56,7 @@
                 numGrid.appendChild(numrow);
             }
 
-            populateArray();
+            populateArray(!SINGLE_PAWNED);
             for (var idnum = NUM_START; idnum < NUM_START + NUM_PAWNS; idnum++) {
                 var circle = document.createElement("img");
                 circle.src = "/images/pawns/small/" + numArray[idnum - NUM_START] + ".jpg";
@@ -70,7 +75,7 @@
                 circle.className = "pawnHeap" + ((idnum % 2) + 1);
                 id('sec').appendChild(circle);
             }
-            placePawns();
+            placePawns(SINGLE_PAWNED);
 
             numpawnsleft = NUM_PAWNS;
             enableRightHeap = true;
@@ -140,21 +145,26 @@
         }
     }
 
-    function checkShape(e1, e2) {
+    function checkShape(drop_target, pawn) {
         // Remove the 'numBox' and 'pawn' part of the id's and compare the rest of the strings. 
-        var target = e1.id.replace("numBox", "");
-        var elt = e2.id.replace("pawn", "");
-        if (target == elt) {  // if we have a match, fill the numBox with white and show the status.
-            var pawn = e2;
-            var pawn_rect = pawn.getClientRects()[0];
-            var container_rect = e1.getClientRects()[0];
-            var cssMatrix = new MSCSSMatrix(pawn.style.msTransform);
-            pawn.style.msTransform = cssMatrix.translate(container_rect.left + container_rect.width / 2 - pawn_rect.left - pawn_rect.width / 2, container_rect.top + container_rect.height / 2 - pawn_rect.top - pawn_rect.height / 2);
+        var target_id = drop_target.id.replace("numBox", "");
+        var pawn_id = pawn.id.replace("pawn", "");
+
+        var pawn_rect = pawn.getClientRects()[0];
+        var container_rect = drop_target.getClientRects()[0];
+        var cssMatrix = new MSCSSMatrix(pawn.style.msTransform);
+        pawn.style.msTransform = cssMatrix.translate(container_rect.left + container_rect.width / 2 - pawn_rect.left - pawn_rect.width / 2, container_rect.top + container_rect.height / 2 - pawn_rect.top - pawn_rect.height / 2);
+
+
+        if (target_id == pawn_id) {  // if we have a match, fill the numBox with white and show the status.
             pawn._pinned = true;
             id('numGrid')._pinned = true;
 
-            gotRightAudio.volume = localSettings.values["volume"];
-            gotRightAudio.play();
+            //gotRightAudio.volume = localSettings.values["volume"];
+            //gotRightAudio.play();
+            drop_target.background = "images/tables/" + target_id + ".jpg";
+            //drop_target.class = "numContainer";
+            drop_target.setAttribute("class", "numContainer");
 
             toggleHeap(enableRightHeap);
 
@@ -184,8 +194,11 @@
             // Display the number of mistakes so far
             mistakeCount++;
             id("mistakeCount").innerHTML = mistakeCount + ": Pieces don't match!";
-            gotWrongAudio.volume = localSettings.values["volume"];
-            gotWrongAudio.play();
+            //gotWrongAudio.volume = localSettings.values["volume"];
+            //gotWrongAudio.play();
+            drop_target.background = "";
+            //drop_target.class = "numContainer wrongpawn";
+            drop_target.setAttribute("class", "numContainer wrongpawn");
         }
     }
 
@@ -202,8 +215,17 @@
 
     function resetPawns() {
         id('numGrid').style.msTransform = "none";
-        id('numGrid')._pinned = false
-        populateArray();
+        id('numGrid')._pinned = false;
+        for (var row = 0; row < NUM_ROWS; row++) {
+            for (var col = 0; col < NUM_COLS; col++) {
+                var idNumber = row * NUM_COLS + col + 11;
+                var numContainer = document.getElementById("numBox" + idNumber);
+                numContainer.background = "images/tables/" + idNumber + ".jpg";
+                numContainer.setAttribute("class", "numContainer");
+            }
+        }
+
+        populateArray(!SINGLE_PAWNED);
         for (var idnum = NUM_START; idnum < NUM_START + NUM_PAWNS; idnum++) {
             var pawn = id("pawn" + numArray[idnum - NUM_START]);
             pawn.style.msTransform = "none";
@@ -212,14 +234,7 @@
             pawn._gesture.target = pawn;// is this required?
             pawn._pinned = false;
         }
-        placePawns();
-
-        for (var row = 0; row < NUM_ROWS; row++) {
-            for (var col = 0; col < NUM_COLS; col++) {
-                var idNumber = row * NUM_COLS + col + 11;
-                var numContainer = document.getElementById("numBox" + idNumber);
-            }
-        }
+        placePawns(SINGLE_PAWNED);        
 
         toggleHeap(enableRightHeap);
         id('guide').innerHTML = "Board Reset!";
@@ -231,13 +246,13 @@
         hours = 0, mins = 0, secs = 0; // timer reset
     }
 
-    function placePawns() {
+    function placePawns(SINGLE_PAWNED) {
         var elesleft = document.getElementsByClassName("pawnHeap1");
         if (elesleft) {
             var leftpos = 120;
             for (var i = 0; i < elesleft.length; i++) {
                 elesleft[i].style.position = "absolute";
-                if (this_level == 8 || this_level == 11) {
+                if (SINGLE_PAWNED) {
                     elesleft[i].style.left = 9 + "%";
                     elesleft[i].style.top = 18 + "%";
                 } else {
@@ -252,7 +267,7 @@
         if (elesright) {
             for (var i = 0; i < elesright.length; i++) {
                 elesright[i].style.position = "absolute";
-                if (this_level == 8 || this_level == 11) {
+                if (SINGLE_PAWNED) {
                     elesright[i].style.left = 9 + "%";
                     elesright[i].style.top = 18 + "%";
                 } else {
@@ -265,29 +280,50 @@
     }
     
     var hours = 0, mins = 0, secs = 0;
+    var td_blink = true;
     function timer() {
         ++secs;
         (secs == 60) ? (++mins, secs = 0) : true;
         (mins == 60) ? (++hours, mins = 0) : true;
         id('timeCounter').innerHTML = (hours < 10 ? "0" : "") + hours + ":" + (mins < 10 ? "0" : "") + mins + ":" + (secs < 10 ? "0" : "") + secs;
+
+        var table_division_array = document.getElementsByClassName("numContainer wrongpawn");
+        if (table_division_array) {
+            if (td_blink) {
+                for (var i = table_division_array.length - 1; i >= 0; i--) {
+                    if (table_division_array[i].tagName === "td" || table_division_array[i].tagName === "TD") {
+                        table_division_array[i].background = "images/tables/" + table_division_array[i].id.replace("numBox", "") + ".jpg";
+                    }
+                }
+            } else {
+                for (var i = table_division_array.length - 1; i >= 0; i--) {
+                    if (table_division_array[i].tagName === "td" || table_division_array[i].tagName === "TD") {
+                        table_division_array[i].background = "";
+                    }
+                }
+            }
+        }
+        td_blink = !td_blink;
     }
 
     var numArray;
-    function populateArray() {
+    function populateArray(randomize) {
         numArray = new Array();
         var populated_count = 0;
         while (populated_count < NUM_PAWNS) {
-            numArray[populated_count] = NUM_START + populated_count;
+            numArray[NUM_PAWNS - populated_count - 1] = NUM_START + populated_count;
             populated_count++;
         }
 
-        for (var i = numArray.length - 1; i > 0; i--) {
-            var j = randint(0, i);
+        if (randomize) {
+            for (var i = numArray.length - 1; i > 0; i--) {
+                var j = randint(0, i);
 
-            // Swap the elements at positions i and j.
-            var temp = numArray[i];
-            numArray[i] = numArray[j];
-            numArray[j] = temp;
+                // Swap the elements at positions i and j.
+                var temp = numArray[i];
+                numArray[i] = numArray[j];
+                numArray[j] = temp;
+            }
         }
     }
 

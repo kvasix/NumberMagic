@@ -255,6 +255,7 @@
             numArray[populated_count] = ++populated_count;
         }
 
+        /*
         for (var i = numArray.length - 1; i > 0; i--) {
             var j = randint(0, i);
 
@@ -263,6 +264,7 @@
             numArray[i] = numArray[j];
             numArray[j] = temp;
         }
+        */
     }
 
     function randint(l, u)

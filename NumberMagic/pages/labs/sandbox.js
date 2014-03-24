@@ -173,24 +173,26 @@
         }
     }
 
-    function checkShape(e1, e2) {
+    function checkShape(drop_target, pawn) {
         // Remove the 'numBox' and 'pawn' part of the id's and compare the rest of the strings. 
-        var target = e1.id.replace("numBox", "");
-        var elt = e2.id.replace("pawn", "");
-        if (true) {  // This is a blank board, the child can place the pawn anywhere on the board.
-            var pawn = e2;
-            var pawn_rect = pawn.getClientRects()[0];
-            var container_rect = e1.getClientRects()[0];
-            var cssMatrix = new MSCSSMatrix(pawn.style.msTransform);
-            pawn.style.msTransform = cssMatrix.translate(container_rect.left + container_rect.width / 2 - pawn_rect.left - pawn_rect.width / 2, container_rect.top + container_rect.height / 2 - pawn_rect.top - pawn_rect.height / 2);
+        var target_id = drop_target.id.replace("numBox", "");
+        var pawn_id = pawn.id.replace("pawn", "");
+
+        var pawn_rect = pawn.getClientRects()[0];
+        var container_rect = drop_target.getClientRects()[0];
+        var cssMatrix = new MSCSSMatrix(pawn.style.msTransform);
+        pawn.style.msTransform = cssMatrix.translate(container_rect.left + container_rect.width / 2 - pawn_rect.left - pawn_rect.width / 2, container_rect.top + container_rect.height / 2 - pawn_rect.top - pawn_rect.height / 2);
+
+
+        if (target_id == pawn_id) {  // if we have a match, fill the numBox with white and show the status.
             pawn._pinned = true;
-            pawn.setAttribute("class", "set");
-            //pawn.removeEventListener("mousedown");
-            pawn._set = true;
             id('numGrid')._pinned = true;
 
-            gotRightAudio.volume = localSettings.values["volume"];
-            gotRightAudio.play();
+            //gotRightAudio.volume = localSettings.values["volume"];
+            //gotRightAudio.play();
+            drop_target.background = "images/tables/" + target_id + ".jpg";
+            //drop_target.class = "numContainer";
+            drop_target.setAttribute("class", "numContainer");
 
             toggleHeap(enableRightHeap);
 
@@ -205,18 +207,26 @@
                     message += "Why don't you try it again?";
                 }
                 else {
-                    message += "You've been upgraded to the next level!!!";
-                    //upgradeLevel();
+                    message += upgradeLevel(this_level);
                 }
                 var msgBox = new Windows.UI.Popups.MessageDialog(message);
                 msgBox.showAsync();
+
+                var score_post_string = "sid=" + localSettings.values["sid"] + "&level=" + this_level;
+                score_post_string += "&mistakes=" + mistakeCount + "&timetaken=" + ((hours * 60 + mins) * 60 + secs);
+                score_post(score_post_string);
             }
+            id("mistakeCount").innerHTML = mistakeCount;
         }
         else {
             // Display the number of mistakes so far
             mistakeCount++;
-            gotWrongAudio.volume = localSettings.values["volume"];
-            gotWrongAudio.play();
+            id("mistakeCount").innerHTML = mistakeCount + ": Pieces don't match!";
+            //gotWrongAudio.volume = localSettings.values["volume"];
+            //gotWrongAudio.play();
+            drop_target.background = "";
+            //drop_target.class = "numContainer wrongpawn";
+            drop_target.setAttribute("class", "numContainer wrongpawn");
         }
     }
 
@@ -233,7 +243,16 @@
 
     function resetPawns() {
         id('numGrid').style.msTransform = "none";
-        id('numGrid')._pinned = false
+        id('numGrid')._pinned = false;
+        for (var row = 0; row < NUM_ROWS; row++) {
+            for (var col = 0; col < NUM_COLS; col++) {
+                var idNumber = row * NUM_COLS + col + NUM_START;
+                var numContainer = document.getElementById("numBox" + idNumber);
+                numContainer.background = "images/tables/" + idNumber + ".jpg";
+                numContainer.setAttribute("class", "numContainer");
+            }
+        }
+
         populateArray();
         for (var idnum = 1; idnum <= NUM_PAWNS; idnum++) {
             var pawn = id("pawn" + numArray[idnum - 1]);
@@ -286,11 +305,30 @@
     }
 
     var hours = 0, mins = 0, secs = 0;
-    function timer() {        
+    var td_blink = true;
+    function timer() {
         ++secs;
         (secs == 60) ? (++mins, secs = 0) : true;
-        (mins == 60) ? (++hours, mins = 0) : true;               
+        (mins == 60) ? (++hours, mins = 0) : true;
         id('timeCounter').innerHTML = (hours < 10 ? "0" : "") + hours + ":" + (mins < 10 ? "0" : "") + mins + ":" + (secs < 10 ? "0" : "") + secs;
+
+        var table_division_array = document.getElementsByClassName("numContainer wrongpawn");
+        if (table_division_array) {
+            if (td_blink) {
+                for (var i = table_division_array.length - 1; i >= 0; i--) {
+                    if (table_division_array[i].tagName === "td" || table_division_array[i].tagName === "TD") {
+                        table_division_array[i].background = "images/tables/" + table_division_array[i].id.replace("numBox", "") + ".jpg";
+                    }
+                }
+            } else {
+                for (var i = table_division_array.length - 1; i >= 0; i--) {
+                    if (table_division_array[i].tagName === "td" || table_division_array[i].tagName === "TD") {
+                        table_division_array[i].background = "";
+                    }
+                }
+            }
+        }
+        td_blink = !td_blink;
     }
 
     var numArray;
