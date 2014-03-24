@@ -73,10 +73,10 @@
             id('reset').addEventListener("click", resetPawns, false);
             timeCtrl = setInterval(timer, 1000);
 
-            gotRightAudio = new Audio("/sounds/right.wma");
-            gotRightAudio.load();
-            gotWrongAudio = new Audio("/sounds/wrong.wma");
-            gotWrongAudio.load();
+            //gotRightAudio = new Audio("/sounds/right.wma");
+            //gotRightAudio.load();
+            //gotWrongAudio = new Audio("/sounds/wrong.wma");
+            //gotWrongAudio.load();
             applaudAudio = new Audio("/sounds/applause.wma");
             applaudAudio.load();
         },
@@ -145,13 +145,24 @@
         if (target_id == pawn_id) {  // if we have a match, fill the numBox with white and show the status.
             pawn._pinned = true;
             id('numGrid100')._pinned = true;
+            
+            var elements = document.msElementsFromPoint(pawn_rect.left + pawn_rect.width / 2, pawn_rect.top + pawn_rect.height / 2);
+            if (elements) {
+                for (var i = 0; i < elements.length; i++) {
+                    if ((elements[i].tagName === "img" || elements[i].tagName === "IMG") && elements[i] != pawn) {
+                        var cssMatrix = new MSCSSMatrix(elements[i].style.msTransform);
+                        elements[i].style.msTransform = cssMatrix.translate(9, 9);
+                    }
+                }
+            }
 
+            /*
             //gotRightAudio.volume = localSettings.values["volume"];
             //gotRightAudio.play();
             drop_target.background = "images/tables/" + target_id + ".jpg";
             //drop_target.class = "numContainer";
             drop_target.setAttribute("class", "numContainer");
-
+            */
             toggleHeap(enableRightHeap);
 
             if (!(--numpawnsleft)) {

@@ -47,6 +47,8 @@ function setupPGesture(eventInfo) {
                     elements[i].background = "images/tables/" + elements[i].id.replace("numBox", "") + ".jpg";
                     //elements[i].class = "numContainer";
                     elements[i].setAttribute("class", "numContainer");
+                } else {
+                    elements[i].setAttribute("class", "numContainer wrongpawn");
                 }
             }
         }       
