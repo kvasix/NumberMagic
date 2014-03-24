@@ -22,15 +22,34 @@ function setupPGesture(eventInfo) {
 
     numberAudio.play();
 
+    var set_container_to_correct = true;
     var elements = document.msElementsFromPoint(eventInfo.clientX, eventInfo.clientY);
     if (elements) {
-        for (var i = elements.length - 1; i >= 0; i--) {
-            if (elements[i].tagName === "td" || elements[i].tagName === "TD") {
-                elements[i].background = "images/tables/" + elements[i].id.replace("numBox", "") + ".jpg";
-                //elements[i].class = "numContainer";
-                elements[i].setAttribute("class", "numContainer");
+        //for (var i = elements.length - 1; i >= 0; i--) {
+        for (var i = 0; i < elements.length; i++) {
+            if (elements[i].tagName === "img" || elements[i].tagName === "IMG"){
+                if (elements[i] != item) {
+                    var subordinates = document.msElementsFromPoint(eventInfo.clientX, eventInfo.clientY);
+                    for (var j = subordinates.length - 1; j >= 0; j--) {
+                        if (subordinates[j].tagName === "td" || subordinates[j].tagName === "TD") {
+                            if (elements[i].id.replace("pawn", "") != subordinates[j].id.replace("numBox", "")) {
+                                set_container_to_correct = false;
+                            }
+                        }
+                    }
+                }
             }
         }
+
+        for (var i = elements.length - 1; i >= 0; i--) {
+            if (elements[i].tagName === "td" || elements[i].tagName === "TD") {
+                if (set_container_to_correct) {
+                    elements[i].background = "images/tables/" + elements[i].id.replace("numBox", "") + ".jpg";
+                    //elements[i].class = "numContainer";
+                    elements[i].setAttribute("class", "numContainer");
+                }
+            }
+        }       
     }
 }
 

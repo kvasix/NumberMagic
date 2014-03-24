@@ -145,7 +145,7 @@
 
         if (target_id == pawn_id) {  // if we have a match, fill the numBox with white and show the status.
             pawn._pinned = true;
-            id('numGrid')._pinned = true;
+            id('numGrid50')._pinned = true;
 
             //gotRightAudio.volume = localSettings.values["volume"];
             //gotRightAudio.play();
