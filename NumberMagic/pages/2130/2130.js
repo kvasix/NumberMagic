@@ -68,7 +68,7 @@
                 circle._gesture.target = circle;
                 circle.addEventListener("MSPointerDown", setupPGesture, false);
                 circle.addEventListener("MSGestureStart", startGesture, false);
-                circle.addEventListener("MSGestureHold", holdGesture, false);
+                //circle.addEventListener("MSGestureHold", holdGesture, false);
                 circle.addEventListener("MSGestureChange", manipulateElement, false);
                 circle.addEventListener("MSGestureEnd", checkpawnpos, false);
 
@@ -273,6 +273,7 @@
                     leftpos += 72;
                     elesleft[i].style.top = 18 + "%";
                 }
+                elesleft[i].style.zIndex = 0;
             }
         }
 
@@ -288,6 +289,7 @@
                     leftpos += 72;
                     elesright[i].style.top = 18 + "%";
                 }
+                elesright[i].style.zIndex = 0;
             }
         }
     }

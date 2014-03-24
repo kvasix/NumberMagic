@@ -62,7 +62,7 @@
                 circle._gesture.target = circle;
                 circle.addEventListener("MSPointerDown", setupPGesture, false);
                 circle.addEventListener("MSGestureStart", startGesture, false);
-                circle.addEventListener("MSGestureHold", holdGesture, false);
+                //circle.addEventListener("MSGestureHold", holdGesture, false);
                 circle.addEventListener("MSGestureChange", manipulateElement, false);
                 circle.addEventListener("MSGestureEnd", checkpawnpos, false);
 
