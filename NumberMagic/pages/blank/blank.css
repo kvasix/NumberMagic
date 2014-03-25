@@ -48,8 +48,13 @@ img {
 }
 
 
+
 #timeBox {
-    top:9em;
+    top:18%;
+
+    font-family:'Arial';
+    font-style:oblique;
+    font-size:large;
 }
 
 

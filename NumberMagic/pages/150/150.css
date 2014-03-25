@@ -50,9 +50,14 @@ img {
 
 #mistakesBox {
     visibility: hidden;
+    top: 18%;
 }
-#mistakesBox, #timeBox {
-    top:9em;
+#timeBox {
+    top:18%;
+
+    font-family:'Arial';
+    font-style:oblique;
+    font-size:large;
 }
 
 .disabled {

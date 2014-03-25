@@ -146,6 +146,7 @@
         }
     }
 
+    var mistakes = new Array();
     function checkShape(drop_target, pawn) {
         // Remove the 'numBox' and 'pawn' part of the id's and compare the rest of the strings. 
         var target_id = drop_target.id.replace("numBox", "");
@@ -198,13 +199,14 @@
                 msgBox.showAsync();
 
                 var score_post_string = "sid=" + localSettings.values["sid"] + "&level=" + this_level;
-                score_post_string += "&mistakes=" + mistakeCount + "&timetaken=" + ((hours * 60 + mins) * 60 + secs);
+                score_post_string += "&mistakeCount=" + mistakeCount + "&mistakes=" + JSON.stringify(mistakes) + "&timetaken=" + ((hours * 60 + mins) * 60 + secs);
                 score_post(score_post_string);
             }
             id("mistakeCount").innerHTML = mistakeCount;
         }
         else {
             // Display the number of mistakes so far
+            mistakes[mistakeCount] = pawn_id + ">" + target_id;
             mistakeCount++;
             id("mistakeCount").innerHTML = mistakeCount + ": Pieces don't match!";
             //gotWrongAudio.volume = localSettings.values["volume"];

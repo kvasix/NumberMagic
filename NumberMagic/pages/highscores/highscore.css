@@ -31,11 +31,11 @@ td {
     text-align:center;
 }
 
-#highscores {
+#scoretable {
     width:81%;
 
     font-family:'Arial';
     font-style:oblique;
     font-weight:300;
-    font-size:xx-large;
+    font-size:large;
 }

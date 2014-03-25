@@ -10,9 +10,9 @@
             var appData = Windows.Storage.ApplicationData.current;
             var localSettings = appData.localSettings;
 
-            var levelArray = Array("blank board", "Numbers 1 - 3", "Numbers 1 - 5", "Numbers 1 - 5+", "Numbers 6 - 10", "Numbers 6 - 10+", "Numbers 1 - 10", "Numbers 1 - 10+", 
-                "Numbers 11 - 15", "Numbers 11 - 15+", "Numbers 1 - 15+", "Numbers 16 - 20", "Numbers 16 - 20+", "Numbers 11 - 20+", "Numbers 1 - 20+", 
-                "Numbers 21 - 25", "Numbers 21 - 25+", "Numbers 1 - 25+", "Numbers 26 - 30", "Numbers 26 - 30+", "Numbers 21 - 30+", "Numbers 1 - 30", "Numbers 1 - 50", "Numbers 1 - 100");
+            var levelArray = Array("blank", "1 - 3", "1 - 5", "1 - 5+", "6 - 10", "6 - 10+", "1 - 10", "1 - 10+", 
+                "11 - 15", "11 - 15+", "1 - 15+", "16 - 20", "16 - 20+", "11 - 20+", "1 - 20+", 
+                "21 - 25", "21 - 25+", "1 - 25+", "26 - 30", "26 - 30+", "21 - 30+", "1 - 30", "1 - 50", "1 - 100");
 
             var score_post_string = "sid=" + localSettings.values["sid"];
             var parsedData;
@@ -25,10 +25,11 @@
             }).done(   //
               function complete(result) {
                   if (result.status === 200) {
+                      console.log(result.responseText);
                       var highscore_list = JSON.parse(result.responseText);
 
-                      var highscore_table = document.getElementById("highscores");
-                      highscore_table.innerHTML = "<tr><th>Date</th><th>Level</th><th>Number of Mistakes</th><th>Timetaken</th></tr>";
+                      var highscore_table = document.getElementById("scoretable");
+                      highscore_table.innerHTML = "<tr><th>Date</th><th>Level</th><th>Mistakes (Pawn > Board)</th><th>Number of Mistakes</th><th>Timetaken</th></tr>";
                       var row = 0;
                       while (highscore_list[row]) {
                           var row_html = document.createElement("tr");
@@ -42,8 +43,12 @@
                           row_html.appendChild(level);
 
                           var mistakes = document.createElement("td");
-                          mistakes.innerText = highscore_list[row].mistakecount;
+                          mistakes.innerText = highscore_list[row].mistakes;
                           row_html.appendChild(mistakes);
+
+                          var mistakecount = document.createElement("td");
+                          mistakecount.innerText = highscore_list[row].mistakecount;
+                          row_html.appendChild(mistakecount);
 
                           var timetaken = document.createElement("td");
                           timetaken.innerText = "";
