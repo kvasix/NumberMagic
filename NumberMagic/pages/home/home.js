@@ -57,7 +57,7 @@
     function LogIn() {
         /*
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://www.kvasix.com/NumberMagic/index.php", true);
+        xhr.open("POST", "http://www.kvasix.com/NumberMagic/user_login.php", true);
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4) {
                 if (xhr.status === 200) {
@@ -71,7 +71,7 @@
         var user_login_post_string = "sid=" + id('sid').value + "&pass=" + id('pass').value;
         WinJS.xhr({
             type: "post",
-            url: "http://www.kvasix.com/NumberMagic/index.php",
+            url: "http://www.kvasix.com/NumberMagic/user_login.php",
             responseType: 'json',
             headers: { "Content-type": "application/x-www-form-urlencoded" },
             data: user_login_post_string
