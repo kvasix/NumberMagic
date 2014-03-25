@@ -12,9 +12,9 @@ function score_post(score_post_string) {
     }).done(   //
         function complete(result) {
             if (result.status === 200) {
-                console.log(result.responseText);
+                //console.log(result.responseText);
                 var jsonContent = JSON.parse(result.responseText);//eval('(' + result.responseText + ')');//result.responseJSON; //
-                console.log(jsonContent);
+                //console.log(jsonContent);
                 /*
                 if (jsonContent['upgradesuccess']) {
                     localSettings.values["usrName"] = jsonContent['usrName'];//"Gautam";//get from server

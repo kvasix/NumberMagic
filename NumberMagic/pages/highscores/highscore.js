@@ -25,12 +25,13 @@
             }).done(   //
               function complete(result) {
                   if (result.status === 200) {
-                      console.log(result.responseText);
+                      //console.log(result.responseText);
                       var highscore_list = JSON.parse(result.responseText);
 
                       var highscore_table = document.getElementById("scoretable");
                       highscore_table.innerHTML = "<tr><th>Date</th><th>Level</th><th>Mistakes (Pawn > Board)</th><th>Number of Mistakes</th><th>Timetaken</th></tr>";
                       var row = 0;
+                      var totalTimeTaken = 0, totalMistakeCount = 0, lastLevel = 0; //lastDate
                       while (highscore_list[row]) {
                           var row_html = document.createElement("tr");
 
@@ -41,17 +42,25 @@
                           var level = document.createElement("td");
                           level.innerText = levelArray[highscore_list[row].level];
                           row_html.appendChild(level);
+                          if (parseInt(highscore_list[row].level) > lastLevel) lastLevel = highscore_list[row].level;
 
                           var mistakes = document.createElement("td");
-                          mistakes.innerText = highscore_list[row].mistakes;
+                          mistakes.innerText = "";
+                          var mistakes_array = highscore_list[row].mistakes.split(",");
+                          for (var i = 0; i < mistakes_array.length; i++) {
+                              mistakes.innerHTML += mistakes_array[i] + ", ";
+                              if (i % 6 == 5) mistakes.innerHTML += "<br />";
+                          }
                           row_html.appendChild(mistakes);
 
                           var mistakecount = document.createElement("td");
                           mistakecount.innerText = highscore_list[row].mistakecount;
                           row_html.appendChild(mistakecount);
-
+                          totalMistakeCount += parseInt(highscore_list[row].mistakecount);
+                          
                           var timetaken = document.createElement("td");
                           timetaken.innerText = "";
+                          totalTimeTaken += parseInt(highscore_list[row].timetaken);
                           var hours_taken = Math.floor(highscore_list[row].timetaken / 3600);
                           var mins_taken = (Math.floor(highscore_list[row].timetaken / 60)) % 60;
                           var secs_taken = highscore_list[row].timetaken % 60;
@@ -69,6 +78,24 @@
                           highscore_table.appendChild(row_html);
                           row++;
                       }
+
+                      
+                      hours_taken = Math.floor(totalTimeTaken / 3600);
+                      mins_taken = (Math.floor(totalTimeTaken / 60)) % 60;
+                      secs_taken = totalTimeTaken % 60;
+                      var textTimeTaken = "";
+                      if (hours_taken) {
+                          textTimeTaken += hours_taken + "h "; //highscore_list[row].timetaken;//highscore_list[row].hours * 3600 + highscore_list[row].mins * 60 + highscore_list[row].secs;
+                      }
+                      if (mins_taken) {
+                          textTimeTaken += mins_taken + "m "; //highscore_list[row].timetaken;//highscore_list[row].hours * 3600 + highscore_list[row].mins * 60 + highscore_list[row].secs;
+                      }
+                      if (secs_taken) {
+                          textTimeTaken += secs_taken + "s"; //highscore_list[row].timetaken;//highscore_list[row].hours * 3600 + highscore_list[row].mins * 60 + highscore_list[row].secs;
+                      }
+
+                      var stats_table = document.getElementById("statstable");
+                      stats_table.innerHTML += "<tr><td></td><td>" + lastLevel + "</td><td>" + totalMistakeCount + "</td><td>" + textTimeTaken + "</td></tr>";
                   }
               },
               function error(result) {
