@@ -63,6 +63,7 @@
 
                 //circle.addEventListener("mousedown", updateHandStatus, false);
 
+                circle._pinned = true;
                 circle.className = "pawnHeap" + ((idnum % 2) + 1);
                 id('sec').appendChild(circle);
             }
@@ -72,8 +73,14 @@
             enableRightHeap = false;
             toggleHeap(enableRightHeap);            
             
+            id('start').addEventListener("click", function () {
+                timeCtrl = setInterval(timer, 1000);
+                id('start').disabled = "true";
+                for (var idnum = NUM_START; idnum < NUM_START + NUM_PAWNS; idnum++) {
+                    id("pawn" + numArray[idnum - NUM_START])._pinned = false;
+                }
+            }, false);
             id('reset').addEventListener("click", resetPawns, false);
-            timeCtrl = setInterval(timer, 1000);
 
             //gotRightAudio = new Audio("/sounds/right.wma");
             //gotRightAudio.load();

@@ -72,6 +72,7 @@
                 circle.addEventListener("MSGestureChange", manipulateElement, false);
                 circle.addEventListener("MSGestureEnd", checkpawnpos, false);
 
+                circle._pinned = true;
                 circle.className = "pawnHeap" + ((idnum % 2) + 1);
                 id('sec').appendChild(circle);
             }
@@ -84,8 +85,14 @@
             //id('pawnHeap1').addEventListener("mousedown", updateHandStatus, false);
             //id('pawnHeap2').addEventListener("mousedown", updateHandStatus, false);
 
-            id('reset').addEventListener("click", resetPawns, false);
-            timeCtrl = setInterval(timer, 1000);
+            id('start').addEventListener("click", function () {
+                timeCtrl = setInterval(timer, 1000);
+                id('start').disabled = "true";
+                for (var idnum = NUM_START; idnum < NUM_START + NUM_PAWNS; idnum++) {
+                    id("pawn" + numArray[idnum - NUM_START])._pinned = false;
+                }
+            }, false);
+            id('reset').addEventListener("click", resetPawns, false);            
 
             //gotRightAudio = new Audio("/sounds/right.wma");
             //gotRightAudio.load();
@@ -303,7 +310,7 @@
         ++secs;
         (secs == 60) ? (++mins, secs = 0) : true;
         (mins == 60) ? (++hours, mins = 0) : true;
-        id('timeCounter').innerHTML = (hours < 10 ? "0" : "") + hours + ":" + (mins < 10 ? "0" : "") + mins + ":" + (secs < 10 ? "0" : "") + secs;
+        id('timeCounter').innerHTML = (hours < 10 ? "0" : "") + hours + "h " + (mins < 10 ? "0" : "") + mins + "m " + (secs < 10 ? "0" : "") + secs +"s";
 
         var table_division_array = document.getElementsByClassName("numContainer wrongpawn");
         if (table_division_array) {
