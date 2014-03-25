@@ -185,6 +185,8 @@
                 var score_post_string = "sid=" + localSettings.values["sid"] + "&level=" + this_level;
                 score_post_string += "&mistakeCount=" + mistakeCount + "&mistakes=" + JSON.stringify(mistakes) + "&timetaken=" + ((hours * 60 + mins) * 60 + secs);
                 score_post(score_post_string);
+
+                redirect_to_next_level(this_level);
             }
             id("mistakeCount").innerHTML = mistakeCount;
         }
@@ -242,7 +244,7 @@
         mistakeCount = 0;
         numpawnsleft = NUM_PAWNS;
         id("mistakeCount").innerHTML = 0;
-        hours = 0, mins = 0, secs = 0; // timer reset
+        hours = 0, mins = 0, secs = 0; // timer reset        
     }
 
     function placePawns() {

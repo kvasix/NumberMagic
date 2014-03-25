@@ -76,3 +76,26 @@ function upgradeLevel(this_level) {
         return "Aren't you playing this level again?";
     }
 }
+
+function redirect_to_next_level(present_level) {
+    var next_level = present_level + 1;
+    if (next_level == 0) {
+        WinJS.Navigation.navigate("/pages/blank/blank.html", next_level);
+    } else if (next_level < 8) {
+        WinJS.Navigation.navigate("/pages/110/110.html", next_level);
+    } else if (next_level == 10 || next_level == 14) {
+        WinJS.Navigation.navigate("/pages/more/more.html", next_level);
+    } else if (next_level <= 13) {
+        WinJS.Navigation.navigate("/pages/1120/1120.html", next_level);
+    } else if (next_level == 17) {
+        WinJS.Navigation.navigate("/pages/more/more.html", next_level);
+    } else if (next_level <= 20) {
+        WinJS.Navigation.navigate("/pages/2130/2130.html", next_level);
+    } else if (next_level == 21) {
+        WinJS.Navigation.navigate("/pages/301/301.html", next_level);
+    } else if (next_level == 22) {
+        WinJS.Navigation.navigate("/pages/150/150.html", next_level);
+    } else if (next_level == 23) {
+        WinJS.Navigation.navigate("/pages/1100/1100.html", next_level);
+    }
+}

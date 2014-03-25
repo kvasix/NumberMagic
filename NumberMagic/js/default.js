@@ -97,7 +97,7 @@
 
         if (selected_level == 0) {
             WinJS.Navigation.navigate("/pages/blank/blank.html", selected_level);
-        } else if (selected_level <= 8) {
+        } else if (selected_level < 8) {
             WinJS.Navigation.navigate("/pages/110/110.html", selected_level);
         }
 

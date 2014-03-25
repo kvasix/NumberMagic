@@ -169,6 +169,8 @@
                 var score_post_string = "sid=" + localSettings.values["sid"] + "&level=" + 0;
                 score_post_string += "&mistakeCount=" + mistakeCount + "&mistakes=" + "" + "&timetaken=" + ((hours * 60 + mins) * 60 + secs);
                 score_post(score_post_string);
+
+                redirect_to_next_level(0);
             }
         }
     }
