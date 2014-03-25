@@ -52,10 +52,10 @@
                 circle._gesture = new MSGesture();
                 circle._gesture.target = circle;
                 circle.addEventListener("MSPointerDown", setupPGesture, false);
-                circle.addEventListener("MSGestureStart", startGesture, false);
-                //circle.addEventListener("MSGestureHold", holdGesture, false);
-                circle.addEventListener("MSGestureChange", manipulateElement, false);
-                circle.addEventListener("MSGestureEnd", checkpawnpos, false);
+                //circle.addEventListener("MSGestureStart", startGesture, false);
+                ////circle.addEventListener("MSGestureHold", holdGesture, false);
+                //circle.addEventListener("MSGestureChange", manipulateElement, false);
+                //circle.addEventListener("MSGestureEnd", checkpawnpos, false);
 
                 circle._pinned = true;
                 circle.className = "pawnHeap" + ((idnum % 2) + 1);
@@ -74,7 +74,12 @@
                 timeCtrl = setInterval(timer, 1000);
                 id('start').disabled = "true";
                 for (var idnum = 1; idnum <= NUM_PAWNS; idnum++) {
-                    id("pawn" + numArray[idnum - 1])._pinned = false;
+                    var circle = id("pawn" + numArray[idnum - 1]);
+                    circle._pinned = false;
+                    circle.addEventListener("MSGestureStart", startGesture, false);
+                    //circle.addEventListener("MSGestureHold", holdGesture, false);
+                    circle.addEventListener("MSGestureChange", manipulateElement, false);
+                    circle.addEventListener("MSGestureEnd", checkpawnpos, false);
                 }
             }, false);
             id('reset').addEventListener("click", resetPawns, false);
