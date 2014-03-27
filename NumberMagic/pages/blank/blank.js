@@ -51,7 +51,7 @@
 
                 circle._gesture = new MSGesture();
                 circle._gesture.target = circle;
-                circle.addEventListener("MSPointerDown", setupPGesture, false);
+                circle.addEventListener("MSPointerDown", setupPawnGesture_blankboard, false);
                 //circle.addEventListener("MSGestureStart", startGesture, false);
                 ////circle.addEventListener("MSGestureHold", holdGesture, false);
                 //circle.addEventListener("MSGestureChange", manipulateElement, false);
@@ -166,7 +166,7 @@
                 applaudAudio.volume = localSettings.values["volume"];
                 applaudAudio.play();
                 var message = "Good Job, " + localSettings.values["usrName"] + "!!! You've completed the game in " +
-                    (hours < 10 ? "0" : "") + hours + ":" + (mins < 10 ? "0" : "") + mins + ":" + (secs < 10 ? "0" : "") + secs +
+                    (hours < 10 ? "0" : "") + hours + "h " + (mins < 10 ? "0" : "") + mins + "m " + (secs < 10 ? "0" : "") + secs + "s " +
                      " with " + mistakeCount + " mistakes. ";
                 if (mistakeCount > MISTAKE_THRESHOLD) {
                     message += "Why don't you try it again?";
@@ -285,5 +285,24 @@
     // Returns an integer uniformly distributed over l..u.
     {
         return l + Math.floor(Math.random() * (u + 1 - l));
+    }
+
+    var zindex = 0;
+    function setupPawnGesture_blankboard(eventInfo) {
+        var item = eventInfo.currentTarget;
+        item._gesture.addPointer(eventInfo.pointerId);
+        //console.log("setup gesture");
+        item.style.zIndex = zindex++;
+
+        var elt = item.id.replace("pawn", "");
+
+        var numberAudio = new Audio("/sounds/numbers/" + elt + ".wma");
+        //console.log("/sounds/numbers/" + elt + ".wma");
+
+        var appData = Windows.Storage.ApplicationData.current;
+        var localSettings = appData.localSettings;
+        numberAudio.volume = localSettings.values["volume"];
+
+        numberAudio.play();
     }
 })();

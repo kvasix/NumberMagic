@@ -184,7 +184,7 @@
                 applaudAudio.volume = localSettings.values["volume"];
                 applaudAudio.play();
                 var message = "Good Job, " + localSettings.values["usrName"] + "!!! You've completed the game in " +
-                    (hours < 10 ? "0" : "") + hours + ":" + (mins < 10 ? "0" : "") + mins + ":" + (secs < 10 ? "0" : "") + secs +
+                    (hours < 10 ? "0" : "") + hours + "h " + (mins < 10 ? "0" : "") + mins + "m " + (secs < 10 ? "0" : "") + secs + "s " +
                      " with " + mistakeCount + " mistakes. ";
                 if (mistakeCount > MISTAKE_THRESHOLD) {
                     message += "Why don't you try it again?";

@@ -33,7 +33,7 @@
                     var idNumber = row * NUM_COLS + col + 1;
                     numContainer.setAttribute("id", "numBox" + idNumber);
                     //numContainer.innerHTML = idNumber;
-                    numContainer.background = "images/tables/blank.jpg";
+                    numContainer.background = "images/tables/" + idNumber + ".jpg";
 
                     numContainer.setAttribute("ondragover", "return false;");
 
@@ -63,29 +63,33 @@
 
                 //circle.addEventListener("mousedown", updateHandStatus, false);
 
-                circle._pinned = true;
+                //circle._pinned = true;
                 circle.className = "pawnHeap" + ((idnum % 2) + 1);
                 id('sec').appendChild(circle);
             }
             placePawns();
 
             numpawnsleft = NUM_PAWNS;
-            enableRightHeap = false;
-            toggleHeap(enableRightHeap);            
+            enableRightHeap = false;                        
             
+
             id('start').addEventListener("click", function () {
                 timeCtrl = setInterval(timer, 1000);
                 id('start').disabled = "true";
-                for (var idnum = NUM_START; idnum < NUM_START + NUM_PAWNS; idnum++) {
-                    var circle = id("pawn" + numArray[idnum - NUM_START]);
-                    circle._pinned = false;
+
+                id('reset').removeAttribute("disabled");
+                id('reset').addEventListener("click", resetPawns, false);
+
+                for (var idnum = 1; idnum <= NUM_PAWNS; idnum++) {
+                    var circle = id("pawn" + numArray[idnum - 1]);
+                    //circle._pinned = false;
                     circle.addEventListener("MSGestureStart", startGesture, false);
                     //circle.addEventListener("MSGestureHold", holdGesture, false);
                     circle.addEventListener("MSGestureChange", manipulateElement, false);
                     circle.addEventListener("MSGestureEnd", checkpawnpos, false);
                 }
-            }, false);
-            id('reset').addEventListener("click", resetPawns, false);
+                toggleHeap(enableRightHeap);
+            }, false);            
 
             //gotRightAudio = new Audio("/sounds/right.wma");
             //gotRightAudio.load();
@@ -211,6 +215,7 @@
                 }
             }
 
+            pawn.removeAttribute("class");
             /*
             //gotRightAudio.volume = localSettings.values["volume"];
             //gotRightAudio.play();
@@ -226,22 +231,24 @@
                 applaudAudio.volume = localSettings.values["volume"];
                 applaudAudio.play();
                 var message = "Good Job, " + localSettings.values["usrName"] + "!!! You've completed the game in " +
-                    (hours < 10 ? "0" : "") + hours + ":" + (mins < 10 ? "0" : "") + mins + ":" + (secs < 10 ? "0" : "") + secs +
+                    (hours < 10 ? "0" : "") + hours + "h " + (mins < 10 ? "0" : "") + mins + "m " + (secs < 10 ? "0" : "") + secs + "s " +
                      " with " + mistakeCount + " mistakes. ";
                 if (mistakeCount > MISTAKE_THRESHOLD) {
                     message += "Why don't you try it again?";
                 }
                 else {
-                    message += upgradeLevel(this_level);
+                    //message += upgradeLevel(this_level);
                 }
                 var msgBox = new Windows.UI.Popups.MessageDialog(message);
                 msgBox.showAsync();
 
+                /*
                 var score_post_string = "sid=" + localSettings.values["sid"] + "&level=" + this_level;
                 score_post_string += "&mistakeCount=" + mistakeCount + "&mistakes=" + JSON.stringify(mistakes) + "&timetaken=" + ((hours * 60 + mins) * 60 + secs);
                 score_post(score_post_string);
-
+                
                 redirect_to_next_level(this_level);
+                */
             }
             id("mistakeCount").innerHTML = mistakeCount;
         }
@@ -274,7 +281,7 @@
         id('numGrid')._pinned = false;
         for (var row = 0; row < NUM_ROWS; row++) {
             for (var col = 0; col < NUM_COLS; col++) {
-                var idNumber = row * NUM_COLS + col + NUM_START;
+                var idNumber = row * NUM_COLS + col + 1;
                 var numContainer = document.getElementById("numBox" + idNumber);
                 numContainer.background = "images/tables/" + idNumber + ".jpg";
                 numContainer.setAttribute("class", "numContainer");
@@ -308,6 +315,8 @@
         mistakeCount = 0;
         numpawnsleft = NUM_PAWNS;
         hours = 0, mins = 0, secs = 0; // timer reset
+        clearInterval(timeCtrl);
+        timeCtrl = setInterval(timer, 1000);
     }
 
     function placePawns() {
@@ -338,7 +347,7 @@
         ++secs;
         (secs == 60) ? (++mins, secs = 0) : true;
         (mins == 60) ? (++hours, mins = 0) : true;
-        id('timeCounter').innerHTML = (hours < 10 ? "0" : "") + hours + ":" + (mins < 10 ? "0" : "") + mins + ":" + (secs < 10 ? "0" : "") + secs;
+        id('timeCounter').innerHTML = (hours < 10 ? "0" : "") + hours + "h " + (mins < 10 ? "0" : "") + mins + "m " + (secs < 10 ? "0" : "") + secs + "s";
 
         var table_division_array = document.getElementsByClassName("numContainer wrongpawn");
         if (table_division_array) {

@@ -95,7 +95,7 @@
                       }
 
                       var stats_table = document.getElementById("statstable");
-                      stats_table.innerHTML += "<tr><td></td><td>" + lastLevel + "</td><td>" + totalMistakeCount + "</td><td>" + textTimeTaken + "</td></tr>";
+                      stats_table.innerHTML += "<tr><td></td><td>" + levelArray[lastLevel] + "</td><td>" + totalMistakeCount + "</td><td>" + textTimeTaken + "</td></tr>";
                   }
               },
               function error(result) {
