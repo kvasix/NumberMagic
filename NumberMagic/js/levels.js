@@ -49,6 +49,60 @@ function sqlite_add_user(user_array) {
     });
 }
 
+function sqlite_update_user(user_array) {
+    var dbPath = appData.localFolder.path + '\\db.sqlite';
+    return SQLite3JS.openAsync(dbPath)
+    .then(function (db) {
+        return db.runAsync('UPDATE Users SET username="' + user_array[1] + '", password="' + user_array[2] + '", level="' + user_array[3] + '" WHERE sid="' + user_array[0] + '"').then(
+            function () {
+                //return db.eachAsync('SELECT * FROM Users', function (row) {
+                //    console.log('Get a ' + row.row_index + ' for $' + row.date);
+                //});
+                //console.log("User Updation Complete");
+            }, function (error) {
+                console.log('SQLite Error (Result Code ' + error + ')');
+            })
+        .then(function () {
+            db.close();
+        });
+    });
+}
+
+function sqlite_del_user(sid) {
+    var dbPath = appData.localFolder.path + '\\db.sqlite';
+    SQLite3JS.openAsync(dbPath)
+    .then(function (db) {
+        return db.runAsync('DELETE FROM Scores WHERE sid="' + sid + '"').then(
+            function () {
+                //return db.eachAsync('SELECT * FROM Scores', function (row) {
+                //    console.log('Get a ' + row.row_index + ' for $' + row.date);
+                //});
+                //console.log("User Scores Deletion Complete");
+            }, function (error) {
+                console.log('SQLite Error (Result Code ' + error + ')');
+            })
+        .then(function () {
+            db.close();
+        });
+    });
+
+    return SQLite3JS.openAsync(dbPath)
+    .then(function (db) {
+        return db.runAsync('DELETE FROM Users WHERE sid="' + sid + '"').then(
+            function () {
+                //return db.eachAsync('SELECT * FROM Scores', function (row) {
+                //    console.log('Get a ' + row.row_index + ' for $' + row.date);
+                //});
+                //console.log("User Deletion Complete");
+            }, function (error) {
+                console.log('SQLite Error (Result Code ' + error + ')');
+            })
+        .then(function () {
+            db.close();
+        });
+    });
+}
+
 function score_post(score_post_array) {
 
     var dbPath = appData.localFolder.path + '\\db.sqlite';    

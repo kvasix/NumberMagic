@@ -39,11 +39,14 @@
                 <span>Search by Student Id:</span>&nbsp;&nbsp;&nbsp;<input type="text" name="search_sid_txt" id="search_sid_txt" style="width:9em" size="9" maxlength="9" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <span>Select to Update/View Student:</span>&nbsp;&nbsp;&nbsp;<select id="students_select"></select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <div id="query_status"></div><br />
-                <span>Student Id:</span>&nbsp;<input type="text" name="new_sid" id="new_sid" style="width:9em" size="9" maxlength="9" />&nbsp;&nbsp;&nbsp;
-                <span>Student Name:</span>&nbsp;<input type="text" name="new_name" id="new_name" style="width:9em" size="9" maxlength="9" />&nbsp;&nbsp;&nbsp;
-                <span>Password:</span>&nbsp;<input type="text" name="new_pass" id="new_pass" style="width:9em" size="9" maxlength="9" />&nbsp;&nbsp;&nbsp;
-                <span>Level:</span>&nbsp;<input type="text" name="new_level" id="new_level" style="width:3em" size="3" maxlength="3" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <button id="add_upd_user_btn">Add Student</button><br />
+                <span>Student Id:</span>&nbsp;<input type="text" name="new_sid" id="new_sid" style="width:9em" size="9" maxlength="9" disabled />&nbsp;&nbsp;
+                <span>Student Name:</span>&nbsp;<input type="text" name="new_name" id="new_name" style="width:9em" size="9" maxlength="9" />&nbsp;&nbsp;
+                <span>Password:</span>&nbsp;<input type="text" name="new_pass" id="new_pass" style="width:9em" size="9" maxlength="9" />&nbsp;&nbsp;
+                <span>Level:</span>&nbsp;<input type="text" name="new_level" id="new_level" style="width:3em" size="3" maxlength="3" />&nbsp;&nbsp;&nbsp;
+                <button id="add_user_btn" disabled>Add Student</button>&nbsp;<button id="update_user_btn" disabled>Update Student</button>&nbsp;<button id="delete_user_btn" disabled>Delete Student</button><br /><br /><br />
+                <table id="scoretable"></table>
+                <br /><br />
+                <table id="statstable"></table>
             </div>
         </section>
     </div>
