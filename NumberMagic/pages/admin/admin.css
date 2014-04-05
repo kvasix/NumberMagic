@@ -38,6 +38,7 @@
 
 
 #controlpanel {
+    overflow: scroll;
     visibility:hidden;
 }
 

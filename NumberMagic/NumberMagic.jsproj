@@ -339,7 +339,6 @@
     <Content Include="pages\more\more.css" />
     <Content Include="pages\more\more.html" />
     <Content Include="pages\more\more.js" />
-    <Content Include="pages\SQLite3.js" />
     <Content Include="sounds\applause.wma" />
     <Content Include="sounds\numbers\1.wma" />
     <Content Include="sounds\numbers\10.wma" />

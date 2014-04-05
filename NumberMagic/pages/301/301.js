@@ -180,25 +180,25 @@
             toggleHeap(enableRightHeap);
 
             if (!(--numpawnsleft)) {
-                clearInterval(timeCtrl);
-                applaudAudio.volume = localSettings.values["volume"];
-                applaudAudio.play();
-                var message = "Good Job, " + localSettings.values["usrName"] + "!!! You've completed the game in " +
-                    (hours < 10 ? "0" : "") + hours + "h " + (mins < 10 ? "0" : "") + mins + "m " + (secs < 10 ? "0" : "") + secs + "s " +
-                     " with " + mistakeCount + " mistakes. ";
-                if (mistakeCount > MISTAKE_THRESHOLD) {
-                    message += "Why don't you try it again?";
-                }
-                else {
-                    message += upgradeLevel(this_level);
-                }
-                var msgBox = new Windows.UI.Popups.MessageDialog(message);
-                msgBox.showAsync();
-
                 var score_post_array = [localSettings.values["sid"], this_level, mistakeCount, JSON.stringify(mistakes), ((hours * 60 + mins) * 60 + secs)];
-                score_post(score_post_array);
+                score_post(score_post_array).then(function () {
+                    clearInterval(timeCtrl);
+                    applaudAudio.volume = localSettings.values["volume"];
+                    applaudAudio.play();
+                    var message = "Good Job, " + localSettings.values["usrName"] + "!!! You've completed the game in " +
+                        (hours < 10 ? "0" : "") + hours + "h " + (mins < 10 ? "0" : "") + mins + "m " + (secs < 10 ? "0" : "") + secs + "s " +
+                         " with " + mistakeCount + " mistakes. ";
+                    if (mistakeCount > MISTAKE_THRESHOLD) {
+                        message += "Why don't you try it again?";
+                    }
+                    else {
+                        message += upgradeLevel(this_level);
+                    }
+                    var msgBox = new Windows.UI.Popups.MessageDialog(message);
+                    msgBox.showAsync();
 
-                redirect_to_next_level(this_level);
+                    redirect_to_next_level(this_level);
+                });
             }
             id("mistakeCount").innerHTML = mistakeCount;
         }

@@ -126,7 +126,6 @@ function score_post(score_post_array) {
 function upgradeLevel(this_level) {
     var new_level = this_level + 1;
     if (new_level > localSettings.values["level"]) {
-
         var dbPath = appData.localFolder.path + '\\db.sqlite';
         SQLite3JS.openAsync(dbPath)
             .then(function (db) {
@@ -135,6 +134,7 @@ function upgradeLevel(this_level) {
                         //return db.eachAsync('SELECT * FROM Users', function (row) {
                         //    console.log('Get a ' + row.row_index + ' for $' + row.date);
                         //});
+                        localSettings.values["level"] = new_level;
                         console.log("You've been upgraded to the next level!!!");
                     }, function (error) {
                         console.log('SQLite Error (Result Code ' + error + ')');
