@@ -2,76 +2,60 @@
 var appData = Windows.Storage.ApplicationData.current;
 var localSettings = appData.localSettings;
 
-function score_post(score_post_string) {
-    WinJS.xhr({
-        type: "post",
-        url: "http://www.kvasix.com/NumberMagic/scoreupdate.php",
-        responseType: 'json',
-        headers: { "Content-type": "application/x-www-form-urlencoded" },
-        data: score_post_string
-    }).done(   //
-        function complete(result) {
-            if (result.status === 200) {
-                //console.log(result.responseText);
-                var jsonContent = JSON.parse(result.responseText);//eval('(' + result.responseText + ')');//result.responseJSON; //
-                //console.log(jsonContent);
-                /*
-                if (jsonContent['upgradesuccess']) {
-                    localSettings.values["usrName"] = jsonContent['usrName'];//"Gautam";//get from server
-                    localSettings.values["level"] = jsonContent['level'];//23;//get from server
-                    id("greetings").innerHTML = "Hi " + localSettings.values["usrName"] + "! Welcome to Number Magic.";
-                    id("userStatus").innerHTML = "You are in Level: " + localSettings.values["level"];
-                    id("logindiv").style.display = "none";
-                    id("signout").style.display = "block";
-                } else {
-                    id("greetings").innerHTML = "Login Failed!";
-                    id("userStatus").innerHTML = "Please enter the right username and password";
-                }
-                */
-            }
-        },
-        function error(result) {
-            /*
-            id("greetings").innerHTML = "Connection Error!";
-            id("userStatus").innerHTML = "Error connecting to Database! Please check your network.";
-            */
-        },
-        function progress(progress) {
-        }
-    );
+function create_sqlite_table() {
+    console.log(appData.localFolder.path);
+    var dbPath = appData.localFolder.path + '\\db.sqlite';
+    SQLite3JS.openAsync(dbPath)
+        .then(function (db) {
+            return db.runAsync('CREATE TABLE Scores (sid TEXT, level INT, mistakecount INT, mistakes TEXT, timetaken INT, date TEXT)')
+                .then(function () {
+                    console.log("TABLE Scores Created");
+                }, function (error) {
+                    console.log('SQLite Error (Result Code ' + error + ')');
+                });
+        });
+}
+
+function score_post(score_post_array) {
+
+    var dbPath = appData.localFolder.path + '\\db.sqlite';    
+    SQLite3JS.openAsync(dbPath)
+    .then(function (db) {
+        return db.runAsync('INSERT INTO Scores (sid, level, mistakecount, mistakes, timetaken, date) VALUES (?, ?, ?, ?, ?, datetime("now"))', score_post_array).then(
+            function () {
+                return db.eachAsync('SELECT * FROM Scores', function (row) {
+                    console.log('Get a ' + row.row_index + ' for $' + row.date);
+                });
+            }, function (error) {
+                console.log('SQLite Error (Result Code ' + error + ')');
+            })        
+        .then(function () {
+            db.close();
+        });
+    });
+
 }
 
 function upgradeLevel(this_level) {
     var new_level = this_level + 1;
     if (new_level > localSettings.values["level"]) {
-        var upgradelevel_post_string = "sid=" + localSettings.values["sid"] + "&level=" + new_level;
-        WinJS.xhr({
-            type: "post",
-            url: "http://www.kvasix.com/NumberMagic/upgradelevel.php",
-            responseType: 'json',
-            headers: { "Content-type": "application/x-www-form-urlencoded" },
-            data: upgradelevel_post_string
-        }).done(   //
-          function complete(result) {
-              if (result.status === 200) {
-                  //console.log(result.responseText);
-                  var jsonContent = JSON.parse(result.responseText);//eval('(' + result.responseText + ')');//result.responseJSON; //
-                  //console.log(jsonContent);
 
-                  if (jsonContent['upgradesuccess']) {
-                      localSettings.values["level"] = jsonContent['level'];//23;//get from server
-                      return "You've been upgraded to the next level!!!";
-                  } else {
-                      return "Upgrade Failed! Database Error.";
-                  }
-              }
-          },
-          function error(result) {
-              return "Upgrade Failed! Network Error.";
-          },
-          function progress(progress) {
-          }
-        );
+        var dbPath = appData.localFolder.path + '\\db.sqlite';
+        SQLite3JS.openAsync(dbPath)
+        .then(function (db) {
+            return db.runAsync('CREATE TABLE Users (sid TEXT PRIMARY KEY, username TEXT, password TEXT, level INT, centerid TEXT )')
+                .then(function () {
+                    return db.runAsync('UPDATE Users SET level=? WHERE sid = ?', [new_level, localSettings.values["sid"]] );
+                })
+                .then(function () {
+                    //return db.eachAsync('SELECT * FROM Item', function (row) {
+                    //console.log('Get a ' + row.name + ' for $' + row.price);});
+                    console.log("You've been upgraded to the next level!!!");
+                })
+                .then(function () {
+                    db.close();
+                });
+        });
     } else {
         return "Aren't you playing this level again?";
     }

@@ -215,9 +215,8 @@
                 var msgBox = new Windows.UI.Popups.MessageDialog(message);
                 msgBox.showAsync();
 
-                var score_post_string = "sid=" + localSettings.values["sid"] + "&level=" + this_level;
-                score_post_string += "&mistakeCount=" + mistakeCount + "&mistakes="+ JSON.stringify(mistakes) + "&timetaken=" + ((hours * 60 + mins) * 60 + secs);
-                score_post(score_post_string);
+                var score_post_array = [localSettings.values["sid"], this_level, mistakeCount, JSON.stringify(mistakes), ((hours * 60 + mins) * 60 + secs)];
+                score_post(score_post_array);
 
                 redirect_to_next_level(this_level);                
             }

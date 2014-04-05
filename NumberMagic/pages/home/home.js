@@ -10,6 +10,8 @@
         ready: function (element, options) {
             // TODO: Initialize the page here.
 
+            create_sqlite_table();
+
             if (!localSettings.values["level"]) {
                 localSettings.values["level"] = -1;
                 localSettings.values["usrName"] = "Anonymous";
@@ -55,55 +57,22 @@
     });
 
     function LogIn() {
-        /*
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://www.kvasix.com/NumberMagic/user_login.php", true);
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4) {
-                if (xhr.status === 200) {
-                    console.log(xhr.responseText);
-                }
-            }
-        };
-        xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-        xhr.send("sid=Gautam&pass=gautam");
-        */
-        var user_login_post_string = "sid=" + id('sid').value + "&pass=" + id('pass').value;
-        WinJS.xhr({
-            type: "post",
-            url: "http://www.kvasix.com/NumberMagic/user_login.php",
-            responseType: 'json',
-            headers: { "Content-type": "application/x-www-form-urlencoded" },
-            data: user_login_post_string
-        }).done(   //
-          function complete(result) {
-              if (result.status === 200) {
-                  var jsonContent = JSON.parse(result.responseText);
-
-                  if (jsonContent['loginsuccess']) {
-                      localSettings.values["sid"] = jsonContent['sid'];
-                      localSettings.values["usrName"] = jsonContent['usrName'];//"Gautam";//get from server
-                      localSettings.values["level"] = jsonContent['level'];//23;//get from server
-                      id("greetings").innerHTML = "Hi " + localSettings.values["usrName"] + "! Welcome to Number Magic.";
-                      id("userStatus").innerHTML = "You are in Level: " + localSettings.values["level"];
-                      id("logindiv").style.display = "none";
-                      id("signout").style.display = "block";
-                      localSettings.values["remoteUpdate"] = jsonContent["remoteHTMLMsg"];
-                      id("remoteUpdatesArea").innerHTML = localSettings.values["remoteUpdate"];
-                      id("remoteUpdatesArea").style.visibility = "visible";
-                  } else {
-                      id("greetings").innerHTML = "Login Failed!";                      
-                      id("userStatus").innerHTML = jsonContent["status"];//"Please enter the right username and password";
-                  }
-              }
-          },
-          function error(result) {
-              id("greetings").innerHTML = "Connection Error!";
-              id("userStatus").innerHTML = "Error connecting to Database! Please check your network.";
-          },
-          function progress(progress) {
-          }
-        );
+        if (id('sid').value == "staff" && id('pass').value == "staff"
+            || id('sid').value == id('pass').value) {
+            localSettings.values["sid"] = "staff";
+            localSettings.values["usrName"] = "Kumon";
+            localSettings.values["level"] = 23;//get from server
+            id("greetings").innerHTML = "Hi " + localSettings.values["usrName"] + "! Welcome to Number Magic.";
+            id("userStatus").innerHTML = "You are in Level: " + localSettings.values["level"];
+            id("logindiv").style.display = "none";
+            id("signout").style.display = "block";
+            localSettings.values["remoteUpdate"] = "You are in luck! We have added a labs page, where we test new features, depending on your feedback we will add it to the next software build";
+            id("remoteUpdatesArea").innerHTML = localSettings.values["remoteUpdate"];
+            id("remoteUpdatesArea").style.visibility = "visible";
+        } else {
+            id("greetings").innerHTML = "Login Failed!";                      
+            id("userStatus").innerHTML = "Please enter the right username and password";
+        }
     }
 
     function SignOut() {
