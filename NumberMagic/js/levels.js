@@ -128,19 +128,21 @@ function upgradeLevel(this_level) {
     if (new_level > localSettings.values["level"]) {
 
         var dbPath = appData.localFolder.path + '\\db.sqlite';
-        return SQLite3JS.openAsync(dbPath)
-        .then(function (db) {
-            return db.runAsync('CREATE TABLE Users (sid TEXT PRIMARY KEY, username TEXT, password TEXT, level INT, centerid TEXT )')
-                .then(function () {
-                    return db.runAsync('UPDATE Users SET level=? WHERE sid = ?', [new_level, localSettings.values["sid"]] );
-                })
-                .then(function () {
-                    console.log("You've been upgraded to the next level!!!");
-                })
+        SQLite3JS.openAsync(dbPath)
+            .then(function (db) {
+                return db.runAsync('UPDATE Users SET level="' + new_level + '" WHERE sid="' + localSettings.values["sid"] + '"').then(
+                    function () {
+                        //return db.eachAsync('SELECT * FROM Users', function (row) {
+                        //    console.log('Get a ' + row.row_index + ' for $' + row.date);
+                        //});
+                        console.log("You've been upgraded to the next level!!!");
+                    }, function (error) {
+                        console.log('SQLite Error (Result Code ' + error + ')');
+                    })
                 .then(function () {
                     db.close();
                 });
-        });
+            });
     } else {
         return "Aren't you playing this level again?";
     }

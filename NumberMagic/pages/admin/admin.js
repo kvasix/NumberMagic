@@ -30,11 +30,9 @@
                 id('sid').value = "";
                 id('pass').value = "";
                 id("logindiv").style.display = "block";
-                id("signout").style.display = "none";
                 id("controlpanel").style.visibility = "hidden";
             
             id('login').addEventListener("click", LogIn, false);
-            id("signout").addEventListener("click", SignOut, false);
 
             get_all_users().then(function () {                
                 id('search_sid_txt').addEventListener("keyup", search_students, false);
@@ -51,23 +49,12 @@
             || id('sid').value == id('pass').value) {
             id("greetings").innerHTML = "Hi! Welcome to Admininstrator's Page.";
             id("userStatus").innerHTML = "You are in the control panel";
-            id("logindiv").style.display = "none";
-            id("signout").style.display = "block";            
+            id("logindiv").style.display = "none";        
             id("controlpanel").style.visibility = "visible";
         } else {
             id("greetings").innerHTML = "Login Failed!";                      
             id("userStatus").innerHTML = "Please enter the right username and password";
         }
-    }
-
-    function SignOut() {
-        id("greetings").innerHTML = "Hi! Welcome to Administrator's page";
-        id("userStatus").innerHTML = "Please Sign in to see the control panel";
-        id('sid').value = "";
-        id('pass').value = "";
-        id("logindiv").style.display = "block";
-        id("signout").style.display = "none";
-        id("controlpanel").style.visibility = "hidden";
     }
 
     var student_array, sid_array;

@@ -57,21 +57,34 @@
     });
 
     function LogIn() {
-        if (id('sid').value == "staff" && id('pass').value == "staff"
-            || id('sid').value == id('pass').value) {
-            localSettings.values["sid"] = "staff";
-            localSettings.values["usrName"] = "Kumon";
-            localSettings.values["level"] = 23;//get from server
-            id("greetings").innerHTML = "Hi " + localSettings.values["usrName"] + "! Welcome to Number Magic.";
-            id("userStatus").innerHTML = "You are in Level: " + localSettings.values["level"];
-            id("logindiv").style.display = "none";
-            id("signout").style.display = "block";
-            localSettings.values["remoteUpdate"] = "You are in luck! We have added a labs page, where we test new features, depending on your feedback we will add it to the next software build";
-            id("remoteUpdatesArea").innerHTML = localSettings.values["remoteUpdate"];
-            id("remoteUpdatesArea").style.visibility = "visible";
+        var dbPath = appData.localFolder.path + '\\db.sqlite';       
+
+        if (id('sid').value) {
+            SQLite3JS.openAsync(dbPath)
+            .then(function (db) {
+                return db.eachAsync('SELECT * FROM Users WHERE sid="' + id('sid').value + '"', function (row_content) {
+                    if (id('pass').value == row_content.password) {
+                        localSettings.values["sid"] = row_content.sid;//get from server
+                        localSettings.values["usrName"] = row_content.username;//get from server
+                        localSettings.values["level"] = row_content.level;//get from server
+                        id("greetings").innerHTML = "Hi " + localSettings.values["usrName"] + "! Welcome to Number Magic.";
+                        id("userStatus").innerHTML = "You are in Level: " + localSettings.values["level"];
+                        id("logindiv").style.display = "none";
+                        id("signout").style.display = "block";
+                        localSettings.values["remoteUpdate"] = "You are in luck! We have added a labs page, where we test new features, depending on your feedback we will add it to the next software build";
+                        id("remoteUpdatesArea").innerHTML = localSettings.values["remoteUpdate"];
+                        id("remoteUpdatesArea").style.visibility = "visible";
+                    } else {
+                        id("greetings").innerHTML = "Login Failed!";
+                        id("userStatus").innerHTML = "Please enter the right username and password";
+                    }
+                }).then(function () {
+                    db.close();
+                });
+            });
         } else {
             id("greetings").innerHTML = "Login Failed!";                      
-            id("userStatus").innerHTML = "Please enter the right username and password";
+            id("userStatus").innerHTML = "Please enter username";
         }
     }
 
