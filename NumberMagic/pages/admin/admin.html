@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>homePage</title>
+
+    <!-- WinJS references -->
+    <link href="//Microsoft.WinJS.1.0/css/ui-dark.css" rel="stylesheet" />
+    <script src="//Microsoft.WinJS.1.0/js/base.js"></script>
+    <script src="//Microsoft.WinJS.1.0/js/ui.js"></script>
+    <script src="/js/SQLite3.js"></script>
+
+    <link href="/css/default.css" rel="stylesheet" />
+    <link href="/pages/admin/admin.css" rel="stylesheet" />
+    <script src="/js/levels.js"></script>
+    <script src="/pages/admin/admin.js"></script>
+
+</head>
+<body>
+    <!-- The content that will be loaded and displayed. -->
+    <div class="fragment homepage">
+        <header aria-label="Header content" role="banner">
+            <!--<button class="win-backbutton" aria-label="Back" disabled type="button"></button>-->
+            <h1 class="titlearea win-type-ellipsis">
+                <span id="greetings" class="pagetitle"></span>
+            </h1>
+        </header>
+        <section aria-label="Main content" role="main">
+            <p id="userStatus"></p>
+            <div id="logindiv"><b>
+                    <span>UserName:</span>&nbsp;&nbsp;&nbsp;<input type="text" name="sid" id="sid" /><br /><br />
+                    <span>Password:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" name="pass" id="pass" />
+                </b><br /><br />
+                    <button id="login">Log Me In!</button>
+                    <a href="http://www.kvasix.com" style="float:right;">Forgot Password?</a>
+            </div>
+            <button id="signout">Sign out!</button>
+            <div id="controlpanel" style="display:block;height:100%;">
+                <span>Search by Student Id:</span>&nbsp;&nbsp;&nbsp;<input type="text" name="search_sid_txt" id="search_sid_txt" style="width:9em" size="9" maxlength="9" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span>Select to Update/View Student:</span>&nbsp;&nbsp;&nbsp;<select id="students_select"></select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <div id="query_status"></div><br />
+                <span>Student Id:</span>&nbsp;<input type="text" name="new_sid" id="new_sid" style="width:9em" size="9" maxlength="9" />&nbsp;&nbsp;&nbsp;
+                <span>Student Name:</span>&nbsp;<input type="text" name="new_name" id="new_name" style="width:9em" size="9" maxlength="9" />&nbsp;&nbsp;&nbsp;
+                <span>Password:</span>&nbsp;<input type="text" name="new_pass" id="new_pass" style="width:9em" size="9" maxlength="9" />&nbsp;&nbsp;&nbsp;
+                <span>Level:</span>&nbsp;<input type="text" name="new_level" id="new_level" style="width:3em" size="3" maxlength="3" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="add_upd_user_btn">Add Student</button><br />
+            </div>
+        </section>
+    </div>
+    
+</body>
+</html>

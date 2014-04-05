@@ -10,7 +10,7 @@
         ready: function (element, options) {
             // TODO: Initialize the page here.
 
-            create_sqlite_table();
+            create_sqlite_tables();
 
             if (!localSettings.values["level"]) {
                 localSettings.values["level"] = -1;

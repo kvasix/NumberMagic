@@ -316,6 +316,9 @@
     <Content Include="pages\301\301.css" />
     <Content Include="pages\301\301.html" />
     <Content Include="pages\301\301.js" />
+    <Content Include="pages\admin\admin.css" />
+    <Content Include="pages\admin\admin.html" />
+    <Content Include="pages\admin\admin.js" />
     <Content Include="pages\blank\blank.css" />
     <Content Include="pages\blank\blank.html" />
     <Content Include="pages\blank\blank.js" />
@@ -336,6 +339,7 @@
     <Content Include="pages\more\more.css" />
     <Content Include="pages\more\more.html" />
     <Content Include="pages\more\more.js" />
+    <Content Include="pages\SQLite3.js" />
     <Content Include="sounds\applause.wma" />
     <Content Include="sounds\numbers\1.wma" />
     <Content Include="sounds\numbers\10.wma" />

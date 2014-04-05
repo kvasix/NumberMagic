@@ -45,8 +45,9 @@
             id('selectadvpage').addEventListener("click", changeadvpage, false);
             id('graph').addEventListener("click", renderGraph, false);
             id('highscores').addEventListener("click", showScores, false);
-            id('labbtn').addEventListener("click", showlabs, false);
+            id('labbtn').addEventListener("click", showlabs, false);            
             id('volume').addEventListener("change", changeVolume, false);
+            id('adminbtn').addEventListener("click", showadmin, false);
 
             //localSettings.values.remove("highscores");
             id('appbar').addEventListener("beforeshow", updatelevel, false);
@@ -182,6 +183,12 @@
     function showlabs(eventInfo) {
         eventInfo.preventDefault();
         WinJS.Navigation.navigate("/pages/labs/sandbox.html");
+        document.getElementById('appbar').winControl.hide();
+    }
+
+    function showadmin(eventInfo) {
+        eventInfo.preventDefault();
+        WinJS.Navigation.navigate("/pages/admin/admin.html");
         document.getElementById('appbar').winControl.hide();
     }
 })();
