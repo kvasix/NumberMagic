@@ -36,7 +36,18 @@
 	font-size:90%;
 }
 
-#remoteUpdatesArea {
+#remoteUpdatesArea {    
+    font-family: 'Arial';
+    font-style: oblique;
+    font-weight: 900;
+    font-size: large;
     /*doesn't hide by this:display:none;*/
     visibility:hidden;
+}
+
+#userStatus {
+    font-family: 'Arial';
+    font-style: oblique;
+    font-weight: 900;
+    font-size: large;
 }

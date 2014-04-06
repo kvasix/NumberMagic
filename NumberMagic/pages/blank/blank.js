@@ -172,14 +172,15 @@
                          " with " + mistakeCount + " mistakes. ";
                     if (mistakeCount > MISTAKE_THRESHOLD) {
                         message += "Why don't you try it again?";
+                        var msgBox = new Windows.UI.Popups.MessageDialog(message);
+                        msgBox.showAsync();
                     }
                     else {
                         message += upgradeLevel(0);
+                        var msgBox = new Windows.UI.Popups.MessageDialog(message);
+                        msgBox.showAsync();
+                        redirect_to_next_level(0);
                     }
-                    var msgBox = new Windows.UI.Popups.MessageDialog(message);
-                    msgBox.showAsync();
-
-                    redirect_to_next_level(0);
                 });
             }
         }

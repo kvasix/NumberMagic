@@ -12,6 +12,8 @@
 
             create_sqlite_tables();
 
+            localSettings.values["volume"] = 0.5;
+
             if (!localSettings.values["level"]) {
                 localSettings.values["level"] = -1;
                 localSettings.values["usrName"] = "Anonymous";
@@ -57,21 +59,22 @@
     });
 
     function LogIn() {
-        var dbPath = appData.localFolder.path + '\\db.sqlite';       
-
+        localSettings.values["volume"] = 0.5;
+        
         if (id('sid').value) {
+            var dbPath = appData.localFolder.path + '\\db.sqlite';
             SQLite3JS.openAsync(dbPath)
             .then(function (db) {
                 return db.eachAsync('SELECT * FROM Users WHERE sid="' + id('sid').value + '"', function (row_content) {
                     if (id('pass').value == row_content.password) {
                         localSettings.values["sid"] = row_content.sid;//get from server
-                        localSettings.values["usrName"] = row_content.username;//get from server
+                        localSettings.values["usrName"] = row_content.username.charAt(0).toUpperCase() + row_content.username.slice(1);//get from server
                         localSettings.values["level"] = row_content.level;//get from server
                         id("greetings").innerHTML = "Hi " + localSettings.values["usrName"] + "! Welcome to Number Magic.";
                         id("userStatus").innerHTML = "You are in Level: " + localSettings.values["level"];
                         id("logindiv").style.display = "none";
                         id("signout").style.display = "block";
-                        localSettings.values["remoteUpdate"] = "You are in luck! We have added a labs page, where we test new features, depending on your feedback we will add it to the next software build";
+                        localSettings.values["remoteUpdate"] = "You are in luck! We have added a labs page, where we test new features, <br />&nbsp;&nbsp;&nbsp;depending on your feedback we will add it to the next software build";
                         id("remoteUpdatesArea").innerHTML = localSettings.values["remoteUpdate"];
                         id("remoteUpdatesArea").style.visibility = "visible";
                     } else {
@@ -89,10 +92,10 @@
     }
 
     function SignOut() {
-        appData.clearAsync();
+        /* appData.clearAsync(); // Check this out */
         localSettings.values["level"] = -1;
         localSettings.values["usrName"] = "Anonymous";
-        localSettings.values["volume"] = 1.0;
+        localSettings.values["volume"] = 0.5;
         localSettings.values["remoteUpdate"] = "";
         id("greetings").innerHTML = "Hi! Welcome to Number Magic.";
         id("userStatus").innerHTML = "Please Sign in to proceed playing...";

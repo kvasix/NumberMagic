@@ -139,10 +139,11 @@ function upgradeLevel(this_level) {
                     }, function (error) {
                         console.log('SQLite Error (Result Code ' + error + ')');
                     })
-                .then(function () {
+                .then(function () {                    
                     db.close();
                 });
             });
+        return "You've been upgraded to the next level!!!";
     } else {
         return "Aren't you playing this level again?";
     }

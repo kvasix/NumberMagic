@@ -45,8 +45,7 @@
     });
 
     function LogIn() {
-        if (id('sid').value == "staff" && id('pass').value == "staff"
-            || id('sid').value == id('pass').value) {
+        if (id('sid').value == id('pass').value) {
             id("greetings").innerHTML = "Hi! Welcome to Admininstrator's Page.";
             id("userStatus").innerHTML = "You are in the control panel";
             id("logindiv").style.display = "none";        
