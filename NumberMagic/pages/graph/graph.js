@@ -17,7 +17,7 @@
             var dbPath = appData.localFolder.path + '\\db.sqlite';
             SQLite3JS.openAsync(dbPath)
                 .then(function (db) {
-                    return db.eachAsync('SELECT * FROM Scores', function (row_content) {
+                    return db.eachAsync('SELECT * FROM Scores WHERE sid="' + localSettings.values['sid'] + '"', function (row_content) {
                         datetimes[row] = row;//row_content.date;
                         //level.innerText = row_content.level;
                         mistakedones[row] = parseInt(row_content.mistakecount);

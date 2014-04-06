@@ -60,31 +60,56 @@
 
     function LogIn() {
         localSettings.values["volume"] = 0.5;
-        
+
         if (id('sid').value) {
             var dbPath = appData.localFolder.path + '\\db.sqlite';
+
+            var row = 0;
+            var student_array = new Array();
             SQLite3JS.openAsync(dbPath)
-            .then(function (db) {
-                return db.eachAsync('SELECT * FROM Users WHERE sid="' + id('sid').value + '"', function (row_content) {
-                    if (id('pass').value == row_content.password) {
-                        localSettings.values["sid"] = row_content.sid;//get from server
-                        localSettings.values["usrName"] = row_content.username.charAt(0).toUpperCase() + row_content.username.slice(1);//get from server
-                        localSettings.values["level"] = row_content.level;//get from server
-                        id("greetings").innerHTML = "Hi " + localSettings.values["usrName"] + "! Welcome to Number Magic.";
-                        id("userStatus").innerHTML = "You are in Level: " + localSettings.values["level"];
-                        id("logindiv").style.display = "none";
-                        id("signout").style.display = "block";
-                        localSettings.values["remoteUpdate"] = "You are in luck! We have added a labs page, where we test new features, <br />&nbsp;&nbsp;&nbsp;depending on your feedback we will add it to the next software build";
-                        id("remoteUpdatesArea").innerHTML = localSettings.values["remoteUpdate"];
-                        id("remoteUpdatesArea").style.visibility = "visible";
-                    } else {
-                        id("greetings").innerHTML = "Login Failed!";
-                        id("userStatus").innerHTML = "Please enter the right username and password";
-                    }
-                }).then(function () {
-                    db.close();
-                });
-            });
+                .then(function (db) {
+                    return db.eachAsync('SELECT sid FROM Users', function (row_content) {
+                        student_array[row] = row_content.sid;
+                        row++;
+                    }).then(function () {
+                        db.close();
+
+                        var student_not_in_db = true;
+                        for (var i = 0; i < student_array.length; i++) {
+                            if (student_array[i] == id('sid').value) {
+                                student_not_in_db = false;
+                            }
+                        }
+
+                        if (student_not_in_db) {
+                            id("greetings").innerHTML = "Login Failed!";
+                            id("userStatus").innerHTML = "This Student ID is not in Database";
+                        } else {
+                            SQLite3JS.openAsync(dbPath)
+                            .then(function (db) {
+                                return db.eachAsync('SELECT * FROM Users WHERE sid="' + id('sid').value + '"', function (row_content) {
+                                    if (id('pass').value == row_content.password) {
+                                        localSettings.values["sid"] = row_content.sid;//get from server
+                                        localSettings.values["usrName"] = row_content.username.charAt(0).toUpperCase() + row_content.username.slice(1);//get from server
+                                        localSettings.values["level"] = row_content.level;//get from server
+                                        id("greetings").innerHTML = "Hi " + localSettings.values["usrName"] + "! Welcome to Number Magic.";
+                                        id("userStatus").innerHTML = "You are in Level: " + localSettings.values["level"];
+                                        id("logindiv").style.display = "none";
+                                        id("signout").style.display = "block";
+                                        localSettings.values["remoteUpdate"] = "You are in luck! We have added a labs page, where we test new features, <br />&nbsp;&nbsp;&nbsp;depending on your feedback we will add it to the next software build";
+                                        id("remoteUpdatesArea").innerHTML = localSettings.values["remoteUpdate"];
+                                        id("remoteUpdatesArea").style.visibility = "visible";
+                                    } else {
+                                        id("greetings").innerHTML = "Login Failed!";
+                                        id("userStatus").innerHTML = "Please enter the right Student ID and Password";
+                                    }
+                                }).then(function () {
+                                    db.close();
+                                });
+                            });
+                        }
+                    });
+                });            
         } else {
             if (!id('pass').value) { // Need more clear code (haven't optimized it yet)
                 localSettings.values["sid"] = "anonymous";//get from server
@@ -99,9 +124,10 @@
                 id("remoteUpdatesArea").style.visibility = "visible";
             } else {
                 id("greetings").innerHTML = "Login Failed!";
-                id("userStatus").innerHTML = "Please enter username";
+                id("userStatus").innerHTML = "Please enter Student ID";
             }
         }
+
     }
 
     function SignOut() {
