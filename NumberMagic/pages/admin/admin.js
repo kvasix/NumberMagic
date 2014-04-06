@@ -10,7 +10,7 @@
         ready: function (element, options) {
             // TODO: Initialize the page here.
                        
-                id("greetings").innerHTML = "Hi! Welcome to Administrator's Page.";
+                id("greetings").innerHTML = "Administrator's Page.";
 
                 var packageSpecificToken;
                 var nonce = null;
@@ -46,8 +46,8 @@
 
     function LogIn() {
         if (id('sid').value == id('pass').value) {
-            id("greetings").innerHTML = "Hi! Welcome to Admininstrator's Page.";
-            id("userStatus").innerHTML = "You are in the control panel";
+            id("greetings").innerHTML = "Administrator's Page.";
+            id("userStatus").innerHTML = "";
             id("logindiv").style.display = "none";        
             id("controlpanel").style.visibility = "visible";
         } else {
@@ -127,36 +127,45 @@
         } else {
             id('new_sid').removeAttribute('disabled');
             id('new_sid').value = id('search_sid_txt').value;
-            id('new_name').value = "";
-            id('new_pass').value = "";
-            id('new_level').value = "";
+            id('new_name').value = "";            
+            id('new_pass').value = "";            
+            id('new_level').value = "";            
             id('add_user_btn').removeAttribute('disabled');
             id('update_user_btn').disabled = true;
             id('delete_user_btn').disabled = true;
         }
+
+
+        id('new_name').removeAttribute('disabled');
+        id('new_pass').removeAttribute('disabled');
+        id('new_level').removeAttribute('disabled');
     }
 
     function add_student() {
-        if (id('new_sid').value && id('new_name').value && id('new_pass').value && id('new_level').value) {
-            var is_already_in_table = false;
-            for (var i = 0; i < student_array.length; i++) {
-                if (student_array[i].search(id('new_sid').value.toLowerCase()) == 0) {
-                    is_already_in_table = true;
-                    break;
+        if (id('new_sid').value && id('new_name').value && id('new_level').value) { //&& id('new_pass').value// Kumon doesn't want a password for students
+            if (id('new_sid').value == "anonymous") {
+                id('query_status').innerText = "Student ID cannont be set to 'anonymous'";
+            } else {
+                var is_already_in_table = false;
+                for (var i = 0; i < student_array.length; i++) {
+                    if (student_array[i].search(id('new_sid').value.toLowerCase()) == 0) {
+                        is_already_in_table = true;
+                        break;
+                    }
+                }
+
+                if (!is_already_in_table) {
+                    sqlite_add_user([id('new_sid').value, id('new_name').value, id('new_pass').value, id('new_level').value]).then(function () {
+                        get_all_users().then(function () {
+                            id('query_status').innerText = "Student successfully added";
+                        });
+                    });
+                } else {
+                    id('query_status').innerText = "An entry already exists with this Student id. Please try again, with a different student id";
                 }
             }
-
-            if (!is_already_in_table) {
-                sqlite_add_user([id('new_sid').value, id('new_name').value, id('new_pass').value, id('new_level').value]).then(function () {
-                    get_all_users().then(function () {
-                        id('query_status').innerText = "Student successfully added";
-                    });
-                });
-            } else {
-                id('query_status').innerText = "An entry already exists with this Student id. Please try again, with a different student id";
-            }
         } else {
-            id('query_status').innerText = "All the fields are mandatory. Please complete all the fields before adding student.";
+            id('query_status').innerText = "All the fields (except password) are mandatory. Please complete all the fields before adding student.";
         }
     }
 

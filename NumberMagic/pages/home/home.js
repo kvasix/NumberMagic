@@ -17,7 +17,7 @@
             if (!localSettings.values["level"]) {
                 localSettings.values["level"] = -1;
                 localSettings.values["usrName"] = "Anonymous";
-                localSettings.values["sid"] = "unknown1";
+                localSettings.values["sid"] = "anonymous";
             }
 
             if (localSettings.values["level"] >= 0) {
@@ -86,8 +86,21 @@
                 });
             });
         } else {
-            id("greetings").innerHTML = "Login Failed!";                      
-            id("userStatus").innerHTML = "Please enter username";
+            if (!id('pass').value) { // Need more clear code (haven't optimized it yet)
+                localSettings.values["sid"] = "anonymous";//get from server
+                localSettings.values["usrName"] = "Anonymous";//get from server
+                localSettings.values["level"] = 23;//get from server
+                id("greetings").innerHTML = "Hi " + localSettings.values["usrName"] + "! Welcome to Number Magic.";
+                id("userStatus").innerHTML = "You are in Level: " + localSettings.values["level"];
+                id("logindiv").style.display = "none";
+                id("signout").style.display = "block";
+                localSettings.values["remoteUpdate"] = "You are in luck! We have added a labs page, where we test new features, <br />&nbsp;&nbsp;&nbsp;depending on your feedback we will add it to the next software build";
+                id("remoteUpdatesArea").innerHTML = localSettings.values["remoteUpdate"];
+                id("remoteUpdatesArea").style.visibility = "visible";
+            } else {
+                id("greetings").innerHTML = "Login Failed!";
+                id("userStatus").innerHTML = "Please enter username";
+            }
         }
     }
 
