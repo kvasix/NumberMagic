@@ -82,16 +82,21 @@
             //id('pawnHeap1').addEventListener("mousedown", updateHandStatus, false);
             //id('pawnHeap2').addEventListener("mousedown", updateHandStatus, false);
 
+            id('levelBox').innerText = this_level;
             id('start').addEventListener("click", function () {
+                id('mGuide').style.visibility = 'hidden';
+                id('blankDiv').style.visibility = 'hidden';
+                id('greetDiv').style.visibility = 'hidden';
+
                 timeCtrl = setInterval(timer, 1000);
-                id('start').disabled = "true";
+                id('start').style.visibility = "hidden";
                 for (var idnum = NUM_START; idnum < NUM_START + NUM_PAWNS; idnum++) {
                     var circle = id("pawn" + numArray[idnum - NUM_START]);
-                    circle._pinned = false;
                     circle.addEventListener("MSGestureStart", startGesture, false);
                     //circle.addEventListener("MSGestureHold", holdGesture, false);
                     circle.addEventListener("MSGestureChange", manipulateElement, false);
                     circle.addEventListener("MSGestureEnd", checkpawnpos, false);
+                    circle._pinned = false;
                 }
             }, false);
             id('reset').addEventListener("click", resetPawns, false);
@@ -196,20 +201,28 @@
                     clearInterval(timeCtrl);
                     applaudAudio.volume = localSettings.values["volume"];
                     applaudAudio.play();
-                    var message = "Good Job, " + localSettings.values["usrName"] + "!!! You've completed the game in " +
-                        (hours < 10 ? "0" : "") + hours + "h " + (mins < 10 ? "0" : "") + mins + "m " + (secs < 10 ? "0" : "") + secs + "s " +
-                         " with " + mistakeCount + " mistakes. ";
+                    var message = "Good Job, " + localSettings.values["usrName"] + "!!!<br><br><br> You've completed the game in <br><b style='color:black'>" +
+                        (hours < 10 ? "0" : "") + hours + "h " + (mins < 10 ? "0" : "") + mins + "m " + (secs < 10 ? "0" : "") + secs + "s </b>" +
+                         "<br> with " + mistakeCount + " mistakes. ";
                     if (mistakeCount > MISTAKE_THRESHOLD) {
                         message += "Why don't you try it again?";
-                        var msgBox = new Windows.UI.Popups.MessageDialog(message);
-                        msgBox.showAsync();
+                        //var msgBox = new Windows.UI.Popups.MessageDialog(message);
+                        //msgBox.showAsync();
                     }
                     else {
                         message += upgradeLevel(this_level);
-                        var msgBox = new Windows.UI.Popups.MessageDialog(message);
-                        msgBox.showAsync();
-                        redirect_to_next_level(this_level);
+                        //var msgBox = new Windows.UI.Popups.MessageDialog(message);
+                        //msgBox.showAsync();
+                        //redirect_to_next_level(this_level);
+                        id('nextLevelBtn').addEventListener("click", function () { redirect_to_next_level(this_level) }, false);
+                        id('nextLevelBtn').style.visibility = 'visible';
                     }
+
+                    id('msgBox').innerHTML = message;
+                    id('replayBtn').addEventListener("click", function () { redirect_to_next_level(this_level - 1) }, false);
+                    id('replayBtn').style.visibility = 'visible';
+                    id('blankDiv').style.visibility = 'visible';
+                    id('greetDiv').style.visibility = 'visible';
                 });
             }
             id("mistakeCount").innerHTML = mistakeCount;
