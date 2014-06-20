@@ -159,15 +159,15 @@
             }
 
             if (level >= 8) {
-                id('pacerflybtn').removeAttribute('disabled');
-
-                if (level >= 15) {
-                    id('advflybtn').removeAttribute('disabled');
-                } else {
-                    id('advflybtn').setAttribute('disabled');
-                }
+                id('pacerflybtn').removeAttribute('disabled');                
             } else {
                 id('pacerflybtn').setAttribute('disabled');
+            }
+
+            if (level >= 15) {
+                id('advflybtn').removeAttribute('disabled');
+            } else {
+                id('advflybtn').setAttribute('disabled');
             }
 
         } else {

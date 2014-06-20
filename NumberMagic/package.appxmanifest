@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
-  <Identity Name="6951f62e-90da-4378-80e4-68d4f1821196" Version="1.0.0.0" Publisher="CN=Kana" />
+  <Identity Name="6951f62e-90da-4378-80e4-68d4f1821196" Version="1.0.0.1" Publisher="CN=Kana" />
   <Properties>
     <DisplayName>NumberMagic</DisplayName>
     <PublisherDisplayName>Kana</PublisherDisplayName>
